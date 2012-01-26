@@ -105,9 +105,9 @@ if (strcmp('3D',flag))
     w_fft=fftn(w,NFFT)./(2*pi)^3;
     time_fft=toc; % get final time for all transformations
     
-    phi_x=u_fft.*conj(u_fft)/dim^6; % compute velocity correlation tensor
-    phi_y=v_fft.*conj(v_fft)/dim^6;
-    phi_z=w_fft.*conj(w_fft)/dim^6;
+    phi_x=u_fft.*conj(u_fft)./(2*pi)^3; % compute velo. correlation tensor
+    phi_y=v_fft.*conj(v_fft)./(2*pi)^3;
+    phi_z=w_fft.*conj(w_fft)./(2*pi)^3;
 end
 if (strcmp('2D',flag))
     tic; %start timer
@@ -169,7 +169,7 @@ if (strcmp('2D',flag))
     %%
     % 
     % <latex>
-    %   From theory we know that the transversal correlation could also be
+    %   From theory we know that the transverse correlation could also be
     %   computed from the longitudinal correlation by
     %   \begin{equation}
     %       g(r) = f + \frac{r}{2}\frac{\partial f}{\partial r}
@@ -187,7 +187,7 @@ figure
 pcolor(fftshift(R2));shading interp;title('R22');
 %% Compute length scales
 % Computing the length scales is rather easy. The longitudinal and
-% transversal length scale are defined through
+% transverse length scale are defined through
 %%
 %
 % <latex>
@@ -225,9 +225,13 @@ rectangle('Position',[0,0,L11,1],'LineWidth',2,'LineStyle','--')
 % </latex>
 %
 %%% Compute 1D spectrum
-L=length(R1);
+L=length(R11);
 NFFT=2^nextpow2(L);
-spec_1D=fft(R1(:,1),NFFT)/L.*2/pi;
+E11=fft(R11,NFFT)/L.*2/pi;
+%
+L=length(R22);
+NFFT=2^nextpow2(L);
+E22=fft(R22,NFFT)/L.*2/pi;
 
 f = linspace(0,1,NFFT)*2*pi/dx;
 
