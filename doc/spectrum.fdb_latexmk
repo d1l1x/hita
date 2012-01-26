@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1327570099 "spectrum.tex" "spectrum.pdf" "spectrum" 
+["pdflatex"] 1327573536 "spectrum.tex" "spectrum.pdf" "spectrum" 
   "/usr/local/texlive/2011/texmf-dist/tex/context/base/supp-pdf.mkii" 1306918461 71592 fe353e1fbd982ffc647f3e98ff74da96 ""
   "/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1303254447 7604 85d429dbffd68dd07db4a57e78f67c79 ""
   "/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifluatex.sty" 1303254447 7324 11d14f318d865f420e692d4e6c9c18c3 ""
@@ -39,10 +39,12 @@
   "/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/kvoptions.sty" 1303254447 21848 c207c01f2e92636b8e32340caa3056d0 ""
   "/usr/local/texlive/2011/texmf-dist/tex/latex/pdftex-def/pdftex.def" 1306616590 55368 3c8a0d99822330f2dfabc0dfb09ce897 ""
   "mcode.sty" 1327563183 10337 f4c3a555b47a7d3c7c6f40a6c641cdb7 ""
-  "spectrum.aux" 1327570100 8 a94a2480d3289e625eea47cd1b285758 ""
-  "spectrum.tex" 1327570096 11261 fdb086f42473e43e8f0de5251dea0e29 ""
-  "spectrum_01.jpg" 1327570078 17442 717e484e5f239feb819708ab65141ec3 ""
-  "spectrum_02.jpg" 1327570078 17281 ecad8ed565a22a141b8da5db068740ac ""
+  "spectrum.aux" 1327573536 8 a94a2480d3289e625eea47cd1b285758 ""
+  "spectrum.tex" 1327573534 12206 45447b222fc46b0588fc0b93c34d3ab6 ""
+  "spectrum_01.jpg" 1327573508 17442 717e484e5f239feb819708ab65141ec3 ""
+  "spectrum_02.jpg" 1327573509 17281 ecad8ed565a22a141b8da5db068740ac ""
+  "spectrum_03.jpg" 1327573509 17281 ecad8ed565a22a141b8da5db068740ac ""
+  "spectrum_04.jpg" 1327573519 14395 690154ba8cc0489269d4be4a92dffd10 ""
   (generated)
   "spectrum.aux"
   "spectrum.log"

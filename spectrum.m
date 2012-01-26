@@ -74,14 +74,14 @@ end
 % 
 % <latex>
 %   \begin{equation}
-%      \Phi_{ij}(\kappa)=\frac{1}{(2\,\pi)^3}\iiint^{\infty}_{-\infty}
+%      \Phi_{ij}(\kappa)=\frac{1}{(2\,\pi)^3}\iiint\limits^{\infty}_{-\infty}
 %                           R_{ij}(\mathbf{r})\,\mathrm{e}^{-i\mathrm{\kappa}r}
 %                           \,\mathrm{d}\mathbf{r}
 %   \end{equation}
 % After the transformation of all velocity components we have to compute
 % the velocity correlation tensor $\Phi$ . From theory we know
 %   \begin{equation}
-%   (u_i*u_j)=\int_{-\infty}^{\infty}u_i^{*}(\mathbf{x})\,
+%   (u_i*u_j)=\int\limits_{-\infty}^{\infty}u_i^{*}(\mathbf{x})\,
 %                   u_j(\mathbf{x}+\mathbf{r})\,\mathrm{d}\mathbf{r}.
 %   \end{equation}
 % Since all our data sets are transformed (and we are in the Fourier space)
@@ -96,13 +96,13 @@ end
 if (strcmp('3D',flag))
     tic; % start timer
     NFFT = 2.^nextpow2(size(u)); % next power of 2 fitting the length of u
-    u_fft=fftn(u,NFFT); % transform 
+    u_fft=fftn(u,NFFT)./(2*pi)^3; %2 pi --> definition of FFT 
     %
     NFFT = 2.^nextpow2(size(v));
-    v_fft=fftn(v,NFFT);
+    v_fft=fftn(v,NFFT)./(2*pi)^3;
     %
     NFFT = 2.^nextpow2(size(w));
-    w_fft=fftn(w,NFFT);
+    w_fft=fftn(w,NFFT)./(2*pi)^3;
     time_fft=toc; % get final time for all transformations
     
     phi_x=u_fft.*conj(u_fft)/dim^6; % compute velocity correlation tensor
@@ -110,33 +110,46 @@ if (strcmp('3D',flag))
     phi_z=w_fft.*conj(w_fft)/dim^6;
 end
 if (strcmp('2D',flag))
+    tic; %start timer
     NFFT = 2.^nextpow2(size(u));
-    u_fft=fft2(u,NFFT(1),NFFT(2))./(2*pi)^2; %2pi comes from the definition of FFT
-%     u_fft = u_fft(1:NFFT(1)/2+1,1:NFFT(2)/2+1);
+    u_fft=fft2(u,NFFT(1),NFFT(2))./(2*pi)^2; %2 pi --> definition of FFT 
+    %
     NFFT = 2.^nextpow2(size(v));
     v_fft=fft2(v,NFFT(1),NFFT(2))./(2*pi)^2;
-%     v_fft = v_fft(1:NFFT(1)/2+1,1:NFFT(2)/2+1);
-       
+    %
     phi_x=u_fft.*conj(u_fft)/size(u,1).^2/size(u,2).^2;
     phi_y=v_fft.*conj(v_fft)/size(v,1).^2/size(v,2).^2;
 end
 
 %% Compute correlations
-% Computing a correlation can be a tedious work (requireing tremendous effort)
-% especially if you have large data sets. From theory it is well known that
-% the multiplication of the transform of a data set and ist complex
-% conjugate give a accurate representation of the correlation function.
-% Using the FFT approach this gives an enormeous speed advantage.
-
+% Computing a correlation can be a tedious work (requireing tremendeous
+% effort) especially if you have large data sets. From theory it is well
+% known that the multiplication of the transform of a data set and its
+% complex conjugate are an accurate representation of the correlation
+% function. Using the FFT approach this gives an enormeous speed advantage.
+% Since we already computed the veloity correlation tensor we may use this
+% result in order to compute the correlation tensor.
+%%
+% 
+% <latex>
+%   \begin{equation}
+%       R_{ij} = \frac{cov(U_i,U_j)}{\sqrt{\sigma_i^2\,\sigma_j^2}}
+%              = \frac{(u_i'-\mu_i)\,(u_j-\mu_j)}{\sqrt{\sigma_i^2\,\sigma_j^2}}
+%   \end{equation}
+% </latex>
+% 
 if (strcmp('3D',flag))
     R11=ifftn(u_fft.*conj(u_fft))/dim^3/std2(u)^2;
     R22=ifftn(u_fft.*conj(u_fft))/dim^3/std2(v)^2;
     R33=ifftn(u_fft.*conj(u_fft))/dim^3/std2(w)^2;
+    %
     R11=R11(1:round(size(R11,1)/2),1,1);
     R22=R22(1:round(size(R22,1)/2),1,1);
     R33=R33(1:round(size(R33,1)/2),1,1);
+    %
     r = linspace(0,Lx/2,dim/2)/(Lx/2);
-else
+end
+if (strcmp('2D',flag))
     NFFT = 2.^nextpow2(size(u_fft));
     R1 = ifft2(u_fft.*conj(u_fft),NFFT(1),NFFT(2))...
                 ./NFFT(1)./NFFT(2)./std2(u)^2 ...
@@ -146,27 +159,43 @@ else
     R2 = ifft2(v_fft.*conj(v_fft),NFFT(1),NFFT(2))...
                 ./NFFT(1)./NFFT(2)./std2(v)^2 ...
                 .*(2*pi)^4; % scaling due to division by 2*pi                
-%     R11= ifftn(fftn(u).*conj(fftn(u))/dim^2/std2(u)^2);
-%     R22=ifftn(fftn(v).*conj(fftn(v))/dim^2/std2(v)^2);
+    %
     R11 = (R1(1:round(size(R1,1)/2),1) + ...
-           R2(1,1:round(size(R2,1)/2))')/2;
+           R2(1,1:round(size(R2,1)/2))')/2; % build the mean 
     R22 = (R2(1:round(size(R2,1)/2),1) + ...
            R1(1,1:round(size(R1,1)/2))')/2;
-    
-%     R11 = (R11 + R2(1,1:round(size(R2,1)/2))')/2;
-    
-%     r = linspace(0,Lx/2,dim/2)/(Lx/2);
-%     test = R11 + r'/2.*gradient(R11,max(diff(r)));
-%     plot(r,R11,r,R22,r,test)
-%     legend('R11','R22','Equation');
-%     h=line([0 1],[0 0],'Color',[0 0 0],'LineWidth',1.0);
+    %
+    r = linspace(0,Lx/2,dim/2)/(Lx/2); % get the radius
+    %%
+    % 
+    % <latex>
+    %   From theory we know that the transversal correlation could also be
+    %   computed from the longitudinal correlation by
+    %   \begin{equation}
+    %       g(r) = f + \frac{r}{2}\frac{\partial f}{\partial r}
+    %   \end{equation}
+    % </latex>
+    % 
+    g_r = R11 + r'/2.*gradient(R11,max(diff(r)));
 end
-%% Show graphs
+plot(r,R11,r,R22,r,g_r)
+legend('R11','R22','g_r');
+h=line([0 1],[0 0],'Color',[0 0 0],'LineWidth',1.0);
+% 2D graphs of correlation function
 pcolor(fftshift(R1));shading interp;title('R11');
 figure
 pcolor(fftshift(R2));shading interp;title('R22');
-
-%% compute length scales
+%% Compute length scales
+% Computing the length scales is rather easy. The longitudinal and
+% transversal length scale are defined through
+%%
+%
+% <latex>
+%   \begin{eqnarray}
+%       L_{11} &= \int\limits_0^{\infty}R_{11}\,\mathrm{d}r\\
+%       L_{22} &= \int\limits_0^{\infty}R_{22}\,\mathrm{d}r
+%   \end{eqnarray}
+% </latex>
 L11=trapz(r,R11);
 L22=trapz(r,R22);
 hold on

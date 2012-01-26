@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.12.9)  26 JAN 2012 10:28
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.12.9)  26 JAN 2012 11:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -335,124 +335,142 @@ e
 [1
 
 {/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 121--121
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 120--120
 []    \OT1/cmtt/m/n/10 u=reshape(uvel,dim,dim,dim); % reshape arrays to have th
 em in 3D[] 
  []
 
 [2]
-LaTeX Font Info:    Try loading font information for U+msa on input line 131.
+LaTeX Font Info:    Try loading font information for U+msa on input line 130.
  (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 131.
+LaTeX Font Info:    Try loading font information for U+msb on input line 130.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+euf on input line 145.
+LaTeX Font Info:    Try loading font information for U+euf on input line 144.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2009/06/22 v3.00 Euler Fraktur
 )
-Overfull \hbox (43.49661pt too wide) in paragraph at lines 180--180
+Overfull \hbox (43.49661pt too wide) in paragraph at lines 179--179
 []    \OT1/cmtt/m/n/10 NFFT = 2.^nextpow2(size(u)); % next power of 2 fitting t
 he length of u[] 
  []
 
 
-Overfull \hbox (85.49625pt too wide) in paragraph at lines 180--180
-[]    \OT1/cmtt/m/n/10 u_fft=fft2(u,NFFT(1),NFFT(2))./(2*pi)^2; %2pi comes from
- the definition of FFT[] 
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 179--179
+[]    \OT1/cmtt/m/n/10 phi_x=u_fft.*conj(u_fft)/dim^6; % compute velocity corre
+lation tensor[] 
+ []
+
+
+Overfull \hbox (32.9967pt too wide) in paragraph at lines 179--179
+[]    \OT1/cmtt/m/n/10 u_fft=fft2(u,NFFT(1),NFFT(2))./(2*pi)^2; %2 pi --> defin
+ition of FFT[] 
  []
 
 [3] [4] <spectrum_01.jpg, id=28, 562.1pt x 421.575pt>
 File: spectrum_01.jpg Graphic file (type jpg)
  <use spectrum_01.jpg>
-Package pdftex.def Info: spectrum_01.jpg used on input line 233.
+Package pdftex.def Info: spectrum_01.jpg used on input line 250.
 (pdftex.def)             Requested size: 289.07999pt x 216.80798pt.
 
 <spectrum_02.jpg, id=29, 562.1pt x 421.575pt>
 File: spectrum_02.jpg Graphic file (type jpg)
  <use spectrum_02.jpg>
-Package pdftex.def Info: spectrum_02.jpg used on input line 235.
+Package pdftex.def Info: spectrum_02.jpg used on input line 252.
 (pdftex.def)             Requested size: 289.07999pt x 216.80798pt.
- [5 <./spectrum_01.jpg>] [6 <./spectrum_02.jpg>]
-Overfull \hbox (32.9967pt too wide) in paragraph at lines 312--312
+ [5 <./spectrum_01.jpg>] <spectrum_03.jpg, id=33, 562.1pt x 421.575pt>
+File: spectrum_03.jpg Graphic file (type jpg)
+
+<use spectrum_03.jpg>
+Package pdftex.def Info: spectrum_03.jpg used on input line 275.
+(pdftex.def)             Requested size: 289.07999pt x 216.80798pt.
+ [6 <./spectrum_02.jpg>]
+Overfull \hbox (32.9967pt too wide) in paragraph at lines 336--336
 []    \OT1/cmtt/m/n/10 %                 spec(kappa_pos) = spec(kappa_pos)+kapp
 a*kappa*(...[] 
  []
 
 
-Overfull \hbox (195.74529pt too wide) in paragraph at lines 312--312
+Overfull \hbox (195.74529pt too wide) in paragraph at lines 336--336
 []    \OT1/cmtt/m/n/10 %                 + real(u_fft(i,j,k))*real(u_fft(i,j,k)
 )+imag(u_fft(i,j,k))*imag(u_fft(i,j,k)) ...[] 
  []
 
-
-Overfull \hbox (195.74529pt too wide) in paragraph at lines 312--312
+[7 <./spectrum_03.jpg>]
+Overfull \hbox (195.74529pt too wide) in paragraph at lines 336--336
 []    \OT1/cmtt/m/n/10 %                 + real(v_fft(i,j,k))*real(v_fft(i,j,k)
 )+imag(v_fft(i,j,k))*imag(v_fft(i,j,k)) ...[] 
  []
 
 
-Overfull \hbox (185.24538pt too wide) in paragraph at lines 312--312
+Overfull \hbox (185.24538pt too wide) in paragraph at lines 336--336
 []    \OT1/cmtt/m/n/10 %                 + real(w_fft(i,j,k))*real(w_fft(i,j,k)
 )+imag(w_fft(i,j,k))*imag(w_fft(i,j,k)));[] 
  []
 
 
-Overfull \hbox (279.74455pt too wide) in paragraph at lines 312--312
+Overfull \hbox (279.74455pt too wide) in paragraph at lines 336--336
 []    \OT1/cmtt/m/n/10 %             spec(kappa_pos) = spec(kappa_pos) + kappa*
 kappa*0.5*(phi_x(i,j,k).^+phi_y(i,j,k).^2+phi_z(i,j,k).^2);[] 
  []
 
 
-Overfull \hbox (38.24666pt too wide) in paragraph at lines 353--353
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 377--377
 []    \OT1/cmtt/m/n/10 maxdim = sqrt(dim^2*(2*pi/Lx)^2+dim^2*(2*pi/Ly)^2+dim^2*
 (2*pi/Lz)^2);[] 
  []
 
-[7]
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 353--353
+
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 377--377
 []                \OT1/cmtt/m/n/10 kappa=sqrt(i*i*(2*pi/Lx)^2+j*j*(2*pi/Ly)^2+k
 *k*(2*pi/Lz)^2);[] 
  []
 
-
-Overfull \hbox (95.99615pt too wide) in paragraph at lines 377--377
+[8]
+Overfull \hbox (95.99615pt too wide) in paragraph at lines 401--401
 []\OT1/cmtt/m/n/10 VKP = 1.5*17^5/dissip.*(kkke).^4./(1+kkke.^2).^(17/6).*exp(-
 3/2*1.5.*(kkkd).^(4/3));[] 
  []
 
-[8] [9] (./spectrum.aux) ) 
+<spectrum_04.jpg, id=44, 562.1pt x 421.575pt>
+File: spectrum_04.jpg Graphic file (type jpg)
+ <use spectrum_04.jpg>
+Package pdftex.def Info: spectrum_04.jpg used on input line 407.
+(pdftex.def)             Requested size: 289.07999pt x 216.80798pt.
+ [9]
+[10 <./spectrum_04.jpg>] (./spectrum.aux) ) 
 Here is how much of TeX's memory you used:
- 3870 strings out of 493629
- 54946 string characters out of 3143323
+ 3880 strings out of 493629
+ 55134 string characters out of 3143323
  113805 words of memory out of 3000000
- 7117 multiletter control sequences out of 15000+200000
+ 7125 multiletter control sequences out of 15000+200000
  9033 words of font info for 35 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 38i,5n,42p,557b,251s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/c
-m-super/cm-super-ts1.enc}</usr/local/texlive/2011/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmbx12.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmex10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmmi10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi7.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr7.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmsy7.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mti10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-tt10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/euler/
-eufm10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/cm-super/sfrm
-1000.pfb>
-Output written on spectrum.pdf (9 pages, 182977 bytes).
+ 38i,6n,42p,557b,249s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/local/texlive/2011/texmf-dist/
+fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2011/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2011/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2011/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2011/texmf-dist/font
+s/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2011/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2011/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2011/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmti10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/publi
+c/amsfonts/euler/eufm10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/pub
+lic/cm-super/sfrm1000.pfb>
+Output written on spectrum.pdf (10 pages, 220011 bytes).
 PDF statistics:
- 89 PDF objects out of 1000 (max. 8388607)
- 62 compressed objects within 1 object stream
+ 94 PDF objects out of 1000 (max. 8388607)
+ 64 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
