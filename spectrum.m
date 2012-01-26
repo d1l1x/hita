@@ -197,15 +197,17 @@ if (strcmp('3D',flag))
     E=E*4*pi;
 % E=E.*kk.^2;
 else
+    dim = size(phi,1);
     maxdim = sqrt(dim^2*(2*pi/Lx)^2+dim^2*(2*pi/Ly)^2);
     E=zeros(uint64(sqrt(dim^2+dim^2)),1);
     kk=zeros(uint64(sqrt(dim^2+dim^2)),1);
-    dim = size(phi,1);
+    bin_counter=zeros(uint64(sqrt(dim^2+dim^2)),1);
     for j=1:dim
         for i=1:dim
             kappa=sqrt(i*i*(2*pi/Lx)^2+j*j*(2*pi/Ly)^2);
             kappa_pos=uint64(sqrt(i*i+j*j));
             E(kappa_pos) = E(kappa_pos) + phi(i,j);
+			bin_counter(kappa_pos) = bin_counter(kappa_pos) + 1;
             kk(kappa_pos) = kappa;
         end
     end
