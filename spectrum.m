@@ -195,13 +195,36 @@ pcolor(fftshift(R2));shading interp;title('R22');
 %       L_{11} &= \int\limits_0^{\infty}R_{11}\,\mathrm{d}r\\
 %       L_{22} &= \int\limits_0^{\infty}R_{22}\,\mathrm{d}r
 %   \end{eqnarray}
+%   Since our data is not represented in an analytical manner we may use a
+%   numerical integration routine. Matlab supporty only one numerical
+%   integration scheme, namely the Trapezoidal numerical integration. For
+%   more information about integration routines you can visit the 
+%   \href{http://www.mathworks.de/support/solutions/en/data/1-1679J/index.html}
+%   {Mathworks Matlab}
+%   support page. 
 % </latex>
 L11=trapz(r,R11);
 L22=trapz(r,R22);
 hold on
 rectangle('Position',[0,0,L11,1],'LineWidth',2,'LineStyle','--')
-
-%% compute 1D spectrum
+%% Spectrum computation
+% In general the spectrum of a phyiscal quantity has three dimensions
+% whereas the direction in wavenumber space is indicated by $\kappa_1$,
+% $\kappa_2$ and $\kappa_3$. Opposed to this relatively extensive
+% computation one also might get an idea of the spectral distribution
+% calculating the one dimensional spectra. This is achieved by Fourier
+% transforming the previously computed correlation functions.
+%%
+%
+% <latex>
+%   \begin{equation}
+%       E_{ij}(\kappa_1) = \frac{1}{\pi} \int\limits_{-\infty}^{\infty}
+%                                \mathbf{R}_{ij}(e_1r_1)\,\mathrm{e}^{-i\kappa_1 r_1}
+%                                 \mathrm{d}r_1
+%   \end{equation}
+% </latex>
+%
+%%% Compute 1D spectrum
 L=length(R1);
 NFFT=2^nextpow2(L);
 spec_1D=fft(R1(:,1),NFFT)/L.*2/pi;
@@ -212,7 +235,9 @@ slope=1.5*664092^(2/3)*(f.^(-5/3));
 % loglog(f,2*abs(spec_(1:NFFT/2+1)));
 % hold on
 % loglog(f,slope);
-%% compute spectrum
+%%
+%
+%%% Compute 3D spectrum
 % spec = zeros(round(dim*dim*dim/8),1);
 if (strcmp('3D',flag))
 %     phi = u_fft;

@@ -8,6 +8,27 @@
 \usepackage{mcode}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{hyperref}
+\hypersetup{
+	bookmarks=true,         % show bookmarks bar?
+	unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+	pdftoolbar=true,        % show Acrobat’s toolbar?
+	pdfmenubar=true,        % show Acrobat’s menu?
+	pdffitwindow=false,     % window fit to page when opened
+	pdfstartview={FitH},    % fits the width of the page to the window
+	pdftitle={My title},    % title
+	pdfauthor={Author},     % author
+	pdfsubject={Subject},   % subject of the document
+	pdfcreator={Creator},   % creator of the document
+	pdfproducer={Producer}, % producer of the document
+	pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+	pdfnewwindow=true,      % links in new window
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=red,          % color of internal links
+	citecolor=green,        % color of links to bibliography
+	filecolor=magenta,      % color of file links
+	urlcolor=cyan           % color of external links
+}
 
 \sloppy
 \definecolor{lightgray}{gray}{0.5}
@@ -35,8 +56,9 @@ INTRODUCTORY TEXT
    \item Compute FFT
    \item Compute correlations
    \item Compute length scales
-   \item compute 1D spectrum
-   \item compute spectrum
+   \item Spectrum computation
+   \item Compute 1D spectrum
+   \item Compute 3D spectrum
    \item compute k vector
    \item compute 1D spectrum
 \end{itemize}
@@ -255,14 +277,21 @@ pcolor(fftshift(R2));shading interp;title('R22');
 \subsection*{Compute length scales}
 
 \begin{par}
-Computing the length scales is rather easy. The longitudinal and transversal length scale are
+Computing the length scales is rather easy. The longitudinal and transversal length scale are defined through
 \end{par} \vspace{1em}
 \begin{par}
 
   \begin{eqnarray}
       L_{11} &= \int\limits_0^{\infty}R_{11}\,\mathrm{d}r\\
-      L_{22} &= \int\limits_0^{\infty}R_{22}\,\mathrm{d}r\\
+      L_{22} &= \int\limits_0^{\infty}R_{22}\,\mathrm{d}r
   \end{eqnarray}
+  Since our data is not represented in an analytical manner we may use a
+  numerical integration routine. Matlab supporty only one numerical
+  integration scheme, namely the Trapezoidal numerical integration. For
+  more information about integration routines you can visit the
+  \href{http://www.mathworks.de/support/solutions/en/data/1-1679J/index.html}
+  {Mathworks Matlab}
+  support page.
 
 \end{par} \vspace{1em}
 \begin{verbatim}
@@ -275,7 +304,23 @@ rectangle('Position',[0,0,L11,1],'LineWidth',2,'LineStyle','--')
 \includegraphics [width=4in]{spectrum_03.jpg}
 
 
-\subsection*{compute 1D spectrum}
+\subsection*{Spectrum computation}
+
+\begin{par}
+In general the spectrum of a phyiscal quantity has three dimensions whereas the direction in wavenumber space is indicated by $\kappa_1$, $\kappa_2$ and $\kappa_3$. Opposed to this relatively extensive computation one also might get an idea of the spectral distribution calculating the one dimensional spectra. This is achieved by Fourier transforming the previously computed correlation functions.
+\end{par} \vspace{1em}
+\begin{par}
+
+  \begin{equation}
+      E_ij(\kappa_1) = \frac{1}{\pi} \int\limits_{-\infty}^{\infty}
+                               \mathbf{R}_{ij}(e_1r_1)\,\mathrm{e}^{-i\kappa_1 r_1}
+                                \mathrm{d}r_1
+  \end{equation}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{Compute 1D spectrum}
 
 \begin{verbatim}
 L=length(R1);
@@ -291,7 +336,7 @@ slope=1.5*664092^(2/3)*(f.^(-5/3));
 \end{verbatim}
 
 
-\subsection*{compute spectrum}
+\subsection*{Compute 3D spectrum}
 
 \begin{par}
 spec = zeros(round(dim*dim*dim/8),1);
