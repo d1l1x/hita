@@ -1,4 +1,4 @@
-%% DOCUMENT TITLE
+%% Small DNS postprocessor
 % INTRODUCTORY TEXT
 
 %% Clear complete workspace
@@ -10,7 +10,7 @@ close all
 clear all
 clc
 
-flag='2D';
+flag='3D';
 datadir='data';
 
 %% Read data files
@@ -105,9 +105,9 @@ if (strcmp('3D',flag))
     w_fft=fftn(w,NFFT)./(2*pi)^3;
     time_fft=toc; % get final time for all transformations
     
-    phi_x=u_fft.*conj(u_fft)./(2*pi)^3; % compute velo. correlation tensor
-    phi_y=v_fft.*conj(v_fft)./(2*pi)^3;
-    phi_z=w_fft.*conj(w_fft)./(2*pi)^3;
+    phi_x=u_fft.*conj(u_fft)/dim^6; % compute velocity correlation tensor
+    phi_y=v_fft.*conj(v_fft)/dim^6;
+    phi_z=w_fft.*conj(w_fft)/dim^6;
 end
 if (strcmp('2D',flag))
     tic; %start timer
@@ -139,9 +139,12 @@ end
 % </latex>
 % 
 if (strcmp('3D',flag))
-    R11=ifftn(u_fft.*conj(u_fft))/dim^3/std2(u)^2;
-    R22=ifftn(u_fft.*conj(u_fft))/dim^3/std2(v)^2;
-    R33=ifftn(u_fft.*conj(u_fft))/dim^3/std2(w)^2;
+    NFFT = 2.^nextpow2(size(u_fft));
+    R11=ifftn(u_fft.*conj(u_fft),NFFT)/dim^3/std2(u)^2;
+    NFFT = 2.^nextpow2(size(v_fft));
+    R22=ifftn(u_fft.*conj(u_fft),NFFT)/dim^3/std2(v)^2;
+    NFFT = 2.^nextpow2(size(w_fft));
+    R33=ifftn(u_fft.*conj(u_fft),NFFT)/dim^3/std2(w)^2;
     %
     R11=R11(1:round(size(R11,1)/2),1,1);
     R22=R22(1:round(size(R22,1)/2),1,1);
@@ -227,7 +230,7 @@ rectangle('Position',[0,0,L11,1],'LineWidth',2,'LineStyle','--')
 %%% Compute 1D spectrum
 L=length(R11);
 NFFT=2^nextpow2(L);
-E11=fft(R11,NFFT)/L.*2/pi;
+E11=fft(R11,NFFT)/L.*2/pi.*std2(u)^2;
 %
 L=length(R22);
 NFFT=2^nextpow2(L);
@@ -239,70 +242,76 @@ slope=1.5*664092^(2/3)*(f.^(-5/3));
 % loglog(f,2*abs(spec_(1:NFFT/2+1)));
 % hold on
 % loglog(f,slope);
+%% Compute 3D spectrum
+% In order to avoid aliasing effects usually connected with a one
+% dimensional spectrum it is also possible to produce correlations that
+% involve all possible directions. The three dimensional Fourier
+% transformation of such a correlation produces a spectrum that not only
+% depends on a single wavenumber but on the wavenumber vector $\kappa_i$.
+% Though the directional information contained in $\kappa_i$ eliminates the
+% aliasing problem the complexity makes a physical reasoning impossible.
+% For homogeneous isotropic turbulence the situation can be simplified by
+% integrating the three dimensional spectrum over spherical shells.
 %%
 %
-%%% Compute 3D spectrum
-% spec = zeros(round(dim*dim*dim/8),1);
+% <latex>
+%   \begin{equation}
+%       E(\kappa) = \oiint E(\boldsymbol\kappa)\mathrm{d}S(\kappa)
+%                 = \oiint \frac{1}{2}\,Phi_{ii}(\boldsymbol\kappa)\mathrm{d}S(\kappa)
+%   \end{equation}
+%   Since the surface of a sphereis completly determined by its radius the
+%   surface integral can be solved analytically.
+%   \begin{equation}
+%       \oiint(\,)\mathrm{d}S(\kappa) = 4\pi\kappa^2\cdot(\,)
+%   \end{equation}
+% This leads to
+%   \begin{equation}
+%       E(|\kappa|) = \frac{1}{2}\,\Phi_{ii}(|\boldsymbol\kappa|)
+%   \end{equation}
+% </latex>
 if (strcmp('3D',flag))
-%     phi = u_fft;
-%     phi(:,:,:)=0.0;
-%     for k=1:dim
-%         for j=1:dim
-%             for i=1:dim
-    %             kappa = sqrt(i*i+j*j+k*k);
-    %             kappa_pos=int16(kappa);
-    %             if (kappa_pos <= size(spec,1))
-    %                 spec(kappa_pos) = spec(kappa_pos)+kappa*kappa*(...
-    %                 + real(u_fft(i,j,k))*real(u_fft(i,j,k))+imag(u_fft(i,j,k))*imag(u_fft(i,j,k)) ...
-    %                 + real(v_fft(i,j,k))*real(v_fft(i,j,k))+imag(v_fft(i,j,k))*imag(v_fft(i,j,k)) ...
-    %                 + real(w_fft(i,j,k))*real(w_fft(i,j,k))+imag(w_fft(i,j,k))*imag(w_fft(i,j,k)));
-
-    %             end
-    %             spec(kappa_pos) = spec(kappa_pos) + kappa*kappa*0.5*(phi_x(i,j,k).^+phi_y(i,j,k).^2+phi_z(i,j,k).^2);
-                  phi = 0.5*(phi_x+phi_y+phi_z);
-                  phi = phi(1:round(size(phi_x,1)/2),...
-                            1:round(size(phi_y,1)/2),...
-                            1:round(size(phi_z,1)/2));
-%             end
-%         end
-%     end
-else
-%     phi = u_fft;
-%     phi(:,:)=0.0;
-%     for j=1:dim
-%         for i=1:dim
-%             phi(i,j) = phi(i,j) +(phi_x(i,j)+phi_y(i,j));
-%         end
-%     end
+    phi = 0.5*(phi_x+phi_y+phi_z);
+    phi = phi(1:round(size(phi_x,1)/2),...
+              1:round(size(phi_y,1)/2),...
+              1:round(size(phi_z,1)/2));
+end
+if (strcmp('2D',flag))
     phi = 0.5*phi_x+phi_y;
     phi = phi(1:round(size(phi_x,1)/2),...
               1:round(size(phi_y,1)/2));
-%     phi = phi(1:round(size(phi,1)));
 end
-%% compute k vector
+%% Compute $\kappa$ vector
+% From the previous section we know that the only independent we have in the
+% ``system'' is the magnitude of the wave number vector, i.e. 
+% $\kappa=|\boldsymbol\kappa|=\sqrt{\kappa_1+\kappa_2+\kappa_3}$. Secondly
+% we have to compute the sum $\Phi_{ii}=\Phi_{11}+\Phi_{22}+\Phi_{33}$ and
+% take into account its dependence on $|\boldsymbol\kappa|$.
 if (strcmp('3D',flag))
+    dim = size(phi,1);
     maxdim = sqrt(dim^2*(2*pi/Lx)^2+dim^2*(2*pi/Ly)^2+dim^2*(2*pi/Lz)^2);
     E=zeros(uint64(sqrt(3*dim^2)),1);
     kk=zeros(uint64(sqrt(3*dim^2)),1);
-    dim = size(phi,1);
+    bin_counter=zeros(uint64(sqrt(3*dim^2)),1);
     for k=1:dim
         for j=1:dim
             for i=1:dim
                 kappa=sqrt(i*i*(2*pi/Lx)^2+j*j*(2*pi/Ly)^2+k*k*(2*pi/Lz)^2);
                 kappa_pos=uint64(sqrt(i*i+j*j+k*k));    
                 E(kappa_pos) = E(kappa_pos) + phi(i,j,k);
+                bin_counter(kappa_pos) = bin_counter(kappa_pos) + 1;
                 kk(kappa_pos) = kappa;
             end
         end
     end
-    E=E*4*pi;
+    E=E*4*pi.*kk.^2./bin_counter;
 % E=E.*kk.^2;
-else
+end
+if (strcmp('2D',flag))
     dim = size(phi,1);
     maxdim = sqrt(dim^2*(2*pi/Lx)^2+dim^2*(2*pi/Ly)^2);
-    E=zeros(uint64(sqrt(dim^2+dim^2)),1);
-    kk=zeros(uint64(sqrt(dim^2+dim^2)),1);
-    bin_counter=zeros(uint64(sqrt(dim^2+dim^2)),1);
+    E=zeros(uint64(sqrt(2*dim^2)),1);
+    kk=zeros(uint64(sqrt(2*dim^2)),1);
+    bin_counter=zeros(uint64(sqrt(2*dim^2)),1);
     for j=1:dim
         for i=1:dim
             kappa=sqrt(i*i*(2*pi/Lx)^2+j*j*(2*pi/Ly)^2);
@@ -312,13 +321,10 @@ else
             kk(kappa_pos) = kappa;
         end
     end
-    EE=E*2*pi.*kk./bin_counter;
-%     EEE = E*2*pi.*kk;
+    E=E*2*pi.*kk./bin_counter;
 end
-
-%% compute 1D spectrum
-% close all
-
+%% Compute 1D spectrum
+%
 slope=1.5*664092^(2/3)*(kk.^(-5/3));
 % test=importdata('INPUT/2D/CTRL_TURB_ENERGY');
 %
