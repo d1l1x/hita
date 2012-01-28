@@ -316,9 +316,10 @@ if (strcmp('3D',flag))
     %             end
     %             spec(kappa_pos) = spec(kappa_pos) + kappa*kappa*0.5*(phi_x(i,j,k).^+phi_y(i,j,k).^2+phi_z(i,j,k).^2);
                   phi = 0.5*(Rij_x+Rij_y+Rij_z);
-                  phi = phi(1:round(size(Rij_x,1)/2),...
-                            1:round(size(Rij_y,1)/2),...
-                            1:round(size(Rij_z,1)/2))./dim^6;
+%                   phi = fftshift(phi);
+%                   phi = phi(1:round(size(Rij_x,1)/2),...
+%                             1:round(size(Rij_y,1)/2),...
+%                             1:round(size(Rij_z,1)/2));
 %             end
 %         end
 %     end
@@ -343,24 +344,44 @@ end
 % we have to compute the sum $\Phi_{ii}=\Phi_{11}+\Phi_{22}+\Phi_{33}$ and
 % take into account its dependence on $|\boldsymbol\kappa|$.
 if (strcmp('3D',flag))
-    dim = size(phi,1);
-    maxdim = sqrt(dim^2*(2*pi/Lx)^2+dim^2*(2*pi/Ly)^2+dim^2*(2*pi/Lz)^2);
-    E=zeros(uint64(sqrt(3*dim^2)),1);
-    kk=zeros(uint64(sqrt(3*dim^2)),1);
-    bin_counter=zeros(uint64(sqrt(3*dim^2)),1);
-    for k=1:dim
-        for j=1:dim
-            for i=1:dim
-                kappa=sqrt(i*i*(2*pi/Lx)^2+j*j*(2*pi/Ly)^2+k*k*(2*pi/Lz)^2);
-                kappa_pos=uint64(sqrt(i*i+j*j+k*k));    
+    dim = size(phi,1)/2+1;
+%     maxdim = sqrt(3*dim^2*(2*pi/Lx)^2);
+    E=zeros(round(sqrt(3*dim^2)),1);
+    kappa=zeros(round(sqrt(3*dim^2)),1);
+    bin_counter=zeros(round(sqrt(3*dim^2)),1);
+%     E=zeros(uint64(maxdim),1);
+%     kk=zeros(uint64(maxdim),1);
+%     bin_counter=zeros(uint64(maxdim),1);
+    for k=1:2*(dim-1)
+        for j=1:2*(dim-1)
+            for i=1:2*(dim-1)
+                kx = i*pi/dx;
+                ii = i;
+                if (i > dim); 
+                    kx=(2*(dim)-i)*pi/dx;
+                    ii=(2*(dim)-i);
+                end
+                ky = j*pi/dy;
+                jj = j;
+                if (j > dim); 
+                    ky=(2*(dim)-j)*pi/dy;
+                    jj=(2*(dim)-j);
+                end
+                kz = k*pi/dz;
+                kk = k;
+                if (k > dim); 
+                    kz=(2*(dim)-k)*pi/dz;
+                    kk=(2*(dim)-k);
+                end
+                kappa_pos = round(sqrt(ii^2+jj^2+kk^2)); 
+                kappa(kappa_pos) = sqrt(kx^2+ky^2+kz^2);
                 E(kappa_pos) = E(kappa_pos) + phi(i,j,k);
                 bin_counter(kappa_pos) = bin_counter(kappa_pos) + 1;
-                kk(kappa_pos) = kappa;
             end
         end
     end
-    E1=E*4*pi./bin_counter.*kk.^2;
-    E2=E;
+    E1=E*4*pi./bin_counter.*kappa.^2;
+%     E2=E;
 % E=E.*kk.^2;
 end
 if (strcmp('2D',flag))
