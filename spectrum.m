@@ -1,4 +1,4 @@
-%% DOCUMENT TITLE
+%% Small DNS postprocessor
 % INTRODUCTORY TEXT
 
 %% Clear complete workspace
@@ -117,9 +117,6 @@ if (strcmp('3D',flag))
     Rij_y=(v_fft.*conj(v_fft));
     Rij_z=(w_fft.*conj(w_fft));
     
-%     Riij_x=Rij_x(dim/2+1:end,dim/2+1:end,dim/2+1:end);
-%     Riij_y=Rij_y(dim/2+1:end,dim/2+1:end,dim/2+1:end);
-%     Riij_z=Rij_z(dim/2+1:end,dim/2+1:end,dim/2+1:end);
 end
 if (strcmp('2D',flag))
     scaling = 1;
@@ -263,7 +260,7 @@ rectangle('Position',[0,0,L11,1],'LineWidth',2,'LineStyle','--')
 %%% Compute 1D spectrum
 L=length(R11);
 NFFT=2^nextpow2(L);
-E11=fft(R11,NFFT)/L.*2/pi;
+E11=fft(R11,NFFT)/L.*2/pi.*std2(u)^2;
 %
 L=length(R22);
 NFFT=2^nextpow2(L);
@@ -275,10 +272,33 @@ slope=1.5*664092^(2/3)*(f.^(-5/3));
 % loglog(f,2*abs(spec_(1:NFFT/2+1)));
 % hold on
 % loglog(f,slope);
+%% Compute 3D spectrum
+% In order to avoid aliasing effects usually connected with a one
+% dimensional spectrum it is also possible to produce correlations that
+% involve all possible directions. The three dimensional Fourier
+% transformation of such a correlation produces a spectrum that not only
+% depends on a single wavenumber but on the wavenumber vector $\kappa_i$.
+% Though the directional information contained in $\kappa_i$ eliminates the
+% aliasing problem the complexity makes a physical reasoning impossible.
+% For homogeneous isotropic turbulence the situation can be simplified by
+% integrating the three dimensional spectrum over spherical shells.
 %%
 %
-%%% Compute 3D spectrum
-% spec = zeros(round(dim*dim*dim/8),1);
+% <latex>
+%   \begin{equation}
+%       E(\kappa) = \oiint E(\boldsymbol\kappa)\mathrm{d}S(\kappa)
+%                 = \oiint \frac{1}{2}\,Phi_{ii}(\boldsymbol\kappa)\mathrm{d}S(\kappa)
+%   \end{equation}
+%   Since the surface of a sphereis completly determined by its radius the
+%   surface integral can be solved analytically.
+%   \begin{equation}
+%       \oiint(\,)\mathrm{d}S(\kappa) = 4\pi\kappa^2\cdot(\,)
+%   \end{equation}
+% This leads to
+%   \begin{equation}
+%       E(|\kappa|) = \frac{1}{2}\,\Phi_{ii}(|\boldsymbol\kappa|)
+%   \end{equation}
+% </latex>
 if (strcmp('3D',flag))
 %     phi = u_fft;
 %     phi(:,:,:)=0.0;
@@ -316,7 +336,12 @@ else
 %               round(size(Rij_y,1)/2+1:end));
 %     phi = phi(1:round(size(phi,1)));
 end
-%% compute k vector
+%% Compute $\kappa$ vector
+% From the previous section we know that the only independent we have in the
+% ``system'' is the magnitude of the wave number vector, i.e. 
+% $\kappa=|\boldsymbol\kappa|=\sqrt{\kappa_1+\kappa_2+\kappa_3}$. Secondly
+% we have to compute the sum $\Phi_{ii}=\Phi_{11}+\Phi_{22}+\Phi_{33}$ and
+% take into account its dependence on $|\boldsymbol\kappa|$.
 if (strcmp('3D',flag))
     dim = size(phi,1);
     maxdim = sqrt(dim^2*(2*pi/Lx)^2+dim^2*(2*pi/Ly)^2+dim^2*(2*pi/Lz)^2);
@@ -337,12 +362,13 @@ if (strcmp('3D',flag))
     E1=E*4*pi./bin_counter.*kk.^2;
     E2=E;
 % E=E.*kk.^2;
-else
+end
+if (strcmp('2D',flag))
     dim = size(phi,1);
     maxdim = sqrt(dim^2*(2*pi/Lx)^2+dim^2*(2*pi/Ly)^2);
-    E=zeros(uint64(sqrt(dim^2+dim^2)),1);
-    kk=zeros(uint64(sqrt(dim^2+dim^2)),1);
-    bin_counter=zeros(uint64(sqrt(dim^2+dim^2)),1);
+    E=zeros(uint64(sqrt(2*dim^2)),1);
+    kk=zeros(uint64(sqrt(2*dim^2)),1);
+    bin_counter=zeros(uint64(sqrt(2*dim^2)),1);
     for j=1:dim
         for i=1:dim
             kappa=sqrt(i*i*(2*pi/Lx)^2+j*j*(2*pi/Ly)^2);
@@ -355,10 +381,8 @@ else
     E=E*2*pi.*kk./bin_counter;
 %     EEE = E*2*pi.*kk;
 end
-
-%% compute 1D spectrum
-% close all
-
+%% Compute 1D spectrum
+%
 slope=1.5*664092^(2/3)*(kk.^(-5/3));
 % test=importdata('INPUT/2D/CTRL_TURB_ENERGY');
 %

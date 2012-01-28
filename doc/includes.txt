@@ -2,6 +2,8 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{hyperref}
+\usepackage{esint}
+\usepackage[protrusion=true,expansion]{microtype}
 \hypersetup{
 	bookmarks=true,         % show bookmarks bar?
 	unicode=false,          % non-Latin characters in Acrobat’s bookmarks

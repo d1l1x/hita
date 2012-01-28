@@ -1,14 +1,15 @@
 
 % This LaTeX was auto-generated from an M-file by MATLAB.
 % To make changes, update the M-file and republish this document.
-
-\documentclass{article}
+\documentclass[12pt,preprint,ntfdMod]{elsarticle}
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{mcode}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{hyperref}
+\usepackage[protrusion=true,expansion]{microtype}
+\usepackage{esint}
 \hypersetup{
 	bookmarks=true,         % show bookmarks bar?
 	unicode=false,          % non-Latin characters in Acrobat’s bookmarks
@@ -33,8 +34,9 @@
 \sloppy
 \definecolor{lightgray}{gray}{0.5}
 \setlength{\parindent}{0pt}
-
+\author{Felix Dietzsch}
 \begin{document}
+\maketitle
 
     
     
@@ -59,7 +61,7 @@ INTRODUCTORY TEXT
    \item Spectrum computation
    \item Compute 1D spectrum
    \item Compute 3D spectrum
-   \item compute k vector
+   \item Compute $\kappa$ vector
    \item compute 1D spectrum
 \end{itemize}
 
@@ -248,7 +250,7 @@ if (strcmp('2D',flag))
 \end{verbatim}
 \begin{par}
 
-  From theory we know that the transversal correlation could also be
+  From theory we know that the transverse correlation could also be
   computed from the longitudinal correlation by
   \begin{equation}
       g(r) = f + \frac{r}{2}\frac{\partial f}{\partial r}
@@ -277,7 +279,7 @@ pcolor(fftshift(R2));shading interp;title('R22');
 \subsection*{Compute length scales}
 
 \begin{par}
-Computing the length scales is rather easy. The longitudinal and transversal length scale are defined through
+Computing the length scales is rather easy. The longitudinal and transverse length scale are defined through
 \end{par} \vspace{1em}
 \begin{par}
 
@@ -312,7 +314,7 @@ In general the spectrum of a phyiscal quantity has three dimensions whereas the 
 \begin{par}
 
   \begin{equation}
-      E_ij(\kappa_1) = \frac{1}{\pi} \int\limits_{-\infty}^{\infty}
+      E_{ij}(\kappa_1) = \frac{1}{\pi} \int\limits_{-\infty}^{\infty}
                                \mathbf{R}_{ij}(e_1r_1)\,\mathrm{e}^{-i\kappa_1 r_1}
                                 \mathrm{d}r_1
   \end{equation}
@@ -323,9 +325,13 @@ In general the spectrum of a phyiscal quantity has three dimensions whereas the 
 \subsection*{Compute 1D spectrum}
 
 \begin{verbatim}
-L=length(R1);
+L=length(R11);
 NFFT=2^nextpow2(L);
-spec_1D=fft(R1(:,1),NFFT)/L.*2/pi;
+E11=fft(R11,NFFT)/L.*2/pi.*std2(u)^2;
+%
+L=length(R22);
+NFFT=2^nextpow2(L);
+E22=fft(R22,NFFT)/L.*2/pi;
 
 f = linspace(0,1,NFFT)*2*pi/dx;
 
@@ -339,50 +345,45 @@ slope=1.5*664092^(2/3)*(f.^(-5/3));
 \subsection*{Compute 3D spectrum}
 
 \begin{par}
-spec = zeros(round(dim*dim*dim/8),1);
+In order to avoid aliasing effects usually connected with a one dimensional spectrum it is also possible to produce correlations that involve all possible directions. The three dimensional Fourier transformation of such a correlation produces a spectrum that not only depends on a single wavenumber but on the wavenumber vector $\kappa_i$. Though the directional information contained in $\kappa_i$ eliminates the aliasing problem the complexity makes a physical reasoning impossible. For homogeneous isotropic turbulence the situation can be simplified by integrating the three dimensional spectrum over spherical shells.
+\end{par} \vspace{1em}
+\begin{par}
+
+  \begin{equation}
+      E(\kappa) = \oiint E(\boldsymbol\kappa)\mathrm{d}S(\kappa)
+                = \oiint \frac{1}{2}\,Phi_{ii}(\boldsymbol\kappa)\mathrm{d}S(\kappa)
+  \end{equation}
+  Since the surface of a sphereis completly determined by its radius the
+  surface integral can be solved analytically.
+  \begin{equation}
+      \oiint(\,)\mathrm{d}S(\kappa) = 4\pi\kappa^2\cdot(\,)
+  \end{equation}
+This leads to
+  \begin{equation}
+      E(|\kappa|) = \frac{1}{2}\,Phi_{ii}(|\boldsymbol\kappa|)
+  \end{equation}
+
 \end{par} \vspace{1em}
 \begin{verbatim}
 if (strcmp('3D',flag))
-%     phi = u_fft;
-%     phi(:,:,:)=0.0;
-%     for k=1:dim
-%         for j=1:dim
-%             for i=1:dim
-    %             kappa = sqrt(i*i+j*j+k*k);
-    %             kappa_pos=int16(kappa);
-    %             if (kappa_pos <= size(spec,1))
-    %                 spec(kappa_pos) = spec(kappa_pos)+kappa*kappa*(...
-    %                 + real(u_fft(i,j,k))*real(u_fft(i,j,k))+imag(u_fft(i,j,k))*imag(u_fft(i,j,k)) ...
-    %                 + real(v_fft(i,j,k))*real(v_fft(i,j,k))+imag(v_fft(i,j,k))*imag(v_fft(i,j,k)) ...
-    %                 + real(w_fft(i,j,k))*real(w_fft(i,j,k))+imag(w_fft(i,j,k))*imag(w_fft(i,j,k)));
-
-    %             end
-    %             spec(kappa_pos) = spec(kappa_pos) + kappa*kappa*0.5*(phi_x(i,j,k).^+phi_y(i,j,k).^2+phi_z(i,j,k).^2);
-                  phi = 0.5*(phi_x+phi_y+phi_z);
-                  phi = phi(1:round(size(phi_x,1)/2),...
-                            1:round(size(phi_y,1)/2),...
-                            1:round(size(phi_z,1)/2));
-%             end
-%         end
-%     end
-else
-%     phi = u_fft;
-%     phi(:,:)=0.0;
-%     for j=1:dim
-%         for i=1:dim
-%             phi(i,j) = phi(i,j) +(phi_x(i,j)+phi_y(i,j));
-%         end
-%     end
+    phi = 0.5*(phi_x+phi_y+phi_z);
+    phi = phi(1:round(size(phi_x,1)/2),...
+              1:round(size(phi_y,1)/2),...
+              1:round(size(phi_z,1)/2));
+end
+if (strcmp('2D',flag))
     phi = 0.5*phi_x+phi_y;
     phi = phi(1:round(size(phi_x,1)/2),...
               1:round(size(phi_y,1)/2));
-%     phi = phi(1:round(size(phi,1)));
 end
 \end{verbatim}
 
 
-\subsection*{compute k vector}
+\subsection*{Compute $\kappa$ vector}
 
+\begin{par}
+From the previous section we know that the only independent we have in the ``system'' is the magnitude of the wave number vector, i.e. $\kappa=|\boldsymbol\kappa|=\sqrt{\kappa_1+\kappa_2+\kappa_3}$. Secondly we have to compute the sum $\Phi_{ii}=\Phi_{11}+\Phi_{22}+\Phi_{33}$ and take into account its dependence on $|\boldsymbol\kappa|$.
+\end{par} \vspace{1em}
 \begin{verbatim}
 if (strcmp('3D',flag))
     maxdim = sqrt(dim^2*(2*pi/Lx)^2+dim^2*(2*pi/Ly)^2+dim^2*(2*pi/Lz)^2);
@@ -401,7 +402,8 @@ if (strcmp('3D',flag))
     end
     E=E*4*pi;
 % E=E.*kk.^2;
-else
+end
+if (strcmp('2D',flag))
     dim = size(phi,1);
     maxdim = sqrt(dim^2*(2*pi/Lx)^2+dim^2*(2*pi/Ly)^2);
     E=zeros(uint64(sqrt(dim^2+dim^2)),1);
@@ -445,8 +447,7 @@ h=legend('Kolmogorov','VKP','Computed');
 set(h,'Location','SouthWest')
 \end{verbatim}
 
-        \color{lightgray} \begin{verbatim}Warning: Legend not supported for patches with
-FaceColor 'interp' 
+        \color{lightgray} \begin{verbatim}Warning: Legend not supported for patches with FaceColor 'interp' 
 \end{verbatim} \color{black}
     
 \includegraphics [width=4in]{spectrum_04.jpg}
