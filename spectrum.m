@@ -10,7 +10,7 @@ close all
 clear all
 clc
 
-flag='2D';
+flag='3D';
 datadir='data';
 
 %% Read data files
@@ -26,6 +26,10 @@ if (strcmp('3D',flag))
     vvel=importdata([datadir,'/',flag,'/vvel']);
     wvel=importdata([datadir,'/',flag,'/wvel']);
     time_reading = toc; % end timer
+%     test=importdata('data/test/CFX_velocity_field.dat');
+%     uvel=test(:,1);
+%     vvel=test(:,2);
+%     wvel=test(:,3);
 end
 %%% 2D
 if (strcmp('2D',flag))
@@ -42,6 +46,8 @@ end
 if (strcmp('3D',flag))
     dim=256; % number of points in one dimension
     Lx=5e-3; % domain size
+%     dim=33;
+%     Lx=3.2e-2; % domain size
     Ly=Lx;
     Lz=Lx;
     dx=Lx/dim; % grid spacing
@@ -93,32 +99,41 @@ end
 %   \end{equation}
 % where $\alpha$ is a normalization factor.
 % </latex>
+scaling = 1;
+extension = 0;
 if (strcmp('3D',flag))
     tic; % start timer
-    NFFT = 2.^nextpow2(size(u)); % next power of 2 fitting the length of u
-    u_fft=fftn(u,NFFT)./(2*pi)^3; %2 pi --> definition of FFT 
+    NFFT = 2.^nextpow2(size(u)+extension); % next power of 2 fitting the length of u
+    u_fft=fftn(u,NFFT)./scaling; %2 pi --> definition of FFT 
     %
-    NFFT = 2.^nextpow2(size(v));
-    v_fft=fftn(v,NFFT)./(2*pi)^3;
+    NFFT = 2.^nextpow2(size(v)+extension);
+    v_fft=fftn(v,NFFT)./scaling;
     %
-    NFFT = 2.^nextpow2(size(w));
-    w_fft=fftn(w,NFFT)./(2*pi)^3;
+    NFFT = 2.^nextpow2(size(w)+extension);
+    w_fft=fftn(w,NFFT)./scaling;
     time_fft=toc; % get final time for all transformations
     
-    phi_x=u_fft.*conj(u_fft)./(2*pi)^3; % compute velo. correlation tensor
-    phi_y=v_fft.*conj(v_fft)./(2*pi)^3;
-    phi_z=w_fft.*conj(w_fft)./(2*pi)^3;
+    Rij_x=(u_fft.*conj(u_fft)); % compute velo. correlation tensor
+    Rij_y=(v_fft.*conj(v_fft));
+    Rij_z=(w_fft.*conj(w_fft));
+    
+%     Riij_x=Rij_x(dim/2+1:end,dim/2+1:end,dim/2+1:end);
+%     Riij_y=Rij_y(dim/2+1:end,dim/2+1:end,dim/2+1:end);
+%     Riij_z=Rij_z(dim/2+1:end,dim/2+1:end,dim/2+1:end);
 end
 if (strcmp('2D',flag))
+    scaling = 1;
+    extension = 0;
     tic; %start timer
-    NFFT = 2.^nextpow2(size(u));
-    u_fft=fft2(u,NFFT(1),NFFT(2))./(2*pi)^2; %2 pi --> definition of FFT 
+    NFFT = 2.^(nextpow2(size(u))+extension);
+    u_fft=fft2(u,NFFT(1),NFFT(2))./scaling; %2 pi --> definition of FFT 
     %
-    NFFT = 2.^nextpow2(size(v));
-    v_fft=fft2(v,NFFT(1),NFFT(2))./(2*pi)^2;
+    NFFT = 2.^(nextpow2(size(v))+extension);
+    v_fft=fft2(v,NFFT(1),NFFT(2))./scaling;
     %
-    phi_x=u_fft.*conj(u_fft)/size(u,1).^2/size(u,2).^2;
-    phi_y=v_fft.*conj(v_fft)/size(v,1).^2/size(v,2).^2;
+    Rij_x=(u_fft.*conj(u_fft));%/size(u,1).^2/size(u,2).^2;
+    Rij_y=(v_fft.*conj(v_fft));%/size(v,1).^2/size(v,2).^2;
+    
 end
 
 %% Compute correlations
@@ -139,33 +154,54 @@ end
 % </latex>
 % 
 if (strcmp('3D',flag))
-    R11=ifftn(u_fft.*conj(u_fft))/dim^3/std2(u)^2;
-    R22=ifftn(u_fft.*conj(u_fft))/dim^3/std2(v)^2;
-    R33=ifftn(u_fft.*conj(u_fft))/dim^3/std2(w)^2;
+    NFFT = 2.^nextpow2(size(u_fft));
+    R1=ifftn(Rij_x,NFFT)/NFFT(1)/NFFT(2)/NFFT(3)/std2(u)^2;
+    NFFT = 2.^nextpow2(size(v_fft));
+    R2=ifftn(Rij_y,NFFT)/NFFT(1)/NFFT(2)/NFFT(3)/std2(v)^2;
+    NFFT = 2.^nextpow2(size(w_fft));
+    R3=ifftn(Rij_z,NFFT)/NFFT(1)/NFFT(2)/NFFT(3)/std2(w)^2;
     %
-    R11=R11(1:round(size(R11,1)/2),1,1);
-    R22=R22(1:round(size(R22,1)/2),1,1);
-    R33=R33(1:round(size(R33,1)/2),1,1);
+%     R33 = reshape(R3(1,1,:),NFFT(1),1);
+%     R22 = reshape(R2(1,:,1),NFFT(1),1);
+%     R11 = reshape(R1(:,1,1),NFFT(1),1);
+    
+    R11 = (reshape(R3(1,1,:),NFFT(1),1)+R2(1,:,1)'+R1(:,1,1))/3;
+    R11 = R11(1:size(u_fft)/2+1);
     %
-    r = linspace(0,Lx/2,dim/2)/(Lx/2);
+    R1_22 = (R1(1,:,1)+R3(1,:,1))/2;
+    R2_22 = (R2(:,1,1)+R3(:,1,1))/2;
+    R3_22 = (reshape(R1(1,1,:),size(u_fft,1),1)+reshape(R2(1,1,:),size(u_fft,1),1))/2;
+    
+    R22 = (R1_22'+R2_22+R3_22)/3;
+    R22 = R22(1:size(u_fft)/2+1);
+%     R22 = (R11(1,:,1) + )/3;
+    
+    
+%     R111 = (R11+R22+R33)/3;
+%     R11 = R111(1:NFFT(1)/2+1);
+%       
+      
+%     R22=R2(1:round(size(R2,1)/2),1,1);
+%     R33=R3(1:round(size(R3,1)/2),1,1);
+    %
+    r = linspace(0,Lx/2,size(u_fft,1)/2+1)/(Lx/2);
 end
 if (strcmp('2D',flag))
     NFFT = 2.^nextpow2(size(u_fft));
-    R1 = ifft2(u_fft.*conj(u_fft),NFFT(1),NFFT(2))...
-                ./NFFT(1)./NFFT(2)./std2(u)^2 ...
-                .*(2*pi)^4; % scaling due to division by 2*pi
+    R1 = ifft2(Rij_x,NFFT(1),NFFT(2))...
+                ./NFFT(1)./NFFT(2)./std2(u)^2; %...
+                %.*(2*pi)^4; % scaling due to division by 2*pi
     %
     NFFT = 2.^nextpow2(size(v_fft));
-    R2 = ifft2(v_fft.*conj(v_fft),NFFT(1),NFFT(2))...
-                ./NFFT(1)./NFFT(2)./std2(v)^2 ...
-                .*(2*pi)^4; % scaling due to division by 2*pi                
+    R2 = ifft2(Rij_y,NFFT(1),NFFT(2))...
+                ./NFFT(1)./NFFT(2)./std2(v)^2; %...
+                %.*(2*pi)^4; % scaling due to division by 2*pi                
+    R11 = (R1(:,1)+R2(1,:)')/2;
+    R11 = R11(1:size(u_fft)/2+1);
+    R22 = (R1(1,:)+R2(:,1)')/2;
+    R22 = R22(1:size(u_fft)/2+1);
     %
-    R11 = (R1(1:round(size(R1,1)/2),1) + ...
-           R2(1,1:round(size(R2,1)/2))')/2; % build the mean 
-    R22 = (R2(1:round(size(R2,1)/2),1) + ...
-           R1(1,1:round(size(R1,1)/2))')/2;
-    %
-    r = linspace(0,Lx/2,dim/2)/(Lx/2); % get the radius
+    r = linspace(0,Lx/2,size(u_fft,1)/2+1)/(Lx/2); % get the radius
     %%
     % 
     % <latex>
@@ -209,7 +245,7 @@ hold on
 rectangle('Position',[0,0,L11,1],'LineWidth',2,'LineStyle','--')
 %% Spectrum computation
 % In general the spectrum of a phyiscal quantity has three dimensions
-% whereas the direction in wavenumber space is indicated by $\kappa_1$,
+% whe./1024^4reas the direction in wavenumber space is indicated by $\kappa_1$,
 % $\kappa_2$ and $\kappa_3$. Opposed to this relatively extensive
 % computation one also might get an idea of the spectral distribution
 % calculating the one dimensional spectra. This is achieved by Fourier
@@ -259,10 +295,10 @@ if (strcmp('3D',flag))
 
     %             end
     %             spec(kappa_pos) = spec(kappa_pos) + kappa*kappa*0.5*(phi_x(i,j,k).^+phi_y(i,j,k).^2+phi_z(i,j,k).^2);
-                  phi = 0.5*(phi_x+phi_y+phi_z);
-                  phi = phi(1:round(size(phi_x,1)/2),...
-                            1:round(size(phi_y,1)/2),...
-                            1:round(size(phi_z,1)/2));
+                  phi = 0.5*(Rij_x+Rij_y+Rij_z);
+                  phi = phi(1:round(size(Rij_x,1)/2),...
+                            1:round(size(Rij_y,1)/2),...
+                            1:round(size(Rij_z,1)/2))./dim^6;
 %             end
 %         end
 %     end
@@ -274,28 +310,32 @@ else
 %             phi(i,j) = phi(i,j) +(phi_x(i,j)+phi_y(i,j));
 %         end
 %     end
-    phi = 0.5*phi_x+phi_y;
-    phi = phi(1:round(size(phi_x,1)/2),...
-              1:round(size(phi_y,1)/2));
+    phi = 0.5*(Rij_x./(size(Rij_x,1)*size(Rij_x,2))...
+              +Rij_y./(size(Rij_y,1)*size(Rij_y,2)));
+%     phi = phi(round(size(Rij_x,1)/2+1:end),...
+%               round(size(Rij_y,1)/2+1:end));
 %     phi = phi(1:round(size(phi,1)));
 end
 %% compute k vector
 if (strcmp('3D',flag))
+    dim = size(phi,1);
     maxdim = sqrt(dim^2*(2*pi/Lx)^2+dim^2*(2*pi/Ly)^2+dim^2*(2*pi/Lz)^2);
     E=zeros(uint64(sqrt(3*dim^2)),1);
     kk=zeros(uint64(sqrt(3*dim^2)),1);
-    dim = size(phi,1);
+    bin_counter=zeros(uint64(sqrt(3*dim^2)),1);
     for k=1:dim
         for j=1:dim
             for i=1:dim
                 kappa=sqrt(i*i*(2*pi/Lx)^2+j*j*(2*pi/Ly)^2+k*k*(2*pi/Lz)^2);
                 kappa_pos=uint64(sqrt(i*i+j*j+k*k));    
                 E(kappa_pos) = E(kappa_pos) + phi(i,j,k);
+                bin_counter(kappa_pos) = bin_counter(kappa_pos) + 1;
                 kk(kappa_pos) = kappa;
             end
         end
     end
-    E=E*4*pi;
+    E1=E*4*pi./bin_counter.*kk.^2;
+    E2=E;
 % E=E.*kk.^2;
 else
     dim = size(phi,1);
@@ -312,7 +352,7 @@ else
             kk(kappa_pos) = kappa;
         end
     end
-    EE=E*2*pi.*kk./bin_counter;
+    E=E*2*pi.*kk./bin_counter;
 %     EEE = E*2*pi.*kk;
 end
 
