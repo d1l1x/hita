@@ -30,8 +30,6 @@ time_reading = toc; % end timer
 %%% 3D
     dim=256; % number of points in one dimension
     Lx=5e-3; % domain size
-%     dim=33;
-%     Lx=3.2e-2; % domain size
     Ly=Lx;
     Lz=Lx;
     dx=Lx/dim; % grid spacing
@@ -272,13 +270,16 @@ phi = 0.5*(Rij_x+Rij_y+Rij_z);
                 kappa(kappa_pos,2) = kappa(kappa_pos,2) + 1;
 
                 E(kappa_pos) = E(kappa_pos) + phi(i,j,k);
-%                 bin_counter(kappa_pos) = bin_counter(kappa_pos) + 1;
             end
         end
     end
     kappa(:,1) = kappa(:,1)./kappa(:,2);
     E1=E*4*pi./kappa(:,2).*(kappa(:,1)).^2;
 %% Computation of kinetic energy and dissipation
+
+% u=u-mean2(u);
+% v=v-mean2(v);
+% w=w-mean2(w);
 
 kin=u.*u+v.*v+w.*w;
 kin=0.5*kin;
@@ -295,12 +296,24 @@ kappa_sq=zeros(size(phi));
 for k=1:size(phi,3)
     for j=1:size(phi,2)
         for i=1:size(phi,1)
-            kappa_sq(i,j,k)=(i*2*pi/Lx)^2+(j*2*pi/Ly)^2+(k*2*pi/Lz)^2;
+             kx = i*pi/Lx;
+             if (i > dim); 
+                kx=(2*(dim)-i)*pi/Lx;
+             end
+             ky = j*pi/Ly;
+             if (j > dim); 
+                 ky=(2*(dim)-j)*pi/Ly;
+             end
+             kz = k*pi/Lz;
+             if (k > dim); 
+                 kz=(2*(dim)-k)*pi/Lz;
+             end
+            kappa_sq(i,j,k)=(kx)^2+(ky)^2+(kz)^2;
         end
     end
 end
 dissip_sim = 2*nu*sum(sum(sum(kappa_sq.*phi)));
-kinetic_sim = sum(sum(sum(phi)));
+kinetic_sim = sum(sum(sum(0.5*(Rij_x+Rij_y+Rij_z))));
 %% Kolmogrov properties
 eta = (nu^3/dissip_sim)^(1/4);
 u_eta = (nu*dissip_sim)^(1/4);
@@ -308,11 +321,9 @@ tau = (nu/dissip_sim)^(1/2);
             
 %% Compute 1D spectrum
 %
-% test=importdata('INPUT/2D/CTRL_TURB_ENERGY');
-%
-% 
     dissip=dissip_sim;%18862.4177875993 ;
 %     up = 3.49327866542476;
+    up = mean2(up);
     kkke=kappa(:,1)./(2*pi*1./1.418952554320881E-002);%kappa(E1==max(E1),1));%L_MAXI
     kkkd=kappa(:,1)./(2*pi*1./1.627286214199254E-004);%kappa(E1==min(E1),1));%L_DISSIP
 
@@ -321,7 +332,7 @@ L=Lx;
 VKP = 1.5*up^5/dissip.*(kkke).^4./(1+kkke.^2).^(17/6).*exp(-3/2*1.5.*(kkkd).^(4/3));
 %
 slope=1.5*dissip^(2/3)*(kappa(:,1).^(-5/3));
-loglog(kappa(:,1),slope,kappa(:,1),VKP,kappa(:,1),E1,kappa(:,1),E)
+loglog(kappa(:,1),slope,kappa(:,1),VKP,kappa(:,1),E1)
 % ylim([1e-14 10]);
 h=legend('Kolmogorov','VKP','Computed');
 set(h,'Location','SouthWest')
