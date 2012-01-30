@@ -18,7 +18,6 @@ datadir='data';
 % the tic/toc block is in seconds. What you should get from the tic/toc
 % block is that most of the time is spend during data I/O. The actual
 % computation needs only ??? of the time of the I/O operations.
-
 tic; % enable timer
 uvel=importdata([datadir,'/',flag,'/uvel']);
 vvel=importdata([datadir,'/',flag,'/vvel']);
@@ -42,7 +41,7 @@ time_reading = toc; % end timer
     u=reshape(uvel,dim,dim,dim); % reshape arrays to have them in 3D
     v=reshape(vvel,dim,dim,dim);
     w=reshape(wvel,dim,dim,dim);
-    clear uvel vvel wvel
+%     clear uvel vvel wvel
 %% Compute FFT
 % This is the most important part of the script. Since the performance of
 % an actual DFT is rather bad the preferred choice is a FFT. The FFT
@@ -279,22 +278,50 @@ phi = 0.5*(Rij_x+Rij_y+Rij_z);
     end
     kappa(:,1) = kappa(:,1)./kappa(:,2);
     E1=E*4*pi./kappa(:,2).*(kappa(:,1)).^2;
+%% Computation of kinetic energy and dissipation
+
+kin=u.*u+v.*v+w.*w;
+kin=0.5*kin;
+kinetic_energy=sum(sum(sum(kin)))/length(kin)^3;
+
+up = sqrt(1/3*(u.^2+v.^2+w.^2));
+kinetic_up = sum(sum(sum(3/2*up.^2)))/size(up,1)^3;
+
+% kinetic_sim = trapz(kappa(:,1),E1);
+
+dissip_sim = trapz(kappa(:,1),2*nu*kappa(:,1).^2.*E1);
+
+kappa_sq=zeros(size(phi));
+for k=1:size(phi,3)
+    for j=1:size(phi,2)
+        for i=1:size(phi,1)
+            kappa_sq(i,j,k)=(i*2*pi/Lx)^2+(j*2*pi/Ly)^2+(k*2*pi/Lz)^2;
+        end
+    end
+end
+dissip_sim = 2*nu*sum(sum(sum(kappa_sq.*phi)));
+kinetic_sim = sum(sum(sum(phi)));
+%% Kolmogrov properties
+eta = (nu^3/dissip_sim)^(1/4);
+u_eta = (nu*dissip_sim)^(1/4);
+tau = (nu/dissip_sim)^(1/2);
+            
 %% Compute 1D spectrum
 %
 % test=importdata('INPUT/2D/CTRL_TURB_ENERGY');
 %
 % 
-    dissip=18862.4177875993 ;
-    up = 3.49327866542476;
-    kkke=kappa(:,1)./(2*pi/1.418952554320881E-002);%L_MAXI
-    kkkd=kappa(:,1)./(2*pi/1.627286214199254E-004);%L_DISSIP
+    dissip=dissip_sim;%18862.4177875993 ;
+%     up = 3.49327866542476;
+    kkke=kappa(:,1)./(2*pi*1./1.418952554320881E-002);%kappa(E1==max(E1),1));%L_MAXI
+    kkkd=kappa(:,1)./(2*pi*1./1.627286214199254E-004);%kappa(E1==min(E1),1));%L_DISSIP
 
 L=Lx;
 
-VKP = 1.5*17^5/dissip.*(kkke).^4./(1+kkke.^2).^(17/6).*exp(-3/2*1.5.*(kkkd).^(4/3));
+VKP = 1.5*up^5/dissip.*(kkke).^4./(1+kkke.^2).^(17/6).*exp(-3/2*1.5.*(kkkd).^(4/3));
 %
 slope=1.5*dissip^(2/3)*(kappa(:,1).^(-5/3));
-loglog(kappa(:,1),slope,kappa(:,1),VKP,kappa(:,1),E1)
+loglog(kappa(:,1),slope,kappa(:,1),VKP,kappa(:,1),E1,kappa(:,1),E)
 % ylim([1e-14 10]);
 h=legend('Kolmogorov','VKP','Computed');
 set(h,'Location','SouthWest')
