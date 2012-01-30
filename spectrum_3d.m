@@ -12,6 +12,7 @@ clc
 
 flag='3D';
 datadir='data';
+path('./functions',path)
 
 %% Read data files
 % Read in the data files and measure the time for reading. The output of
