@@ -19,31 +19,16 @@ datadir='data';
 % block is that most of the time is spend during data I/O. The actual
 % computation needs only ??? of the time of the I/O operations.
 
-%%% 3D
-if (strcmp('3D',flag))
-    tic; % enable timer
-    uvel=importdata([datadir,'/',flag,'/uvel']);
-    vvel=importdata([datadir,'/',flag,'/vvel']);
-    wvel=importdata([datadir,'/',flag,'/wvel']);
-    time_reading = toc; % end timer
-%     test=importdata('data/test/CFX_velocity_field.dat');
-%     uvel=test(:,1);
-%     vvel=test(:,2);
-%     wvel=test(:,3);
-end
-%%% 2D
-if (strcmp('2D',flag))
-    tic;
-    uvel=importdata([datadir,'/',flag,'/uvel']);
-    vvel=importdata([datadir,'/',flag,'/vvel']);
-    time_reading = toc;
-end
+tic; % enable timer
+uvel=importdata([datadir,'/',flag,'/uvel']);
+vvel=importdata([datadir,'/',flag,'/vvel']);
+wvel=importdata([datadir,'/',flag,'/wvel']);
+time_reading = toc; % end timer
 %% Set some neccessary parameters
 % For further computations it is important to define some parmeters of the
 % DNS simulation such as domain size, grid spacing, and the number of grid
 % points.
 %%% 3D
-if (strcmp('3D',flag))
     dim=256; % number of points in one dimension
     Lx=5e-3; % domain size
 %     dim=33;
@@ -58,17 +43,6 @@ if (strcmp('3D',flag))
     v=reshape(vvel,dim,dim,dim);
     w=reshape(wvel,dim,dim,dim);
     clear uvel vvel wvel
-end
-%%% 2D
-if (strcmp('2D',flag))
-    dim=1024; % number of points in one dimension
-    Lx=1E-2;  % domain size
-    Ly=Lx;
-    dx=Lx/dim; % grid spacing
-    dy=dx;
-    u=reshape(uvel,dim,dim); % reshape arrays to have them in 2D
-    v=reshape(vvel,dim,dim);
-end
 %% Compute FFT
 % This is the most important part of the script. Since the performance of
 % an actual DFT is rather bad the preferred choice is a FFT. The FFT
@@ -100,40 +74,22 @@ end
 %   \end{equation}
 % where $\alpha$ is a normalization factor.
 % </latex>
-if (strcmp('3D',flag))
-    scaling = (2*pi)^3*dim^3;
-    extension = 0;
-    tic; % start timer
-    NFFT = 2.^nextpow2(size(u)+extension); % next power of 2 fitting the length of u
-    u_fft=fftn(u,NFFT)./scaling; %2 pi --> definition of FFT 
-    %
-    NFFT = 2.^nextpow2(size(v)+extension);
-    v_fft=fftn(v,NFFT)./scaling;
-    %
-    NFFT = 2.^nextpow2(size(w)+extension);
-    w_fft=fftn(w,NFFT)./scaling;
-    time_fft=toc; % get final time for all transformations
+scaling = (2*pi)^3*dim^3;
+extension = 0;
+tic; % start timer
+NFFT = 2.^nextpow2(size(u)+extension); % next power of 2 fitting the length of u
+u_fft=fftn(u,NFFT)./scaling; %2 pi --> definition of FFT 
+%
+NFFT = 2.^nextpow2(size(v)+extension);
+v_fft=fftn(v,NFFT)./scaling;
+%
+NFFT = 2.^nextpow2(size(w)+extension);
+w_fft=fftn(w,NFFT)./scaling;
+time_fft=toc; % get final time for all transformations
     
-    Rij_x=(u_fft.*conj(u_fft)); % compute velo. correlation tensor
-    Rij_y=(v_fft.*conj(v_fft));
-    Rij_z=(w_fft.*conj(w_fft));
-    
-end
-if (strcmp('2D',flag))
-    scaling = (2*pi)^2*dim^2;
-    extension = 0;
-    tic; %start timer
-    NFFT = 2.^(nextpow2(size(u))+extension);
-    u_fft=fft2(u,NFFT(1),NFFT(2))./scaling; %2 pi --> definition of FFT 
-    %
-    NFFT = 2.^(nextpow2(size(v))+extension);
-    v_fft=fft2(v,NFFT(1),NFFT(2))./scaling;
-    %
-    Rij_x=(u_fft.*conj(u_fft));%/size(u,1).^2/size(u,2).^2;
-    Rij_y=(v_fft.*conj(v_fft));%/size(v,1).^2/size(v,2).^2;
-    
-end
-
+Rij_x=(u_fft.*conj(u_fft)); % compute velo. correlation tensor
+Rij_y=(v_fft.*conj(v_fft));
+Rij_z=(w_fft.*conj(w_fft));
 %% Compute correlations
 % Computing a correlation can be a tedious work (requireing tremendeous
 % effort) especially if you have large data sets. From theory it is well
@@ -151,17 +107,12 @@ end
 %   \end{equation}
 % </latex>
 % 
-if (strcmp('3D',flag))
     NFFT = 2.^nextpow2(size(u_fft));
     R1=ifftn(Rij_x,NFFT)/std2(u)^2*NFFT(1)*NFFT(2)*NFFT(3)*(2*pi)^6;
     NFFT = 2.^nextpow2(size(v_fft));
     R2=ifftn(Rij_y,NFFT)/std2(v)^2*NFFT(1)*NFFT(2)*NFFT(3)*(2*pi)^6;
     NFFT = 2.^nextpow2(size(w_fft));
     R3=ifftn(Rij_z,NFFT)/std2(w)^2*NFFT(1)*NFFT(2)*NFFT(3)*(2*pi)^6;
-    %
-%     R33 = reshape(R3(1,1,:),NFFT(1),1);
-%     R22 = reshape(R2(1,:,1),NFFT(1),1);
-%     R11 = reshape(R1(:,1,1),NFFT(1),1);
     
     R11 = (reshape(R3(1,1,:),NFFT(1),1)+R2(1,:,1)'+R1(:,1,1))/3;
     R11 = R11(1:size(u_fft)/2+1);
@@ -172,34 +123,8 @@ if (strcmp('3D',flag))
     
     R22 = (R1_22'+R2_22+R3_22)/3;
     R22 = R22(1:size(u_fft)/2+1);
-%     R22 = (R11(1,:,1) + )/3;
-    
-    
-%     R111 = (R11+R22+R33)/3;
-%     R11 = R111(1:NFFT(1)/2+1);
-%       
-      
-%     R22=R2(1:round(size(R2,1)/2),1,1);
-%     R33=R3(1:round(size(R3,1)/2),1,1);
-    %
+
     r = linspace(0,Lx/2,size(u_fft,1)/2+1)/(Lx/2);
-end
-if (strcmp('2D',flag))
-    NFFT = 2.^nextpow2(size(u_fft));
-    R1 = ifft2(Rij_x,NFFT(1),NFFT(2))...
-                ./NFFT(1)./NFFT(2)./std2(u)^2; %...
-                %.*(2*pi)^4; % scaling due to division by 2*pi
-    %
-    NFFT = 2.^nextpow2(size(v_fft));
-    R2 = ifft2(Rij_y,NFFT(1),NFFT(2))...
-                ./NFFT(1)./NFFT(2)./std2(v)^2; %...
-                %.*(2*pi)^4; % scaling due to division by 2*pi                
-    R11 = (R1(:,1)+R2(1,:)')/2;
-    R11 = R11(1:size(u_fft)/2+1);
-    R22 = (R1(1,:)+R2(:,1)')/2;
-    R22 = R22(1:size(u_fft)/2+1);
-    %
-    r = linspace(0,Lx/2,size(u_fft,1)/2+1)/(Lx/2); % get the radius
     %%
     % 
     % <latex>
@@ -211,7 +136,6 @@ if (strcmp('2D',flag))
     % </latex>
     % 
     g_r = R11 + r'/2.*gradient(R11,max(diff(r)));
-end
 plot(r,R11,r,R22,r,g_r)
 legend('R11','R22','g_r');
 h=line([0 1],[0 0],'Color',[0 0 0],'LineWidth',1.0);
@@ -300,52 +224,14 @@ slope=1.5*664092^(2/3)*(f.^(-5/3));
 %       E(|\kappa|) = \frac{1}{2}\,\Phi_{ii}(|\boldsymbol\kappa|)
 %   \end{equation}
 % </latex>
-if (strcmp('3D',flag))
-%     phi = u_fft;
-%     phi(:,:,:)=0.0;
-%     for k=1:dim
-%         for j=1:dim
-%             for i=1:dim
-    %             kappa = sqrt(i*i+j*j+k*k);
-    %             kappa_pos=int16(kappa);
-    %             if (kappa_pos <= size(spec,1))
-    %                 spec(kappa_pos) = spec(kappa_pos)+kappa*kappa*(...
-    %                 + real(u_fft(i,j,k))*real(u_fft(i,j,k))+imag(u_fft(i,j,k))*imag(u_fft(i,j,k)) ...
-    %                 + real(v_fft(i,j,k))*real(v_fft(i,j,k))+imag(v_fft(i,j,k))*imag(v_fft(i,j,k)) ...
-    %                 + real(w_fft(i,j,k))*real(w_fft(i,j,k))+imag(w_fft(i,j,k))*imag(w_fft(i,j,k)));
 
-    %             end
-    %             spec(kappa_pos) = spec(kappa_pos) + kappa*kappa*0.5*(phi_x(i,j,k).^+phi_y(i,j,k).^2+phi_z(i,j,k).^2);
-                  phi = 0.5*(Rij_x+Rij_y+Rij_z);
-%                   phi = fftshift(phi);
-%                   phi = phi(1:round(size(Rij_x,1)/2),...
-%                             1:round(size(Rij_y,1)/2),...
-%                             1:round(size(Rij_z,1)/2));
-%             end
-%         end
-%     end
-else
-%     phi = u_fft;
-%     phi(:,:)=0.0;
-%     for j=1:dim
-%         for i=1:dim
-%             phi(i,j) = phi(i,j) +(phi_x(i,j)+phi_y(i,j));
-%         end
-%     end
-%     phi = 0.5*(Rij_x./(size(Rij_x,1)*size(Rij_x,2))...
-%               +Rij_y./(size(Rij_y,1)*size(Rij_y,2)));
-        phi = 0.5*(Rij_x+Rij_y);
-%     phi = phi(round(size(Rij_x,1)/2+1:end),...
-%               round(size(Rij_y,1)/2+1:end));
-%     phi = phi(1:round(size(phi,1)));
-end
+phi = 0.5*(Rij_x+Rij_y+Rij_z);
 %% Compute $\kappa$ vector
 % From the previous section we know that the only independent we have in the
 % ``system'' is the magnitude of the wave number vector, i.e. 
 % $\kappa=|\boldsymbol\kappa|=\sqrt{\kappa_1+\kappa_2+\kappa_3}$. Secondly
 % we have to compute the sum $\Phi_{ii}=\Phi_{11}+\Phi_{22}+\Phi_{33}$ and
 % take into account its dependence on $|\boldsymbol\kappa|$.
-if (strcmp('3D',flag))
     dim = size(phi,1)/2+1;
 %     maxdim = sqrt(3*dim^2*(2*pi/Lx)^2);
 %     E=zeros(round(sqrt(3*dim^2)+0.5),1);
@@ -393,68 +279,15 @@ if (strcmp('3D',flag))
     end
     kappa(:,1) = kappa(:,1)./kappa(:,2);
     E1=E*4*pi./kappa(:,2).*(kappa(:,1)).^2;
-%     E2=E;
-% E=E.*kk.^2;
-end
-if (strcmp('2D',flag))
-    dim = size(phi,1)/2+1;
-%     maxdim = sqrt(3*dim^2*(2*pi/Lx)^2);
-%     E=zeros(round(sqrt(3*dim^2)+0.5),1);
-%     kappa=zeros(round(sqrt(3*dim^2)+0.5),2);
-    E=zeros(dim,1);
-    kappa=zeros(dim,2);
-%     bin_counter=zeros(round(sqrt(3*dim^2)+0.5),1);
-%     E=zeros(uint64(maxdim),1);
-%     kk=zeros(uint64(maxdim),1);
-%     bin_counter=zeros(uint64(maxdim),1);
-        for j=1:2*(dim-1)
-            for i=1:2*(dim-1)
-                kx = i*pi/Lx;
-                ii = i;
-                if (i > dim); 
-                    kx=(2*(dim)-i)*pi/Lx;
-                    ii=(2*(dim)-i);
-                end
-                ky = j*pi/Ly;
-                jj = j;
-                if (j > dim); 
-                    ky=(2*(dim)-j)*pi/Ly;
-                    jj=(2*(dim)-j);
-                end
-                
-                kappa_pos = round(sqrt(ii^2+jj^2)+0.5)-1;
-                if kappa_pos > dim
-                    kappa_pos = dim;
-                end
-
-                kappa(kappa_pos,1) = kappa(kappa_pos,1) + sqrt(kx^2+ky^2);
-                kappa(kappa_pos,2) = kappa(kappa_pos,2) + 1;
-
-                E(kappa_pos) = E(kappa_pos) + phi(i,j);
-%                 bin_counter(kappa_pos) = bin_counter(kappa_pos) + 1;
-            end
-        end
-    kappa(:,1) = kappa(:,1)./kappa(:,2);
-    E1=E*2*pi./kappa(:,2).*(kappa(:,1));
-
-end
 %% Compute 1D spectrum
 %
 % test=importdata('INPUT/2D/CTRL_TURB_ENERGY');
 %
 % 
-if (strcmp('3D',flag))
-    dissip=18862.41;
-    up = 3.5;
-    kkke=kappa(:,1)./(2*pi/1.42e-2);%L_MAXI
-    kkkd=kappa(:,1)./(2*pi/1.63e-4);%L_DISSIP
-end
-if (strcmp('2D',flag))
-    dissip=664092;
-    up=17;
-    kkke=kappa(:,1)./(2*pi/1.0e-2);
-    kkkd=kappa(:,1)./(2*pi/1.0e-4);%./(2*pi*100)*L;
-end
+    dissip=18862.4177875993 ;
+    up = 3.49327866542476;
+    kkke=kappa(:,1)./(2*pi/1.418952554320881E-002);%L_MAXI
+    kkkd=kappa(:,1)./(2*pi/1.627286214199254E-004);%L_DISSIP
 
 L=Lx;
 
