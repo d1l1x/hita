@@ -9,7 +9,7 @@ v_fft=fftn(v,NFFT);
 w_fft=fftn(w,NFFT);
 
 % Calculate the numberof unique points
-NumUniquePts = ceil((NFFT+1)/2);
+NumUniquePts = ceil((NFFT(1)+1)/2);
 
 % FFT is symmetric, throw away second half 
 u_fft = u_fft(1:NumUniquePts,1:NumUniquePts,1:NumUniquePts);
@@ -42,10 +42,12 @@ mx=NumUniquePts;
 my=NumUniquePts;
 mz=NumUniquePts;
 
-dx=2*pi/L;
-dy=2*pi/L;
-dz=2*pi/L;
-
+% dx=2*pi/L;
+% dy=2*pi/L;
+% dz=2*pi/L;
+dx=pi/L;
+dy=pi/L;
+dz=pi/L;
 for I=1:mx
        X0(I)=(I)*dx; 
 end
@@ -66,12 +68,12 @@ for I=1:mx
     end
 end
 
-P=mod(nx,2);
-if (P < 1)
-    Nmax=mx-0.5;
-else
+% P=mod(nx,2);
+% if (P < 1)
+%     Nmax=mx-0.5;
+% else
     Nmax=mx;
-end
+% end
 
 % % % for N=1:Nmax
 % % %     T_UprimVP1=0;
@@ -104,7 +106,6 @@ end
 % % % end
 spectrum=zeros(Nmax,1);
 for N=1:Nmax
-
     Radius1=sqrt(3)*(N-1)*dx; %lower radius bound
     Radius2=sqrt(3)*N*dx; %upper radius bound
     % bild logical index for selecting values lying on the shell
@@ -112,8 +113,9 @@ for N=1:Nmax
     % build summation over shelle over all components
     T_EVP1=sum(mu(logical))+sum(mv(logical))+sum(mw(logical));
     % put them at position N in the spectrum
-    spectrum(N)=0.25.*T_EVP1;                
+    spectrum(N)=0.25.*T_EVP1;               
 end
 k=[1:Nmax].*(2*pi/(L));
+spectrum = 1./(2*pi)^3.*spectrum;
 
 end

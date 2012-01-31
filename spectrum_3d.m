@@ -19,16 +19,13 @@ path('./functions',path)
 % the tic/toc block is in seconds. What you should get from the tic/toc
 % block is that most of the time is spend during data I/O. The actual
 % computation needs only ??? of the time of the I/O operations.
-tic; % enable timer
-uvel=importdata([datadir,'/',flag,'/uvel']);
-vvel=importdata([datadir,'/',flag,'/vvel']);
-wvel=importdata([datadir,'/',flag,'/wvel']);
-time_reading = toc; % end timer
+%
+[uvel,vvel,wvel,time_read] = read_data(datadir,flag);
 %% Set some neccessary parameters
 % For further computations it is important to define some parmeters of the
 % DNS simulation such as domain size, grid spacing, and the number of grid
 % points.
-%%% 3D
+%
     dim=256; % number of points in one dimension
     Lx=5e-3; % domain size
     Ly=Lx;
@@ -41,6 +38,70 @@ time_reading = toc; % end timer
     v=reshape(vvel,dim,dim,dim);
     w=reshape(wvel,dim,dim,dim);
 %     clear uvel vvel wvel
+%% Compute 3D spectrum
+% In order to avoid aliasing effects usually connected with a one
+% dimensional spectrum it is also possible to produce correlations that
+% involve all possible directions. The three dimensional Fourier
+% transformation of such a correlation produces a spectrum that not only
+% depends on a single wavenumber but on the wavenumber vector $\kappa_i$.
+% Though the directional information contained in $\kappa_i$ eliminates the
+% aliasing problem the complexity makes a physical reasoning impossible.
+% For homogeneous isotropic turbulence the situation can be simplified by
+% integrating the three dimensional spectrum over spherical shells.
+%%
+%
+% <latex>
+%   \begin{equation}
+%       E(\kappa) = \oiint E(\boldsymbol\kappa)\mathrm{d}S(\kappa)
+%                 = \oiint \frac{1}{2}\,Phi_{ii}(\boldsymbol\kappa)\mathrm{d}S(\kappa)
+%   \end{equation}
+%   Since the surface of a sphereis completly determined by its radius the
+%   surface integral can be solved analytically.
+%   \begin{equation}
+%       \oiint(\,)\mathrm{d}S(\kappa) = 4\pi\kappa^2\cdot(\,)
+%   \end{equation}
+% This leads to
+%   \begin{equation}
+%       E(|\kappa|) = \frac{1}{2}\,\Phi_{ii}(|\boldsymbol\kappa|)
+%   \end{equation}
+% </latex>
+[spectrum,k] = power_spec(u,v,w,Lx);
+%% Compute dissipation and turbulent kinetic energy
+[Dissipation,kinetic_E] = spec_prop(spectrum,k,nu);
+
+%% Verify computation of kinetic Energy
+
+up = sqrt(1/3*(u.^2+v.^2+w.^2));
+kinetic_Up = sum(sum(sum(3/2*up.^2)))/size(up,1)^3;
+%% Kolmogrov properties
+eta = (nu^3/Dissipation)^(1/4);
+u_eta = (nu*Dissipation)^(1/4);
+tau = (nu/Dissipation)^(1/2);
+            
+%% Compute 1D spectrum
+%
+    up = mean2(up);
+%     kkke=k./(2*pi*1./1.418952554320881E-002);%kappa(E1==max(E1),1));%L_MAXI
+%     kkkd=k./(2*pi*1./1.627286214199254E-004);%kappa(E1==min(E1),1));%L_DISSIP
+    kkke=k./k(spectrum==max(spectrum));%k./(1./k(spectrum==max(spectrum)));%L_MAXI
+    kkkd=k./1./eta;%k./(1./k(spectrum==min(spectrum)));%L_DISSIP
+% Von Karman-Pao Spektrum
+kd = 1./eta;
+% ke = (2*pi*1./1.627286214199254E-004);%5027;
+% VKP1 = 1.5*up^5/Dissipation.*(k./ke).^4./(1+(k./ke).^2).^(17/6).*exp(-3/2*1.5.*(k./kd).^(4/3));
+VKP2 = 1.5*(k./kd).^(-5/3)./(Dissipation*nu^5)^(-1/4).*exp(-1.5*1.5.*(k./kd).^(4/3));
+% Kraichnan spectrum
+k0 = k(spectrum==min(spectrum));
+KS = 16/(0.5*pi)^(1/2).*up^2.*k.^4./(k0.^5).*exp(-2*k.^2./k0.^2);
+% Kolmogorov Spektrum
+Kolmo=1.5*dissip^(2/3)*(k.^(-5/3));
+% Plot spectra
+loglog(k,Kolmo,k,VKP2,k,spectrum./1.1)
+
+h=legend('Kolmogorov','VKP1','VKP2','Computed');
+set(h,'Location','SouthWest')
+
+
 %% Compute FFT
 % This is the most important part of the script. Since the performance of
 % an actual DFT is rather bad the preferred choice is a FFT. The FFT
