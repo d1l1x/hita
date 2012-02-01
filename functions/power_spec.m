@@ -42,9 +42,6 @@ mx=NumUniquePts;
 my=NumUniquePts;
 mz=NumUniquePts;
 
-% dx=2*pi/L;
-% dy=2*pi/L;
-% dz=2*pi/L;
 dx=pi/L;
 dy=pi/L;
 dz=pi/L;
@@ -74,36 +71,6 @@ end
 % else
     Nmax=mx;
 % end
-
-% % % for N=1:Nmax
-% % %     T_UprimVP1=0;
-% % %     T_VprimVP1=0;
-% % %     T_WprimVP1=0;
-% % %     T_EVP1=0;
-% % %     
-% % %     Radius1=sqrt(3)*(N-1)*dx;
-% % %     Radius2=sqrt(3)*N*dx;
-% % %     
-% % %     for I=1:mx
-% % %       for J=1:my
-% % %           for K=1:mz
-% % %               if (Radius1 <= R(I,J,K)) && (R(I,J,K) < Radius2)
-% % %              
-% % %                 T_UprimVP1=T_UprimVP1+mu(I,J,K);
-% % %                 T_VprimVP1=T_VprimVP1+mv(I,J,K);
-% % %                 T_WprimVP1=T_WprimVP1+mw(I,J,K);
-% % %                 T_EVP1=T_UprimVP1+T_VprimVP1+T_WprimVP1;                                  
-% % %               else         
-% % %                 T_UprimVP1=T_UprimVP1;
-% % %                 T_VprimVP1=T_VprimVP1;
-% % %                 T_WprimVP1=T_WprimVP1;
-% % %                 T_EVP1=T_UprimVP1+T_VprimVP1+T_WprimVP1;                                                  
-% % %               end    
-% % %           end
-% % %       end
-% % %     end        
-% % %     spectrum(N)=0.25.*T_EVP1;                
-% % % end
 spectrum=zeros(Nmax,1);
 for N=1:Nmax
     Radius1=sqrt(3)*(N-1)*dx; %lower radius bound
