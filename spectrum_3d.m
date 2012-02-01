@@ -65,7 +65,7 @@ path('./functions',path)
 %       E(|\kappa|) = \frac{1}{2}\,\Phi_{ii}(|\boldsymbol\kappa|)
 %   \end{equation}
 % </latex>
-[spectrum,k] = power_spec(u,v,w,Lx);
+[spectrum,k,u_fft,v_fft,w_fft] = power_spec(u,v,w,Lx);
 %% Compute dissipation and turbulent kinetic energy
 [Dissipation,kinetic_E] = spec_prop(spectrum,k,nu);
 
@@ -83,8 +83,7 @@ tau = (nu/Dissipation)^(1/2);
     up = mean2(up);
 %     kkke=k./(2*pi*1./1.418952554320881E-002);%kappa(E1==max(E1),1));%L_MAXI
 %     kkkd=k./(2*pi*1./1.627286214199254E-004);%kappa(E1==min(E1),1));%L_DISSIP
-    kkke=k./k(spectrum==max(spectrum));%k./(1./k(spectrum==max(spectrum)));%L_MAXI
-    kkkd=k./1./eta;%k./(1./k(spectrum==min(spectrum)));%L_DISSIP
+
 % Von Karman-Pao Spektrum
 kd = 1./eta;
 % ke = (2*pi*1./1.627286214199254E-004);%5027;
@@ -94,9 +93,9 @@ VKP2 = 1.5*(k./kd).^(-5/3)./(Dissipation*nu^5)^(-1/4).*exp(-1.5*1.5.*(k./kd).^(4
 k0 = k(spectrum==min(spectrum));
 KS = 16/(0.5*pi)^(1/2).*up^2.*k.^4./(k0.^5).*exp(-2*k.^2./k0.^2);
 % Kolmogorov Spektrum
-Kolmo=1.5*dissip^(2/3)*(k.^(-5/3));
+Kolmo=1.5*Dissipation^(2/3)*(k.^(-5/3));
 % Plot spectra
-loglog(k,Kolmo,k,VKP2,k,spectrum./1.1)
+loglog(k,Kolmo,k,VKP2,k,spectrum)
 
 h=legend('Kolmogorov','VKP1','VKP2','Computed');
 set(h,'Location','SouthWest')

@@ -1,7 +1,7 @@
-function [spectrum,k] = power_spec(u,v,w,L)
-nx = size(u,1);
-ny = size(u,2);
-nz = size(u,3);
+function [spectrum,k,u_fft,v_fft,w_fft] = power_spec(u,v,w,L)
+% nx = size(u,1);
+% ny = size(u,2);
+% nz = size(u,3);
 
 NFFT = 2.^nextpow2(size(u)); % next power of 2 fitting the length of u
 u_fft=fftn(u,NFFT);
