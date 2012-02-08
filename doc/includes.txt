@@ -1,8 +1,12 @@
-\usepackage{mcode}
+\documentclass[ntfdMod]{elsarticle}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage[numbered,bw]{mcode}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{hyperref}
 \usepackage{esint}
+\usepackage{units}
 \usepackage[protrusion=true,expansion]{microtype}
 \hypersetup{
 	bookmarks=true,         % show bookmarks bar?
@@ -24,3 +28,25 @@
 	filecolor=magenta,      % color of file links
 	urlcolor=cyan           % color of external links
 }
+\usepackage{verbatim}
+\usepackage{relsize}
+\usepackage{lipsum}
+\usepackage{caption}
+\captionsetup[figure]{name=Fig.,labelfont=bf}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+%c from texinfo.tex
+\def\ifmonospace{\ifdim\fontdimen3\font=0pt }
+%c C plus plus
+\def\C++{%
+\ifmonospace%
+    C++%
+	\else%
+	    C\kern-.1667em\raise.30ex\hbox{\smaller{++}}%
+		\fi%
+		\spacefactor1000 }
+
+\title{Small post processor}

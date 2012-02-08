@@ -1,0 +1,18 @@
+#!/bin/bash
+#sed -i -r 's/\{article\}/\[ntfdMod\]\{elsarticle\}/g' spectrum_3d.tex
+#head -n7 spectrum_3d.tex > test0
+
+grep -A 1000 -E '\\begin\{document\}' spectrum_3d.tex > test1
+cat includes.txt test1 > spectrum_3d.tex
+sed -E '
+/begin\{document\}/ a\
+	\\maketitle
+' spectrum_3d.tex > temp
+mv temp spectrum_3d.tex
+## replace verbatim environment by listing env.
+sed -i -r 's/begin{verbatim}/begin{lstlisting}/g' spectrum_3d.tex
+sed -i -r 's/end{verbatim}/end{lstlisting}/g' spectrum_3d.tex
+sed -i -r 's/subsection\*/section/g' spectrum_3d.tex
+
+latexmk -C
+latexmk -pdf spectrum_3d.tex

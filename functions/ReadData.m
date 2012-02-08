@@ -1,4 +1,4 @@
-function [uvel,vvel,wvel,time] = read_data(datadir,flag)
+function [uvel,vvel,wvel,time] = ReadData(datadir,flag)
     tic; % enable timer
     uvel=importdata([datadir,'/',flag,'/uvel']);
     vvel=importdata([datadir,'/',flag,'/vvel']);

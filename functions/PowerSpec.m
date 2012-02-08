@@ -1,8 +1,8 @@
-function [spectrum,k,u_fft,v_fft,w_fft] = power_spec(u,v,w,L)
+function [spectrum,k,mu,mv,mw,time] = power_spec(u,v,w,L)
 % nx = size(u,1);
 % ny = size(u,2);
 % nz = size(u,3);
-
+tic;
 NFFT = 2.^nextpow2(size(u)); % next power of 2 fitting the length of u
 u_fft=fftn(u,NFFT);
 v_fft=fftn(v,NFFT);
@@ -26,16 +26,16 @@ mv = mv.^2;
 mw = mw.^2;
 
 % Since we dropped half the FFT, we multiply mx by 2 to keep the same energy.
-% The DC component and Nyquist component, if it exists, are unique and should not be multiplied by 2.
+% The Nyquist component, if it exists, is unique and should not be multiplied by 2.
 
 if rem(NFFT, 2) % odd nfft excludes Nyquist point
-  mu(2:end) = mu(2:end)*2;
-  mv(2:end) = mv(2:end)*2;
-  mw(2:end) = mw(2:end)*2;
+  mu(2:end,2:end,2:end) = mu(2:end,2:end,2:end)*2;
+  mv(2:end,2:end,2:end) = mv(2:end,2:end,2:end)*2;
+  mw(2:end,2:end,2:end) = mw(2:end,2:end,2:end)*2;
 else
-  mu(2:end -1) = mu(2:end -1)*2;
-  mv(2:end -1) = mv(2:end -1)*2;
-  mw(2:end -1) = mw(2:end -1)*2;
+  mu(2:end -1,2:end -1,2:end -1) = mu(2:end -1,2:end -1,2:end -1)*2;
+  mv(2:end -1,2:end -1,2:end -1) = mv(2:end -1,2:end -1,2:end -1)*2;
+  mw(2:end -1,2:end -1,2:end -1) = mw(2:end -1,2:end -1,2:end -1)*2;
 end
 % Compute the radius vector along which the energies are sumed
 mx=NumUniquePts;
@@ -77,12 +77,12 @@ for N=1:Nmax
     Radius2=sqrt(3)*N*dx; %upper radius bound
     % bild logical index for selecting values lying on the shell
     logical = (Radius1 <= R(:,:,:)) & (R(:,:,:) < Radius2);
-    % build summation over shelle over all components
+    % build summation over shell components
     T_EVP1=sum(mu(logical))+sum(mv(logical))+sum(mw(logical));
     % put them at position N in the spectrum
-    spectrum(N)=0.25.*T_EVP1;               
+    spectrum(N)=T_EVP1./2;               
 end
-k=[1:Nmax].*(2*pi/(L));
+k=[1:Nmax].*dx;
 spectrum = 1./(2*pi)^3.*spectrum;
-
+time=toc;
 end
