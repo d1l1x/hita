@@ -47,7 +47,11 @@ path('./functions',path) % add functions directory the Matlab path
 % read by nearly all data processing tools.
 % </latex>
 %
-[uvel,vvel,wvel,time_read] = ReadData(datadir,flag);
+[uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'xyz_u.txt','xyz_v.txt','xyz_w.txt');
+test=importdata('data/3D/CFX_velocity_field.dat');
+uvel=reshape(test(:,1),33,33,33);
+vvel=reshape(test(:,2),33,33,33);
+wvel=reshape(test(:,3),33,33,33);
 %% 
 % <latex>
 % \lstinputlisting{../functions/ReadData.m}
@@ -66,6 +70,9 @@ path('./functions',path) % add functions directory the Matlab path
 % </latex>
 %
 [u,v,w,dim,Lx,dx,nu]=Params(uvel,vvel,wvel);
+u=u-mean2(u);
+v=v-mean2(v);
+w=w-mean2(w);
 %% 
 % <latex>
 % \lstinputlisting{../functions/Params.m}
@@ -110,7 +117,7 @@ path('./functions',path) % add functions directory the Matlab path
 % <latex>
 %   \begin{equation}
 %       E(\kappa) = \oiint E(\boldsymbol\kappa)\mathrm{d}S(\kappa)
-%                 = \oiint \frac{1}{2}\,Phi_{ii}(\boldsymbol\kappa)\mathrm{d}S(\kappa)
+%                 = \oiint \frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\mathrm{d}S(\kappa)
 %   \end{equation}
 %   Since the surface of a sphereis completly determined by its radius the
 %   surface integral can be solved analytically.
@@ -122,7 +129,7 @@ path('./functions',path) % add functions directory the Matlab path
 %       E(|\kappa|) = \frac{1}{2}\,\Phi_{ii}(|\boldsymbol\kappa|)
 %   \end{equation}
 % </latex>
-[spectrum,k,mu,mv,mw,time_spec] = PowerSpec(u,v,w,Lx);
+[spectrum,k,mu,mv,mw,time_spec] = PowerSpec(u,v,w,Lx,dim);
 %% 
 % <latex>
 % The content of \verb|PowerSpec| reads
@@ -130,7 +137,9 @@ path('./functions',path) % add functions directory the Matlab path
 % </latex>
 %% Compute dissipation and turbulent kinetic energy
 %
-[Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,nu,u,v,w);
+[Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,nu,u,v,w,dim);
+kin_E_Ph
+kin_E_Sp
 %% 
 % <latex>
 % The content of \verb|SpecProp| reads
@@ -139,6 +148,9 @@ path('./functions',path) % add functions directory the Matlab path
 %% Kolmogrov properties
 %
 [eta,u_eta,tau]=KolmoScale(nu,Dissipation);
+eta
+u_eta
+tau
 %% 
 % <latex>
 % The content of \verb|KolmoScale| reads
@@ -165,11 +177,15 @@ PlotModelSpec(k,spectrum,Dissipation,up,Lx,eta,nu);
 % <latex>
 %   \begin{equation}
 %       R_{ij} = \frac{cov(U_i,U_j)}{\sqrt{\sigma_i^2\,\sigma_j^2}}
-%              = \frac{(u_i'-\mu_i)\,(u_j-\mu_j)}{\sqrt{\sigma_i^2\,\sigma_j^2}}
+%              = \frac{left<u_i'\,u_j'\right>}{\sqrt{\sigma_i^2\,\sigma_j^2}}
 %   \end{equation}
 % </latex>
 % 
-[R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx);
+[R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx,dim);
+close all
+figure
+plot(r,R11,r,R22)
+legend('R11','R22')
 %% 
 % <latex>
 % The content of \verb|Correlation| reads

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.2.2)  8 FEB 2012 17:49
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.2.2)  9 FEB 2012 08:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -21,8 +21,8 @@ Document Class: elsarticle 2009/09/17, 1.20b: Elsevier Ltd
 \@bls=\dimen102
 (/usr/local/texlive/2011/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2011/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -452,15 +452,15 @@ Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 (/usr/local/texlive/2011/texmf-dist/tex/latex/relsize/relsize.sty
 Package: relsize 2011/09/21 ver 4.0
 
-Examine \normalsize starts \@setfontsize size may be \@xpt. 
-Examine \small starts \@setfontsize size may be \@ixpt. 
-Examine \footnotesize starts \@setfontsize size may be \@viiipt. 
-Examine \large starts \@setfontsize size may be \@xiipt. 
-Examine \Large starts \@setfontsize size may be \@xivpt. 
-Examine \LARGE starts \@setfontsize size may be \@xviipt. 
-Examine \scriptsize starts \@setfontsize size may be \@viipt. 
-Examine \tiny starts \@setfontsize size may be \@vpt. 
-Examine \huge starts \@setfontsize size may be \@xxpt. 
+Examine \normalsize starts \@setfontsize size may be \@xiipt. 
+Examine \small starts \@setfontsize size may be \@xipt. 
+Examine \footnotesize starts \@setfontsize size may be \@xpt. 
+Examine \large starts \@setfontsize size may be \@xivpt. 
+Examine \Large starts \@setfontsize size may be \@xviipt. 
+Examine \LARGE starts \@setfontsize size may be \@xxpt. 
+Examine \scriptsize starts \@setfontsize size may be \@viiipt. 
+Examine \tiny starts \@setfontsize size may be \@vipt. 
+Examine \huge starts \@setfontsize size may be \@xxvpt. 
 Examine \Huge starts \@setfontsize size may be \@xxvpt. )
 (/usr/local/texlive/2011/texmf-dist/tex/latex/lipsum/lipsum.sty
 Package: lipsum 2011/04/14 v1.2 150 paragraphs of Lorem Ipsum dummy text
@@ -608,131 +608,202 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 78.
 (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <8> not available
+LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
 (Font)              Font shape `OT1/pcr/b/n' tried instead on input line 79.
 LaTeX Font Info:    Try loading font information for TS1+pcr on input line 79.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 )
-LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <8> not available
+LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
 (Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 79.
 
-(../functions/ClearWs.m) [1
+Overfull \hbox (6.00403pt too wide) in paragraph at lines 79--80
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+(../functions/ClearWs.m [1
 
 
-{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (../fun
-ctions/ReadData.m) (../functions/Params.m [2])
+{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) (../fu
+nctions/ReadData.m) [2] (../functions/Params.m
+Overfull \hbox (18.00415pt too wide) in paragraph at lines 10--11
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+)
 Package epstopdf Info: Source file: <shell_integration.eps>
-(epstopdf)                    date: 2012-02-08 17:48:04
-(epstopdf)                    size: 618674 bytes
+(epstopdf)                    date: 2012-02-08 22:08:53
+(epstopdf)                    size: 618894 bytes
 (epstopdf)             Output file: <shell_integration-eps-converted-to.pdf>
-(epstopdf)                    date: 2012-02-08 17:48:12
-(epstopdf)                    size: 28046 bytes
+(epstopdf)                    date: 2012-02-09 08:17:26
+(epstopdf)                    size: 29324 bytes
 (epstopdf)             Command: <repstopdf --outfile=shell_integration-eps-conv
 erted-to.pdf shell_integration.eps>
 (epstopdf)             \includegraphics on input line 189.
 Package epstopdf Info: Output file is already uptodate.
-
-<shell_integration-eps-converted-to.pdf, id=88, 199.74625pt x 193.72375pt>
+ <shell_integration-eps-converted-to.pdf, id=84, 182.6825pt x 195.73125pt>
 File: shell_integration-eps-converted-to.pdf Graphic file (type pdf)
 
 <use shell_integration-eps-converted-to.pdf>
 Package pdftex.def Info: shell_integration-eps-converted-to.pdf used on input l
 ine 189.
-(pdftex.def)             Requested size: 199.74576pt x 193.72327pt.
- [3] (../functions/PowerSpec.m
-[4 <./shell_integration-eps-converted-to.pdf>]
-Overfull \hbox (24.60376pt too wide) in paragraph at lines 28--29
+(pdftex.def)             Requested size: 182.68204pt x 195.73076pt.
+ [3] [4 <./shell_integration-eps-converted-to.pdf>] (../functions/PowerSpec.m
+Overfull \hbox (30.00427pt too wide) in paragraph at lines 6--7
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (72.0047pt too wide) in paragraph at lines 28--29
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (53.40405pt too wide) in paragraph at lines 29--31
+Overfull \hbox (108.00507pt too wide) in paragraph at lines 29--31
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[5]
+Overfull \hbox (18.00415pt too wide) in paragraph at lines 36--37
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (18.00415pt too wide) in paragraph at lines 37--38
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (18.00415pt too wide) in paragraph at lines 38--39
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 LaTeX Font Info:    Try loading font information for OML+pcr on input line 69.
 (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/omlpcr.fd
 File: omlpcr.fd 
 )
-LaTeX Font Info:    Font shape `OML/pcr/m/it' in size <8> not available
+LaTeX Font Info:    Font shape `OML/pcr/m/it' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 69.
-LaTeX Font Info:    Font shape `OML/pcr/m/n' in size <8> not available
+ [6]
+LaTeX Font Info:    Font shape `OML/pcr/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 79.
- [5])
-(../functions/SpecProp.m) (../functions/KolmoScale.m)
-(../functions/PlotModelSpec.m [6]
-Overfull \hbox (111.00464pt too wide) in paragraph at lines 9--11
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][] 
+)
+Overfull \hbox (12.00409pt too wide) in paragraph at lines 226--227
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-
-Overfull \hbox (82.20435pt too wide) in paragraph at lines 12--14
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+(../functions/SpecProp.m
+Overfull \hbox (18.00415pt too wide) in paragraph at lines 1--2
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) (../functions/Correlation.m
-Overfull \hbox (10.20361pt too wide) in paragraph at lines 3--4
+) [7] (../functions/KolmoScale.m)
+Package epstopdf Info: Source file: <spectrum_3d_01.eps>
+(epstopdf)                    date: 2012-02-09 08:51:56
+(epstopdf)                    size: 19051 bytes
+(epstopdf)             Output file: <spectrum_3d_01-eps-converted-to.pdf>
+(epstopdf)                    date: 2012-02-09 08:52:53
+(epstopdf)                    size: 9349 bytes
+(epstopdf)             Command: <repstopdf --outfile=spectrum_3d_01-eps-convert
+ed-to.pdf spectrum_3d_01.eps>
+(epstopdf)             \includegraphics on input line 289.
+Package epstopdf Info: Output file is already uptodate.
+
+<spectrum_3d_01-eps-converted-to.pdf, id=261, 472.76625pt x 372.39125pt>
+File: spectrum_3d_01-eps-converted-to.pdf Graphic file (type pdf)
+
+<use spectrum_3d_01-eps-converted-to.pdf>
+Package pdftex.def Info: spectrum_3d_01-eps-converted-to.pdf used on input line
+ 289.
+(pdftex.def)             Requested size: 289.07999pt x 227.7095pt.
+ [8] (../functions/PlotModelSpec.m
+Overfull \hbox (36.00433pt too wide) in paragraph at lines 9--10
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[9 <./spectrum_3d_01-eps-converted-to.pdf>])
+Package epstopdf Info: Source file: <spectrum_3d_02.eps>
+(epstopdf)                    date: 2012-02-09 08:52:04
+(epstopdf)                    size: 10636 bytes
+(epstopdf)             Output file: <spectrum_3d_02-eps-converted-to.pdf>
+(epstopdf)                    date: 2012-02-09 08:52:54
+(epstopdf)                    size: 7125 bytes
+(epstopdf)             Command: <repstopdf --outfile=spectrum_3d_02-eps-convert
+ed-to.pdf spectrum_3d_02.eps>
+(epstopdf)             \includegraphics on input line 319.
+Package epstopdf Info: Output file is already uptodate.
+
+<spectrum_3d_02-eps-converted-to.pdf, id=327, 465.74pt x 367.3725pt>
+File: spectrum_3d_02-eps-converted-to.pdf Graphic file (type pdf)
+
+<use spectrum_3d_02-eps-converted-to.pdf>
+Package pdftex.def Info: spectrum_3d_02-eps-converted-to.pdf used on input line
+ 319.
+(pdftex.def)             Requested size: 289.07999pt x 228.03204pt.
+ [10] (../functions/Correlation.m
+Overfull \hbox (54.00452pt too wide) in paragraph at lines 3--4
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[7]
-Overfull \hbox (67.8042pt too wide) in paragraph at lines 31--33
-[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+Overfull \hbox (6.00403pt too wide) in paragraph at lines 12--13
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][] 
  []
 
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 287.
- [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 287.
+[11 <./spectrum_3d_02-eps-converted-to.pdf>])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 329.
+ [12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 329.
  (./spectrum_3d.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 287.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 287.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 329.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 329.
 Package rerunfilecheck Info: File `spectrum_3d.out' has not changed.
 (rerunfilecheck)             Checksum: AF1D00C92115FF2927310AB42EB89142;515.
  ) 
 Here is how much of TeX's memory you used:
- 11207 strings out of 493629
- 168280 string characters out of 3143324
- 436738 words of memory out of 3000000
- 14011 multiletter control sequences out of 15000+200000
- 16878 words of font info for 86 fonts, out of 3000000 for 9000
+ 11272 strings out of 493629
+ 169538 string characters out of 3143324
+ 416942 words of memory out of 3000000
+ 14043 multiletter control sequences out of 15000+200000
+ 18205 words of font info for 88 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 38i,8n,42p,493b,1696s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,8n,42p,493b,1701s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
 exlive/2011/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/te
-xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/tex
+xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/tex
 live/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texl
 ive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texli
-ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive
-/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2
-011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2
-011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/201
-1/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2011/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2011/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2011/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2011/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2011/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2011/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2011/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2011/texmf-dist/font
-s/type1/public/esint-type1/esint10.pfb></usr/local/texlive/2011/texmf-dist/font
-s/type1/public/lm/lmr5.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/publ
-ic/cm-super/sfrm1000.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/co
-urier/ucrb8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/uc
-rr8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrro8a.pf
-b>
-Output written on spectrum_3d.pdf (8 pages, 250782 bytes).
+ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texliv
+e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/
+2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/
+2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/20
+11/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2011
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2011/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2011/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2011/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2011/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2011/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2011/texmf-dist/
+fonts/type1/public/esint-type1/esint10.pfb></usr/local/texlive/2011/texmf-dist/
+fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1
+/public/lm/lmr5.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/cm-s
+uper/sfrm1200.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/u
+crb8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrr8a.pf
+b></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
+Output written on spectrum_3d.pdf (12 pages, 266277 bytes).
 PDF statistics:
- 448 PDF objects out of 1000 (max. 8388607)
- 409 compressed objects within 5 object streams
- 236 named destinations out of 1000 (max. 500000)
- 13390 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 521 PDF objects out of 1000 (max. 8388607)
+ 474 compressed objects within 5 object streams
+ 275 named destinations out of 1000 (max. 500000)
+ 13912 words of extra memory for PDF output out of 14400 (max. 10000000)
 

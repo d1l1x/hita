@@ -2,7 +2,6 @@ function [R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx,dim)
     scaling = 1;
     NFFT = 2.^nextpow2(size(u)); % next power of 2 fitting the length of u
     u_fft=fftn(u,NFFT)./scaling; %2 pi --> definition of FFT 
-
     %
     NFFT = 2.^nextpow2(size(v));
     v_fft=fftn(v,NFFT)./scaling;
@@ -17,7 +16,7 @@ function [R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx,dim)
     % x-component
     NFFT = 2.^nextpow2(size(u_fft));
     R1=ifftn(Rij_x,NFFT)/std2(u)^2/dim^3;
-
+    
     % y-component
     NFFT = 2.^nextpow2(size(v_fft));
     R2=ifftn(Rij_y,NFFT)/std2(v)^2./dim^3;

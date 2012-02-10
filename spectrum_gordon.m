@@ -149,28 +149,28 @@ T=[0.22572e-3];
 
 k=[1:Nmax].*(2*pi/(L));
 
-% % % figure
-% % % hold on
-% % % plot(log10(k),log10(C.*ENVP1),'b')
-% % % set(gca,'fontname', 'new century schoolbook','fontweight','bold');
-% % % title('Energy')
-% % % xlabel('log10 (k)','fontweight','bold','fontname', 'new century schoolbook','fontsize',11)
-% % % ylabel('log10 (E)','fontweight','bold','fontname', 'new century schoolbook','fontsize',11)
-% % % hold off
+figure
+% hold on
+loglog(k,C.*ENVP1./(2*pi)^3,'b')
+% set(gca,'fontname', 'new century schoolbook','fontweight','bold');
+% title('Energy')
+% xlabel('log10 (k)','fontweight','bold','fontname', 'new century schoolbook','fontsize',11)
+% ylabel('log10 (E)','fontweight','bold','fontname', 'new century schoolbook','fontsize',11)
+hold off
 
 % % % %%%%%%%%%%%%%%%%%% RMS values of velocity fluctuations %%%%%%%%%%%%
 % % % 
-% % % Mtime1=sum(sum(x_velocity))/(nx*ny);
+% % % Mtime1=sum(sum(sum(x_velocity)))/(nx*ny*nz);
 % % % Uprimetime1=x_velocity-Mtime1;
 % % % Uprimetime12=Uprimetime1.^2;
-% % % Urms_time1=sum(sum(Uprimetime12))/(nx*ny);
+% % % Urms_time1=sum(sum(Uprimetime12))/(nx*ny*nz);
 % % % 
-% % % Ntime1=sum(sum(y_velocity))/(nx*ny);
+% % % Ntime1=sum(sum(sum(y_velocity)))/(nx*ny*nz);
 % % % 
 % % % Vprimetime1=y_velocity-Ntime1;
 % % % Vprimetime12=Vprimetime1.^2;
 % % % 
-% % % Vrms_time1=sum(sum(Vprimetime12))/(nx*ny);
+% % % Vrms_time1=sum(sum(sum(Vprimetime12)))/(nx*ny*nz);
 % % % RMS_time1=sqrt(0.5*(Urms_time1+Vrms_time1));
 % % % RMS=[RMS_time1]
 % % % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -183,7 +183,7 @@ k=[1:Nmax].*(2*pi/(L));
 % % % 
 % % % DVP1=sum(2.*C.*ENVP1./k);
 % % % L11_VPspec1 = (2/(RMS_spec_VP1^2)).*DVP1;
-% % % L11VP1 = (2/(RMS_time1^2)).*DVP1;
+% % % L11VP1 = (2/(RMS_time1.^2)).*DVP1;
 % % % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % % L11_VPspec=[L11_VPspec1]
 % % % L11VP=[L11VP1]

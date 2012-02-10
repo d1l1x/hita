@@ -1,4 +1,4 @@
-\documentclass[ntfdMod]{elsarticle}
+\documentclass[preprint,12pt,ntfdMod]{elsarticle}
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage[numbered,bw]{mcode}

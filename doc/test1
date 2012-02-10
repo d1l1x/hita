@@ -134,7 +134,7 @@ idea of this integration is illustrated in Fig. \ref{fig:shell_int}
 \begin{figure}
   \centering
   \includegraphics[scale=1]{shell_integration}
-  \caption{Illustration of two dimensional shell integration}
+  \caption{Illustration of the two dimensional shell integration}
   \label{fig:shell_int}
 \end{figure}
 
@@ -143,7 +143,7 @@ idea of this integration is illustrated in Fig. \ref{fig:shell_int}
 
   \begin{equation}
       E(\kappa) = \oiint E(\boldsymbol\kappa)\mathrm{d}S(\kappa)
-                = \oiint \frac{1}{2}\,Phi_{ii}(\boldsymbol\kappa)\mathrm{d}S(\kappa)
+                = \oiint \frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\mathrm{d}S(\kappa)
   \end{equation}
   Since the surface of a sphereis completly determined by its radius the
   surface integral can be solved analytically.
@@ -171,8 +171,22 @@ The content of \verb|PowerSpec| reads
 
 \begin{verbatim}
 [Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,nu,u,v,w);
+kin_E_Ph
+kin_E_Sp
 \end{verbatim}
-\begin{par}
+
+        \color{lightgray} \begin{verbatim}
+kin_E_Ph =
+
+    6.8206
+
+
+kin_E_Sp =
+
+    5.3630
+
+\end{verbatim} \color{black}
+    \begin{par}
 
 The content of \verb|SpecProp| reads
 \lstinputlisting{../functions/SpecProp.m}
@@ -184,8 +198,28 @@ The content of \verb|SpecProp| reads
 
 \begin{verbatim}
 [eta,u_eta,tau]=KolmoScale(nu,Dissipation);
+eta
+u_eta
+tau
 \end{verbatim}
-\begin{par}
+
+        \color{lightgray} \begin{verbatim}
+eta =
+
+   4.5999e-05
+
+
+u_eta =
+
+    0.3696
+
+
+tau =
+
+   1.2446e-04
+
+\end{verbatim} \color{black}
+    \begin{par}
 
 The content of \verb|KolmoScale| reads
 \lstinputlisting{../functions/KolmoScale.m}
@@ -198,6 +232,8 @@ The content of \verb|KolmoScale| reads
 \begin{verbatim}
 PlotModelSpec(k,spectrum,Dissipation,up,Lx,eta,nu);
 \end{verbatim}
+
+\includegraphics [width=4in]{spectrum_3d_01.eps}
 \begin{par}
 
 The content of \verb|PlotModelSpec| reads
@@ -215,13 +251,19 @@ Computing a correlation can be a tedious work (requireing tremendeous effort) es
 
   \begin{equation}
       R_{ij} = \frac{cov(U_i,U_j)}{\sqrt{\sigma_i^2\,\sigma_j^2}}
-             = \frac{(u_i'-\mu_i)\,(u_j-\mu_j)}{\sqrt{\sigma_i^2\,\sigma_j^2}}
+             = \frac{left<u_i'\,u_j'right>}{\sqrt{\sigma_i^2\,\sigma_j^2}}
   \end{equation}
 
 \end{par} \vspace{1em}
 \begin{verbatim}
 [R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx);
+close all
+figure
+plot(r,R11,r,R22)
+legend('R11','R22')
 \end{verbatim}
+
+\includegraphics [width=4in]{spectrum_3d_02.eps}
 \begin{par}
 
 The content of \verb|Correlation| reads
