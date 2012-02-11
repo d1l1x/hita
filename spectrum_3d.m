@@ -5,7 +5,6 @@
 % a plot call is invoked.
 %
 path('./functions',path) % add functions directory the Matlab path
-set(0,'DefaultFigureWindowStyle','docked');
 [datadir,flag]=ClearWs();
 %%
 %
@@ -138,7 +137,7 @@ w=w-mean2(w);
 % </latex>
 %% Compute dissipation and turbulent kinetic energy
 %
-[Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum',k,nu,u,v,w,dim);
+[Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,nu,u,v,w,dim);
 kin_E_Ph
 kin_E_Sp
 %% 
