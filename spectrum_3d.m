@@ -130,6 +130,7 @@ w=w-mean2(w);
 %   \end{equation}
 % </latex>
 [spectrum,k,time_spec] = PowerSpec(u,v,w,Lx,dim);
+spectrum=spectrum;
 %% 
 % <latex>
 % The content of \verb|PowerSpec| reads
