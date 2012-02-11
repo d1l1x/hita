@@ -5,6 +5,7 @@
 % a plot call is invoked.
 %
 path('./functions',path) % add functions directory the Matlab path
+set(0,'DefaultFigureWindowStyle','docked');
 [datadir,flag]=ClearWs();
 %%
 %
@@ -129,7 +130,7 @@ w=w-mean2(w);
 %       E(|\kappa|) = \frac{1}{2}\,\Phi_{ii}(|\boldsymbol\kappa|)
 %   \end{equation}
 % </latex>
-[spectrum,k,mu,mv,mw,time_spec] = PowerSpec(u,v,w,Lx,dim);
+[spectrum,k,time_spec] = PowerSpec(u,v,w,Lx,dim);
 %% 
 % <latex>
 % The content of \verb|PowerSpec| reads
@@ -137,7 +138,7 @@ w=w-mean2(w);
 % </latex>
 %% Compute dissipation and turbulent kinetic energy
 %
-[Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,nu,u,v,w,dim);
+[Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum',k,nu,u,v,w,dim);
 kin_E_Ph
 kin_E_Sp
 %% 
@@ -191,3 +192,11 @@ legend('R11','R22')
 % The content of \verb|Correlation| reads
 % \lstinputlisting{../functions/Correlation.m}
 % </latex>
+close all
+sohm=importdata('data/3D/SPECTRUM_00.SET');
+h=loglog(sohm(:,1),sohm(:,2),'*-b');hold on
+set(h,'LineWidth',1);
+h=loglog(k,spectrum,'r-s');
+set(h,'LineWidth',1);
+legend('Sohm','Dietzsch')
+saveas(gcf,'spectrum.eps','psc2')
