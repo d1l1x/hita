@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.2.2)  9 FEB 2012 08:52
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.2.2)  13 FEB 2012 14:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -492,43 +492,80 @@ fi \vskip \belowcaptionskip .
 \c@ContinuedFloat=\count127
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
-) (./spectrum_3d.aux)
+) (/usr/local/texlive/2011/texmf-dist/tex/latex/tocloft/tocloft.sty
+Package: tocloft 2010/10/13 v2.3e parameterised ToC, etc., typesetting
+Package tocloft Info: The document has section divisions on input line 43.
+\cftparskip=\skip55
+\cftbeforetoctitleskip=\skip56
+\cftaftertoctitleskip=\skip57
+\cftbeforepartskip=\skip58
+\cftpartnumwidth=\skip59
+\cftpartindent=\skip60
+\cftbeforesecskip=\skip61
+\cftsecindent=\skip62
+\cftsecnumwidth=\skip63
+\cftbeforesubsecskip=\skip64
+\cftsubsecindent=\skip65
+\cftsubsecnumwidth=\skip66
+\cftbeforesubsubsecskip=\skip67
+\cftsubsubsecindent=\skip68
+\cftsubsubsecnumwidth=\skip69
+\cftbeforeparaskip=\skip70
+\cftparaindent=\skip71
+\cftparanumwidth=\skip72
+\cftbeforesubparaskip=\skip73
+\cftsubparaindent=\skip74
+\cftsubparanumwidth=\skip75
+\cftbeforeloftitleskip=\skip76
+\cftafterloftitleskip=\skip77
+\cftbeforefigskip=\skip78
+\cftfigindent=\skip79
+\cftfignumwidth=\skip80
+\c@lofdepth=\count128
+\c@lotdepth=\count129
+\cftbeforelottitleskip=\skip81
+\cftafterlottitleskip=\skip82
+\cftbeforetabskip=\skip83
+\cfttabindent=\skip84
+\cfttabnumwidth=\skip85
+)
+(./spectrum_3d.aux)
 \openout1 = `spectrum_3d.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 53.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 62.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 62.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
 
 (/usr/local/texlive/2011/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count128
+\scratchcounter=\count130
 \scratchdimen=\dimen133
 \scratchbox=\box34
-\nofMPsegments=\count129
-\nofMParguments=\count130
+\nofMPsegments=\count131
+\nofMParguments=\count132
 \everyMPshowfont=\toks26
-\MPscratchCnt=\count131
+\MPscratchCnt=\count133
 \MPscratchDim=\dimen134
-\MPnumerator=\count132
-\makeMPintoPDFobject=\count133
+\MPnumerator=\count134
+\makeMPintoPDFobject=\count135
 \everyMPtoPDFconversion=\toks27
 ) (/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -545,9 +582,9 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count134
+\c@lstlisting=\count136
 \AtBeginShipoutBox=\box35
-Package hyperref Info: Link coloring ON on input line 53.
+Package hyperref Info: Link coloring ON on input line 62.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
@@ -555,17 +592,17 @@ Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
 (/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count135
+\c@section@level=\count137
 )
-LaTeX Info: Redefining \ref on input line 53.
-LaTeX Info: Redefining \pageref on input line 53.
-LaTeX Info: Redefining \nameref on input line 53.
+LaTeX Info: Redefining \ref on input line 62.
+LaTeX Info: Redefining \pageref on input line 62.
+LaTeX Info: Redefining \nameref on input line 62.
 
 (./spectrum_3d.out) (./spectrum_3d.out)
 \@outlinefile=\write4
 \openout4 = `spectrum_3d.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 53.
+LaTeX Info: Redefining \microtypecontext on input line 62.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -582,7 +619,7 @@ File: mt-cmr.cfg 2009/11/09 v2.0 microtype config. file: Computer Modern Roman
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for U+msa on input line 58.
+LaTeX Font Info:    Try loading font information for U+msa on input line 64.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
@@ -590,7 +627,7 @@ File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 (/usr/local/texlive/2011/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 58.
+LaTeX Font Info:    Try loading font information for U+msb on input line 64.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -598,42 +635,38 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 (/usr/local/texlive/2011/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+esint on input line 58.
+LaTeX Font Info:    Try loading font information for U+esint on input line 64.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 )
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 78.
+(./spectrum_3d.toc)
+\tf@toc=\write5
+\openout5 = `spectrum_3d.toc'.
 
-(/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+ [1
+
+
+{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 88.
+ (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
-(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 79.
-LaTeX Font Info:    Try loading font information for TS1+pcr on input line 79.
+(Font)              Font shape `OT1/pcr/b/n' tried instead on input line 89.
+LaTeX Font Info:    Try loading font information for TS1+pcr on input line 89.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/ts1pcr.fd
 File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
-(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 79.
+(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 89.
 
-Overfull \hbox (6.00403pt too wide) in paragraph at lines 79--80
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-(../functions/ClearWs.m [1
-
-
-{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) (../fu
-nctions/ReadData.m) [2] (../functions/Params.m
-Overfull \hbox (18.00415pt too wide) in paragraph at lines 10--11
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-)
+(../functions/ClearWs.m) [2]
+LaTeX Font Info:    Font shape `TS1/pcr/m/it' in size <10> not available
+(Font)              Font shape `TS1/pcr/m/sl' tried instead on input line 140.
+ (../functions/ReadData.m) [3]
+(../functions/Params.m)
 Package epstopdf Info: Source file: <shell_integration.eps>
 (epstopdf)                    date: 2012-02-08 22:08:53
 (epstopdf)                    size: 618894 bytes
@@ -642,142 +675,48 @@ Package epstopdf Info: Source file: <shell_integration.eps>
 (epstopdf)                    size: 29324 bytes
 (epstopdf)             Command: <repstopdf --outfile=shell_integration-eps-conv
 erted-to.pdf shell_integration.eps>
-(epstopdf)             \includegraphics on input line 189.
+(epstopdf)             \includegraphics on input line 210.
 Package epstopdf Info: Output file is already uptodate.
- <shell_integration-eps-converted-to.pdf, id=84, 182.6825pt x 195.73125pt>
+
+<shell_integration-eps-converted-to.pdf, id=110, 182.6825pt x 195.73125pt>
 File: shell_integration-eps-converted-to.pdf Graphic file (type pdf)
 
 <use shell_integration-eps-converted-to.pdf>
 Package pdftex.def Info: shell_integration-eps-converted-to.pdf used on input l
-ine 189.
+ine 210.
 (pdftex.def)             Requested size: 182.68204pt x 195.73076pt.
- [3] [4 <./shell_integration-eps-converted-to.pdf>] (../functions/PowerSpec.m
-Overfull \hbox (30.00427pt too wide) in paragraph at lines 6--7
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
+ [4] (../functions/PowerSpec.m
+[5 <./shell_integration-eps-converted-to.pdf>] [6] [7]
+LaTeX Font Info:    Try loading font information for OML+pcr on input line 82.
 
-
-Overfull \hbox (72.0047pt too wide) in paragraph at lines 28--29
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (108.00507pt too wide) in paragraph at lines 29--31
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[5]
-Overfull \hbox (18.00415pt too wide) in paragraph at lines 36--37
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (18.00415pt too wide) in paragraph at lines 37--38
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (18.00415pt too wide) in paragraph at lines 38--39
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-LaTeX Font Info:    Try loading font information for OML+pcr on input line 69.
 (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/omlpcr.fd
 File: omlpcr.fd 
 )
 LaTeX Font Info:    Font shape `OML/pcr/m/it' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 69.
- [6]
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 82.
 LaTeX Font Info:    Font shape `OML/pcr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 79.
-)
-Overfull \hbox (12.00409pt too wide) in paragraph at lines 226--227
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 98.
+ [8]) [9]
+(../functions/SpecProp.m) (../functions/KolmoScale.m)
+(../functions/PlotModelSpec.m [10]) [11] (../functions/Correlation.m [12])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 327.
 
-(../functions/SpecProp.m
-Overfull \hbox (18.00415pt too wide) in paragraph at lines 1--2
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-) [7] (../functions/KolmoScale.m)
-Package epstopdf Info: Source file: <spectrum_3d_01.eps>
-(epstopdf)                    date: 2012-02-09 08:51:56
-(epstopdf)                    size: 19051 bytes
-(epstopdf)             Output file: <spectrum_3d_01-eps-converted-to.pdf>
-(epstopdf)                    date: 2012-02-09 08:52:53
-(epstopdf)                    size: 9349 bytes
-(epstopdf)             Command: <repstopdf --outfile=spectrum_3d_01-eps-convert
-ed-to.pdf spectrum_3d_01.eps>
-(epstopdf)             \includegraphics on input line 289.
-Package epstopdf Info: Output file is already uptodate.
-
-<spectrum_3d_01-eps-converted-to.pdf, id=261, 472.76625pt x 372.39125pt>
-File: spectrum_3d_01-eps-converted-to.pdf Graphic file (type pdf)
-
-<use spectrum_3d_01-eps-converted-to.pdf>
-Package pdftex.def Info: spectrum_3d_01-eps-converted-to.pdf used on input line
- 289.
-(pdftex.def)             Requested size: 289.07999pt x 227.7095pt.
- [8] (../functions/PlotModelSpec.m
-Overfull \hbox (36.00433pt too wide) in paragraph at lines 9--10
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[9 <./spectrum_3d_01-eps-converted-to.pdf>])
-Package epstopdf Info: Source file: <spectrum_3d_02.eps>
-(epstopdf)                    date: 2012-02-09 08:52:04
-(epstopdf)                    size: 10636 bytes
-(epstopdf)             Output file: <spectrum_3d_02-eps-converted-to.pdf>
-(epstopdf)                    date: 2012-02-09 08:52:54
-(epstopdf)                    size: 7125 bytes
-(epstopdf)             Command: <repstopdf --outfile=spectrum_3d_02-eps-convert
-ed-to.pdf spectrum_3d_02.eps>
-(epstopdf)             \includegraphics on input line 319.
-Package epstopdf Info: Output file is already uptodate.
-
-<spectrum_3d_02-eps-converted-to.pdf, id=327, 465.74pt x 367.3725pt>
-File: spectrum_3d_02-eps-converted-to.pdf Graphic file (type pdf)
-
-<use spectrum_3d_02-eps-converted-to.pdf>
-Package pdftex.def Info: spectrum_3d_02-eps-converted-to.pdf used on input line
- 319.
-(pdftex.def)             Requested size: 289.07999pt x 228.03204pt.
- [10] (../functions/Correlation.m
-Overfull \hbox (54.00452pt too wide) in paragraph at lines 3--4
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (6.00403pt too wide) in paragraph at lines 12--13
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][] 
- []
-
-[11 <./spectrum_3d_02-eps-converted-to.pdf>])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 329.
- [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 329.
+[13]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 327.
  (./spectrum_3d.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 329.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 329.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 327.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 327.
 Package rerunfilecheck Info: File `spectrum_3d.out' has not changed.
 (rerunfilecheck)             Checksum: AF1D00C92115FF2927310AB42EB89142;515.
  ) 
 Here is how much of TeX's memory you used:
- 11272 strings out of 493629
- 169538 string characters out of 3143324
- 416942 words of memory out of 3000000
- 14043 multiletter control sequences out of 15000+200000
- 18205 words of font info for 88 fonts, out of 3000000 for 9000
+ 11586 strings out of 493629
+ 174068 string characters out of 3143324
+ 675892 words of memory out of 3000000
+ 14284 multiletter control sequences out of 15000+200000
+ 19173 words of font info for 91 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 38i,8n,42p,493b,1701s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,8n,42p,493b,1733s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
 exlive/2011/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/te
 xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/tex
@@ -793,17 +732,19 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2011/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2011/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2011/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2011/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2011/texmf-dist/
-fonts/type1/public/esint-type1/esint10.pfb></usr/local/texlive/2011/texmf-dist/
-fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1
-/public/lm/lmr5.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/cm-s
-uper/sfrm1200.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/u
-crb8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrr8a.pf
-b></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
-Output written on spectrum_3d.pdf (12 pages, 266277 bytes).
+/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2011/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2011/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2011/texmf-dist/fon
+ts/type1/public/esint-type1/esint10.pfb></usr/local/texlive/2011/texmf-dist/fon
+ts/type1/public/lm/lmr10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/pu
+blic/lm/lmr5.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/cm-supe
+r/sfrm1200.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrb
+8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><
+/usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
+Output written on spectrum_3d.pdf (13 pages, 285754 bytes).
 PDF statistics:
- 521 PDF objects out of 1000 (max. 8388607)
- 474 compressed objects within 5 object streams
- 275 named destinations out of 1000 (max. 500000)
- 13912 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 608 PDF objects out of 1000 (max. 8388607)
+ 561 compressed objects within 6 object streams
+ 341 named destinations out of 1000 (max. 500000)
+ 15438 words of extra memory for PDF output out of 17280 (max. 10000000)
 

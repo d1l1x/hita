@@ -5,6 +5,10 @@
 % a plot call is invoked.
 %
 path('./functions',path) % add functions directory the Matlab path
+close all % close all figures
+clear all % clear workspace
+clc % clear command window
+
 [datadir,flag]=ClearWs();
 %%
 %
@@ -47,7 +51,7 @@ path('./functions',path) % add functions directory the Matlab path
 % read by nearly all data processing tools.
 % </latex>
 %
-[uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'xyz_u.txt','xyz_v.txt','xyz_w.txt');
+% [uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
 test=importdata('data/3D/CFX_velocity_field.dat');
 uvel=reshape(test(:,1),33,33,33);
 vvel=reshape(test(:,2),33,33,33);
@@ -70,9 +74,9 @@ wvel=reshape(test(:,3),33,33,33);
 % </latex>
 %
 [u,v,w,dim,Lx,dx,nu]=Params(uvel,vvel,wvel);
-u=u-mean2(u);
-v=v-mean2(v);
-w=w-mean2(w);
+% u=u-mean2(u);
+% v=v-mean2(v);
+% w=w-mean2(w);
 %% 
 % <latex>
 % \lstinputlisting{../functions/Params.m}
@@ -177,7 +181,7 @@ PlotModelSpec(k,spectrum,Dissipation,up,Lx,eta,nu);
 % <latex>
 %   \begin{equation}
 %       R_{ij} = \frac{cov(U_i,U_j)}{\sqrt{\sigma_i^2\,\sigma_j^2}}
-%              = \frac{left<u_i'\,u_j'\right>}{\sqrt{\sigma_i^2\,\sigma_j^2}}
+%              = \frac{\left<u_i'\,u_j'\right>}{\sqrt{\sigma_i^2\,\sigma_j^2}}
 %   \end{equation}
 % </latex>
 % 

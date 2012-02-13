@@ -33,8 +33,9 @@
 \usepackage{lipsum}
 \usepackage{caption}
 \captionsetup[figure]{name=Fig.,labelfont=bf}
+\usepackage{tocloft}
+\setlength{\cftbeforesecskip}{2pt}
 
-\sloppy
 \definecolor{lightgray}{gray}{0.5}
 \setlength{\parindent}{0pt}
 
@@ -48,5 +49,13 @@
 	    C\kern-.1667em\raise.30ex\hbox{\smaller{++}}%
 		\fi%
 		\spacefactor1000 }
+\lstset{%
+xleftmargin=8mm,%
+xrightmargin=8mm,%
+framexleftmargin=6mm,%
+xleftmargin=6mm,%
+breaklines=true}
 
+\author[rss]{Felix Dietzsch}
+\address[rss]{River Valley Technologies, SJP Building, Cotton Hills, Trivandrum, Kerala, India 695014}
 \title{Small post processor}

@@ -24,6 +24,10 @@ For new Matlab projects best practise is to clear the complete workspace and the
 \end{par} \vspace{1em}
 \begin{verbatim}
 path('./functions',path) % add functions directory the Matlab path
+close all % close all figures
+clear all % clear workspace
+clc % clear command window
+
 [datadir,flag]=ClearWs();
 \end{verbatim}
 \begin{par}
@@ -69,7 +73,11 @@ read by nearly all data processing tools.
 
 \end{par} \vspace{1em}
 \begin{verbatim}
-[uvel,vvel,wvel,time_read] = ReadData(datadir,flag);
+[uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
+% test=importdata('data/3D/CFX_velocity_field.dat');
+% uvel=reshape(test(:,1),33,33,33);
+% vvel=reshape(test(:,2),33,33,33);
+% wvel=reshape(test(:,3),33,33,33);
 \end{verbatim}
 \begin{par}
 
@@ -94,6 +102,9 @@ DNS simulation such as
 \end{par} \vspace{1em}
 \begin{verbatim}
 [u,v,w,dim,Lx,dx,nu]=Params(uvel,vvel,wvel);
+% u=u-mean2(u);
+% v=v-mean2(v);
+% w=w-mean2(w);
 \end{verbatim}
 \begin{par}
 
@@ -157,7 +168,7 @@ This leads to
 
 \end{par} \vspace{1em}
 \begin{verbatim}
-[spectrum,k,mu,mv,mw,time_spec] = PowerSpec(u,v,w,Lx);
+[spectrum,k,time_spec] = PowerSpec(u,v,w,Lx,dim);
 \end{verbatim}
 \begin{par}
 
@@ -170,23 +181,11 @@ The content of \verb|PowerSpec| reads
 \subsection*{Compute dissipation and turbulent kinetic energy}
 
 \begin{verbatim}
-[Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,nu,u,v,w);
+[Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,nu,u,v,w,dim);
 kin_E_Ph
 kin_E_Sp
 \end{verbatim}
-
-        \color{lightgray} \begin{verbatim}
-kin_E_Ph =
-
-    6.8206
-
-
-kin_E_Sp =
-
-    5.3630
-
-\end{verbatim} \color{black}
-    \begin{par}
+\begin{par}
 
 The content of \verb|SpecProp| reads
 \lstinputlisting{../functions/SpecProp.m}
@@ -202,24 +201,7 @@ eta
 u_eta
 tau
 \end{verbatim}
-
-        \color{lightgray} \begin{verbatim}
-eta =
-
-   4.5999e-05
-
-
-u_eta =
-
-    0.3696
-
-
-tau =
-
-   1.2446e-04
-
-\end{verbatim} \color{black}
-    \begin{par}
+\begin{par}
 
 The content of \verb|KolmoScale| reads
 \lstinputlisting{../functions/KolmoScale.m}
@@ -232,8 +214,6 @@ The content of \verb|KolmoScale| reads
 \begin{verbatim}
 PlotModelSpec(k,spectrum,Dissipation,up,Lx,eta,nu);
 \end{verbatim}
-
-\includegraphics [width=4in]{spectrum_3d_01.eps}
 \begin{par}
 
 The content of \verb|PlotModelSpec| reads
@@ -251,25 +231,33 @@ Computing a correlation can be a tedious work (requireing tremendeous effort) es
 
   \begin{equation}
       R_{ij} = \frac{cov(U_i,U_j)}{\sqrt{\sigma_i^2\,\sigma_j^2}}
-             = \frac{left<u_i'\,u_j'right>}{\sqrt{\sigma_i^2\,\sigma_j^2}}
+             = \frac{\left<u_i'\,u_j'\right>}{\sqrt{\sigma_i^2\,\sigma_j^2}}
   \end{equation}
 
 \end{par} \vspace{1em}
 \begin{verbatim}
-[R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx);
+[R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx,dim);
 close all
 figure
 plot(r,R11,r,R22)
 legend('R11','R22')
 \end{verbatim}
-
-\includegraphics [width=4in]{spectrum_3d_02.eps}
 \begin{par}
 
 The content of \verb|Correlation| reads
 \lstinputlisting{../functions/Correlation.m}
 
 \end{par} \vspace{1em}
+\begin{verbatim}
+close all
+sohm=importdata('data/3D/SPECTRUM_00.SET');
+h=loglog(sohm(:,1),sohm(:,2),'*-b');hold on
+set(h,'LineWidth',1);
+h=loglog(k,spectrum,'r-s');
+set(h,'LineWidth',1);
+legend('Sohm','Dietzsch')
+saveas(gcf,'spectrum.eps','psc2')
+\end{verbatim}
 
 
 
