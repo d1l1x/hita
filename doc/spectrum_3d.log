@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.2.2)  13 FEB 2012 14:20
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.2.2)  15 FEB 2012 22:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -640,16 +640,16 @@ LaTeX Font Info:    Try loading font information for U+esint on input line 64.
 (/usr/local/texlive/2011/texmf-dist/tex/latex/esint/uesint.fd
 File: uesint.fd 
 )
+Missing character: There is no Ã in font cmti10!
+Missing character: There is no ¼ in font cmti10!
+
 (./spectrum_3d.toc)
 \tf@toc=\write5
 \openout5 = `spectrum_3d.toc'.
 
- [1
-
-
-{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 88.
- (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/pcr/bx/n' in size <10> not available
@@ -661,12 +661,12 @@ File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
 (Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 89.
+ [1
 
-(../functions/ClearWs.m) [2]
-LaTeX Font Info:    Font shape `TS1/pcr/m/it' in size <10> not available
-(Font)              Font shape `TS1/pcr/m/sl' tried instead on input line 140.
- (../functions/ReadData.m) [3]
-(../functions/Params.m)
+
+{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(../functions/ClearWs.m) [2] (../functions/ReadData.m) (../functions/Params.m
+[3])
 Package epstopdf Info: Source file: <shell_integration.eps>
 (epstopdf)                    date: 2012-02-08 22:08:53
 (epstopdf)                    size: 618894 bytes
@@ -675,48 +675,52 @@ Package epstopdf Info: Source file: <shell_integration.eps>
 (epstopdf)                    size: 29324 bytes
 (epstopdf)             Command: <repstopdf --outfile=shell_integration-eps-conv
 erted-to.pdf shell_integration.eps>
-(epstopdf)             \includegraphics on input line 210.
+(epstopdf)             \includegraphics on input line 212.
 Package epstopdf Info: Output file is already uptodate.
 
-<shell_integration-eps-converted-to.pdf, id=110, 182.6825pt x 195.73125pt>
+<shell_integration-eps-converted-to.pdf, id=114, 182.6825pt x 195.73125pt>
 File: shell_integration-eps-converted-to.pdf Graphic file (type pdf)
 
 <use shell_integration-eps-converted-to.pdf>
 Package pdftex.def Info: shell_integration-eps-converted-to.pdf used on input l
-ine 210.
+ine 212.
 (pdftex.def)             Requested size: 182.68204pt x 195.73076pt.
  [4] (../functions/PowerSpec.m
-[5 <./shell_integration-eps-converted-to.pdf>] [6] [7]
-LaTeX Font Info:    Try loading font information for OML+pcr on input line 82.
+[5 <./shell_integration-eps-converted-to.pdf>]
+LaTeX Font Info:    Try loading font information for OML+pcr on input line 45.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/omlpcr.fd
 File: omlpcr.fd 
 )
-LaTeX Font Info:    Font shape `OML/pcr/m/it' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 82.
 LaTeX Font Info:    Font shape `OML/pcr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 98.
- [8]) [9]
-(../functions/SpecProp.m) (../functions/KolmoScale.m)
-(../functions/PlotModelSpec.m [10]) [11] (../functions/Correlation.m [12])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 327.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 45.
+ [6]
+LaTeX Font Info:    Font shape `TS1/pcr/m/it' in size <10> not available
+(Font)              Font shape `TS1/pcr/m/sl' tried instead on input line 57.
+)
+(../functions/SpecProp.m [7]) (../functions/KolmoScale.m)
+(../functions/PlotModelSpec.m [8]) (../functions/Correlation.m [9]
+LaTeX Font Info:    Font shape `OML/pcr/m/it' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 4.
+ [10])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 342.
 
-[13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 327.
+[11]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 342.
  (./spectrum_3d.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 327.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 327.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 342.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 342.
 Package rerunfilecheck Info: File `spectrum_3d.out' has not changed.
 (rerunfilecheck)             Checksum: AF1D00C92115FF2927310AB42EB89142;515.
  ) 
 Here is how much of TeX's memory you used:
- 11586 strings out of 493629
- 174068 string characters out of 3143324
- 675892 words of memory out of 3000000
- 14284 multiletter control sequences out of 15000+200000
+ 11496 strings out of 493629
+ 172659 string characters out of 3143324
+ 610827 words of memory out of 3000000
+ 14287 multiletter control sequences out of 15000+200000
  19173 words of font info for 91 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 36i,8n,42p,493b,1733s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,8n,42p,493b,1785s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
 exlive/2011/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/te
 xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/tex
@@ -741,10 +745,10 @@ blic/lm/lmr5.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/cm-supe
 r/sfrm1200.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrb
 8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><
 /usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
-Output written on spectrum_3d.pdf (13 pages, 285754 bytes).
+Output written on spectrum_3d.pdf (11 pages, 275402 bytes).
 PDF statistics:
- 608 PDF objects out of 1000 (max. 8388607)
- 561 compressed objects within 6 object streams
- 341 named destinations out of 1000 (max. 500000)
+ 489 PDF objects out of 1000 (max. 8388607)
+ 445 compressed objects within 5 object streams
+ 248 named destinations out of 1000 (max. 500000)
  15438 words of extra memory for PDF output out of 17280 (max. 10000000)
 

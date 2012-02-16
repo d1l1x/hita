@@ -57,5 +57,5 @@ xleftmargin=6mm,%
 breaklines=true}
 
 \author[rss]{Felix Dietzsch}
-\address[rss]{River Valley Technologies, SJP Building, Cotton Hills, Trivandrum, Kerala, India 695014}
+\address[rss]{Institut für Chemieingenieurwesen und Energieverahrenstechnik,...}
 \title{Small post processor}

@@ -57,7 +57,7 @@ xleftmargin=6mm,%
 breaklines=true}
 
 \author[rss]{Felix Dietzsch}
-\address[rss]{River Valley Technologies, SJP Building, Cotton Hills, Trivandrum, Kerala, India 695014}
+\address[rss]{Institut für Chemieingenieurwesen und Energieverahrenstechnik,...}
 \title{Small post processor}
 \begin{document}
 \maketitle 
@@ -90,7 +90,7 @@ path('./functions',path) % add functions directory the Matlab path
 close all % close all figures
 clear all % clear workspace
 clc % clear command window
-
+set(0,'DefaultFigureWindowStyle','docked')
 [datadir,flag]=ClearWs();
 \end{lstlisting}
 \begin{par}
@@ -135,12 +135,14 @@ structure it is highly optimized for parallel I/O operations and can be
 read by nearly all data processing tools.
 
 \end{par} \vspace{1em}
+\begin{par}
+[uvel,vvel,wvel,time\_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
+\end{par} \vspace{1em}
 \begin{lstlisting}
-[uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
-% test=importdata('data/3D/CFX_velocity_field.dat');
-% uvel=reshape(test(:,1),33,33,33);
-% vvel=reshape(test(:,2),33,33,33);
-% wvel=reshape(test(:,3),33,33,33);
+test=importdata('data/3D/CFX_velocity_field.dat');
+uvel=reshape(test(:,1),33,33,33);
+vvel=reshape(test(:,2),33,33,33);
+wvel=reshape(test(:,3),33,33,33);
 \end{lstlisting}
 \begin{par}
 
@@ -180,7 +182,7 @@ DNS simulation such as
 
 \begin{par}
 
-The core of the provided code is contained in the function
+The core of the code is contained in the function
 \lstinline!PowerSpec!. It computes the three dimensional energy spectrum
 from the given velocity fields, obtained from a direct numerical
 simulation. Although the theoretical analysis is
@@ -235,7 +237,6 @@ This leads to
 \end{lstlisting}
 \begin{par}
 
-The content of \verb|PowerSpec| reads
 \lstinputlisting{../functions/PowerSpec.m}
 
 \end{par} \vspace{1em}
@@ -243,6 +244,21 @@ The content of \verb|PowerSpec| reads
 
 \subsection*{Compute dissipation and turbulent kinetic energy}
 
+\begin{par}
+
+  The function \lstinline!SpecProp! calculates the kinetic energy both
+  from the velocities and the previously computed spectrum. The latter
+  one is calcualted by
+  \begin{equation}
+      k = \int E(\kappa)\,\mathrm{d}\kappa\qquad \kappa=|\boldsymbol\kappa|
+  \end{equation}
+  A second integral, also evaluated in this routine, gives the value
+  of the Dissipation
+  \begin{equation}
+      \epsilon = 2\int\nu\kappa^2 E(\kappa)\,\mathrm{d}\kappa
+  \end{equation}
+
+\end{par} \vspace{1em}
 \begin{lstlisting}
 [Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,nu,u,v,w,dim);
 kin_E_Ph
@@ -250,7 +266,6 @@ kin_E_Sp
 \end{lstlisting}
 \begin{par}
 
-The content of \verb|SpecProp| reads
 \lstinputlisting{../functions/SpecProp.m}
 
 \end{par} \vspace{1em}

@@ -1,4 +1,4 @@
-function [spectrum,k,time] = PowerSpec(u,v,w,L,dim)
+function [spectrum,k,bin_counter,time] = PowerSpec(u,v,w,L,dim)
 	tic;
 	NFFT = 2.^nextpow2(size(u)); % next power of 2 fitting the length of u
 
@@ -39,19 +39,23 @@ function [spectrum,k,time] = PowerSpec(u,v,w,L,dim)
     dx=2*pi/L;
     k=[1:(dim-1)/2].*dx;
     spectrum=zeros(size(k,2),1);
+    bin_counter=zeros(size(k,2),1);
 	for N=2:(dim-1)/2-1
 
         picker = (r(:,:,:)*dx <= (k(N+1) + k(N))/2) & ...
                  (r(:,:,:)*dx > (k(N) + k(N-1))/2);
 		spectrum(N) = sum(muu(picker))+sum(mvv(picker))+sum(mww(picker));
-
+        bin_counter(N) = size(find(picker==1),1);
     end
     % special handling for first and last energy value necessary
     picker = (r(:,:,:)*dx <= (k(2) + k(1))/2);
     spectrum(1) = sum(muu(picker))+sum(mvv(picker))+sum(mww(picker));
-    picker = (r(:,:,:)*dx > (k(end) + k(end-1))/2);
+    bin_counter(1) = size(find(picker==1),1);
+    picker = (r(:,:,:)*dx > (k(end) + k(end-1))/2 & r(:,:,:)*dx <= k(end));
     spectrum(end) = sum(muu(picker))+sum(mvv(picker))+sum(mww(picker));
-	spectrum=0.5*spectrum./(2*pi/L);%(2*pi)^3;%
-
+    bin_counter(end) = size(find(picker==1),1);
+% 	spectrum=0.5*spectrum./(dx);%(2*pi)^3;%
+    spectrum = 0.5 *spectrum*4*pi.*k'.^2./(bin_counter.*dx.^3);
+% %     bin_counter.*4*pi.*k'.^2;
 	time=toc;
 end

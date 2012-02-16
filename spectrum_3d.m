@@ -8,7 +8,7 @@ path('./functions',path) % add functions directory the Matlab path
 close all % close all figures
 clear all % clear workspace
 clc % clear command window
-
+set(0,'DefaultFigureWindowStyle','docked')
 [datadir,flag]=ClearWs();
 %%
 %
@@ -84,7 +84,7 @@ wvel=reshape(test(:,3),33,33,33);
 %% Compute 3D spectrum
 % 
 % <latex>
-% The core of the provided code is contained in the function
+% The core of the code is contained in the function
 % \lstinline!PowerSpec!. It computes the three dimensional energy spectrum
 % from the given velocity fields, obtained from a direct numerical
 % simulation. Although the theoretical analysis is 
@@ -133,20 +133,31 @@ wvel=reshape(test(:,3),33,33,33);
 %       E(|\kappa|) = \frac{1}{2}\,\Phi_{ii}(|\boldsymbol\kappa|)
 %   \end{equation}
 % </latex>
-[spectrum,k,time_spec] = PowerSpec(u,v,w,Lx,dim);
+[spectrum,k,bin_counter,time_spec] = PowerSpec(u,v,w,Lx,dim);
 %% 
 % <latex>
-% The content of \verb|PowerSpec| reads
 % \lstinputlisting{../functions/PowerSpec.m}
 % </latex>
 %% Compute dissipation and turbulent kinetic energy
 %
+% <latex>
+%   The function \lstinline!SpecProp! calculates the kinetic energy both
+%   from the velocities and the previously computed spectrum. The latter
+%   one is calcualted by
+%   \begin{equation}
+%       k = \int E(\kappa)\,\mathrm{d}\kappa\qquad \kappa=|\boldsymbol\kappa|
+%   \end{equation}
+%   A second integral, also evaluated in this routine, gives the value
+%   of the Dissipation
+%   \begin{equation}
+%       \epsilon = 2\int\nu\kappa^2 E(\kappa)\,\mathrm{d}\kappa
+%   \end{equation}
+% </latex>
 [Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,nu,u,v,w,dim);
 kin_E_Ph
 kin_E_Sp
 %% 
 % <latex>
-% The content of \verb|SpecProp| reads
 % \lstinputlisting{../functions/SpecProp.m}
 % </latex>
 %% Kolmogrov properties

@@ -320,17 +320,23 @@
   \def\baselinestretch{1}%
   \printFirstPageNotes
   \begin{center}%
- \thispagestyle{pprintTitle}%
-   \def\baselinestretch{1}%
-    \Large\@title\par\vskip18pt
-    \normalsize\elsauthors\par\vskip10pt
-    \footnotesize\itshape\elsaddress\par\vskip36pt
-	\ifntfdModifications\vskip22pt\else\hrule\vskip12pt\fi
-    \ifvoid\absbox\else\unvbox\absbox\par\vskip10pt\fi
-    \ifvoid\keybox\else\unvbox\keybox\par\vskip10pt\fi
-	\ifntfdModifications\vskip22pt\else\hrule\vskip12pt\fi
-    \end{center}%
-  \gdef\thefootnote{\arabic{footnote}}%
+	\thispagestyle{pprintTitle}%
+	\def\baselinestretch{1}%
+ 	\Large\@title\par\vskip18pt
+ 	\normalsize\elsauthors\par\vskip10pt
+ 	\footnotesize\itshape\elsaddress\par\vskip36pt
+ 	\ifntfdModifications%\vskip22pt
+		\else
+		\hrule%\vskip12pt
+	\fi
+ 	%\ifvoid\absbox\else\unvbox\absbox\par\vskip10pt\fi
+ 	%\ifvoid\keybox\else\unvbox\keybox\par\vskip10pt\fi
+ 	\ifntfdModifications%\vskip22pt
+		\else
+		\hrule%\vskip12pt
+	\fi
+ 	\end{center}%
+ 	\gdef\thefootnote{\arabic{footnote}}%
   }
 
 \def\printWarning{%
