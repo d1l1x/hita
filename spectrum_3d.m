@@ -94,7 +94,7 @@ set(0,'DefaultFigureWindowStyle','docked')
 % on the assumption that the propagation of spectral waves ($\kappa_1$)
 % is in the direction of the observed velocity fields or to say it differently one
 % dimenional spectra and correlation functions are Fourier transform pairs.
-% The theory of correlation functions will be discussed in a later section.
+% The theory of correlation functions will be discussed in section \ref{sec:correlation}.
 % A key drawback of this theory is that the calculated spectrum has
 % contributions from all wavenumbers $\boldsymbol\kappa$, so that the
 % magnitude of $\boldsymbol\kappa$ can be appreciably larger than 
@@ -164,7 +164,7 @@ set(0,'DefaultFigureWindowStyle','docked')
 %   \begin{equation}
 %       B=-\frac{E(|\boldsymbol\kappa|)}{4\pi(|\boldsymbol\kappa|)^2} 
 %   \end{equation}
-% Together with the approximation of the continous integral of $\Phi$
+% Together with the approximation of the integral of $\Phi$
 % (equation \eqref{eq:exp_for_k})
 %   \begin{equation}
 %       \iiint\limits_{-\infty}^{\infty}\frac{1}{2}\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}\boldsymbol\kappa
@@ -229,6 +229,20 @@ set(0,'DefaultFigureWindowStyle','docked')
 % \lstinputlisting{../functions/KolmoScale.m}
 % </latex>
 %% Compute correlations
+%
+% <latex>
+% \label{sec:correlation}
+% From a general perspective correlation functions are a measure of how
+% much two physical quantities are connected. So how is this helpful for
+% the analysis of turbulent flows? For seemingly chaotic and random
+% procescees it would be beneficial if we had a measure of how the velocity
+% at point $A$ is influenced by the velocity at point $B$. A maybe more
+% intuitive measure that can be calculated from the correlation functions
+% is the integral lengthscale which gives a measure of the largest
+% eddies in the flow. In fluid dynamics one generally differentiates
+% between two forms of correlation functions, the longitudinal and the
+% transversal correlation function. The difference between both forms is
+% illustrated in figure ....
 % Computing a correlation can be a tedious work (requireing tremendeous
 % effort) especially if you have large data sets. From theory it is well
 % known that the multiplication of the transform of a data set and its
@@ -236,6 +250,7 @@ set(0,'DefaultFigureWindowStyle','docked')
 % function. Using the FFT approach this gives an enormeous speed advantage.
 % Since we already computed the veloity correlation tensor we may use this
 % result in order to compute the correlation tensor.
+% </latex>
 %%
 % 
 % <latex>
