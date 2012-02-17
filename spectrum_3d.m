@@ -89,41 +89,87 @@ wvel=reshape(test(:,3),33,33,33);
 % from the given velocity fields, obtained from a direct numerical
 % simulation. Although the theoretical analysis is 
 % relatively demanding compared to one dimensional spectra its worth
-% investing the effort. The theory of one dimensional spectra relies
+% investing the effort.
+% The theory of one dimensional spectra relies
 % on the assumption that the propagation of spectral waves ($\kappa_1$)
-% is in the
-% direction of the observed velocity fields or to say it differently one
+% is in the direction of the observed velocity fields or to say it differently one
 % dimenional spectra and correlation functions are Fourier transform pairs.
 % The theory of correlation functions will be discussed in a later section.
 % A key drawback of this theory is that the calculated spectrum has
 % contributions from all wavenumbers $\boldsymbol\kappa$, so that the
 % magnitude of $\boldsymbol\kappa$ can be appreciably larger than 
-% $\kappa_1$. This phenomenon is called aliasing.\\
-% In order to avoid aliasing effects usually connected with a one
-% dimensional spectrum it is also possible to produce correlations that
+% $\kappa_1$. This phenomenon is called aliasing.
+% In order to avoid these aliasing effects is also possible to produce correlations that
 % involve all possible directions. The three dimensional Fourier
 % transformation of such a correlation produces a spectrum that not only
 % depends on a single wavenumber but on the wavenumber vector $\kappa_i$.
 % Though the directional information contained in $\kappa_i$ eliminates the
 % aliasing problem the complexity makes a physical reasoning impossible.
-% For homogeneous isotropic turbulence the situation can be simplified by
-% integrating the three dimensional spectrum over spherical shells. The
-% idea of this integration is illustrated in Fig. \ref{fig:shell_int}
-% \begin{figure}
-%   \centering
-%   \includegraphics[scale=1]{shell_integration}
-%   \caption{Illustration of the two dimensional shell integration}
-%   \label{fig:shell_int}
-% \end{figure}
-% </latex>
-%%
-%
-% <latex>
+% For homogeneous isotropic turbulence the situation can be considerably
+% simplified. From the knowledge that the velocity field is isotropic it can be
+% shown that the velocity spectrum tensor is fully determined by
 %   \begin{equation}
-%       E(\kappa) = \oiint E(\boldsymbol\kappa)\mathrm{d}S(\kappa)
+%       \label{eq:iso_tensor}
+%       \Phi_{ij}(\boldsymbol\kappa) = A(\kappa)\delta_{ij}+B(\kappa)\kappa_i\kappa_j,
+%   \end{equation}
+% where $A(\kappa)$ and $B(\kappa)$ are arbitrary scalar functions. Since we assume
+% incompressible fluids (mathematically expressed by $\nabla\cdot u=0$ or $\kappa_iu_i=0$
+% the following condition holds
+%   \begin{equation}
+%       \kappa_i\,\Phi_{ij}(\boldsymbol\kappa)=0.
+%   \end{equation}
+% It can be shown that this yields a relation between $A$ and $B$ by means of
+%   \begin{equation}
+%       \label{eq:rel_AB}
+%   	B(\kappa)=-\frac{A(\kappa)}{\kappa^2}	
+%   \end{equation}
+% In the end this gives a relation between the three dimensional energy spectrum
+% function $E(|\boldsymbol\kappa|)$ and the velocity spectrum tensor $\Phi_{ij}$.
+%   \begin{equation}
+%   	\Phi_{ij}=\frac{E(|\boldsymbol\kappa|)}{4\pi\,(|\boldsymbol\kappa|)^2}\left(\delta_{ij}
+%   	-\frac{\kappa_i\kappa_j}{(|\boldsymbol\kappa|)^2}\right)	
+%   \end{equation}
+% The question is now how the remaining variable ($A$ or $B$) can be determined. Regarding the turbulent kinetic
+% energy we know that
+%   \begin{equation}
+%       k=\int\limits_{-\infty}^{\infty}E(|\boldsymbol\kappa|)\,\mathrm{d}k
+%       =\sum\limits_{\boldsymbol\kappa}E(\boldsymbol\kappa)
+%       =\sum\limits_{\boldsymbol\kappa}\frac{1}{2}\left<u^{*}(\boldsymbol\kappa)\,u(\boldsymbol\kappa)\right>
+%       =\iiint\limits_{-\infty}^{\infty}\frac{1}{2}\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}\boldsymbol\kappa.
+%   \end{equation}
+% Comparing the second and last expression we get
+%   \begin{equation}
+%       E(\kappa)=\oiint\frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}S(\kappa).
+%   \end{equation}
+% This integral can be solved analytically by utilizing again the assumption of isotropy.
+% For these kind of flows the energy spectrum function can be regarded as the sum of kinetic energy
+% (in wave number space) on different energy levels. Each of these energy levels is denoted by a spherical
+% shell in wave number space. The idea of this integration is illustrated
+% in Fig. \ref{fig:shell_int}.
+%   \begin{figure}
+%       \centering
+%       \includegraphics[scale=1]{shell_integration}
+%       \caption{Illustration of the two dimensional shell integration}
+%       \label{fig:shell_int}
+%   \end{figure}
+% As a result of this one gets
+%   \begin{equation}
+%       E(|\kappa|)=\oiint\frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}S(\kappa)
+%       =4\pi(|\kappa|)^2\,\Phi_{ii}(|\kappa|).
+%   \end{equation}
+% Introducing this relation to equations \eqref{eq:iso_tensor} and
+% \eqref{eq:rel_AB} after some calculations one arrives a
+% The integral on the very right side might be approximated by
+%   \begin{equation}
+%       \iiint\limits_{-\infty}^{\infty}\frac{1}{2}\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}\boldsymbol\kappa
+%       \approx\frac{1}{2}\sum\limits_{\boldsymbol\kappa}\Phi_{ii}(\boldsymbol\kappa)\,(\Delta\kappa)^3.
+%   \end{equation}
+% Integrating the three dimensional spectrum over spherical shells.
+%   \begin{equation}
+%       E(|\kappa|) = \oiint E(\boldsymbol\kappa)\mathrm{d}S(\kappa)
 %                 = \oiint \frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\mathrm{d}S(\kappa)
 %   \end{equation}
-%   Since the surface of a sphereis completly determined by its radius the
+%   Since the surface of a sphere is completly determined by its radius the
 %   surface integral can be solved analytically.
 %   \begin{equation}
 %       \oiint(\,)\mathrm{d}S(\kappa) = 4\pi\kappa^2\cdot(\,)
@@ -133,6 +179,8 @@ wvel=reshape(test(:,3),33,33,33);
 %       E(|\kappa|) = \frac{1}{2}\,\Phi_{ii}(|\boldsymbol\kappa|)
 %   \end{equation}
 % </latex>
+% 
+
 [spectrum,k,bin_counter,time_spec] = PowerSpec(u,v,w,Lx,dim);
 %% 
 % <latex>

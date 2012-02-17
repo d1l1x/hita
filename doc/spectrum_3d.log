@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.2.2)  15 FEB 2012 22:04
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.2.2)  16 FEB 2012 20:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -666,7 +666,7 @@ LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <10> not available
 
 {/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 (../functions/ClearWs.m) [2] (../functions/ReadData.m) (../functions/Params.m
-[3])
+[3]) [4]
 Package epstopdf Info: Source file: <shell_integration.eps>
 (epstopdf)                    date: 2012-02-08 22:08:53
 (epstopdf)                    size: 618894 bytes
@@ -675,49 +675,49 @@ Package epstopdf Info: Source file: <shell_integration.eps>
 (epstopdf)                    size: 29324 bytes
 (epstopdf)             Command: <repstopdf --outfile=shell_integration-eps-conv
 erted-to.pdf shell_integration.eps>
-(epstopdf)             \includegraphics on input line 212.
+(epstopdf)             \includegraphics on input line 249.
 Package epstopdf Info: Output file is already uptodate.
 
-<shell_integration-eps-converted-to.pdf, id=114, 182.6825pt x 195.73125pt>
+<shell_integration-eps-converted-to.pdf, id=136, 182.6825pt x 195.73125pt>
 File: shell_integration-eps-converted-to.pdf Graphic file (type pdf)
 
 <use shell_integration-eps-converted-to.pdf>
 Package pdftex.def Info: shell_integration-eps-converted-to.pdf used on input l
-ine 212.
+ine 249.
 (pdftex.def)             Requested size: 182.68204pt x 195.73076pt.
- [4] (../functions/PowerSpec.m
-[5 <./shell_integration-eps-converted-to.pdf>]
-LaTeX Font Info:    Try loading font information for OML+pcr on input line 45.
+ [5] (../functions/PowerSpec.m
+[6 <./shell_integration-eps-converted-to.pdf>]
+LaTeX Font Info:    Try loading font information for OML+pcr on input line 41.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/omlpcr.fd
 File: omlpcr.fd 
 )
 LaTeX Font Info:    Font shape `OML/pcr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 45.
- [6]
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 41.
+ [7]
 LaTeX Font Info:    Font shape `TS1/pcr/m/it' in size <10> not available
-(Font)              Font shape `TS1/pcr/m/sl' tried instead on input line 57.
+(Font)              Font shape `TS1/pcr/m/sl' tried instead on input line 53.
 )
-(../functions/SpecProp.m [7]) (../functions/KolmoScale.m)
-(../functions/PlotModelSpec.m [8]) (../functions/Correlation.m [9]
+(../functions/SpecProp.m [8]) (../functions/KolmoScale.m)
+(../functions/PlotModelSpec.m [9]) (../functions/Correlation.m [10]
 LaTeX Font Info:    Font shape `OML/pcr/m/it' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 4.
- [10])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 342.
+ [11])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 388.
 
-[11]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 342.
+[12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 388.
  (./spectrum_3d.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 342.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 342.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 388.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 388.
 Package rerunfilecheck Info: File `spectrum_3d.out' has not changed.
 (rerunfilecheck)             Checksum: AF1D00C92115FF2927310AB42EB89142;515.
  ) 
 Here is how much of TeX's memory you used:
- 11496 strings out of 493629
- 172659 string characters out of 3143324
- 610827 words of memory out of 3000000
- 14287 multiletter control sequences out of 15000+200000
+ 11506 strings out of 493629
+ 172769 string characters out of 3143324
+ 617919 words of memory out of 3000000
+ 14291 multiletter control sequences out of 15000+200000
  19173 words of font info for 91 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  36i,8n,42p,493b,1785s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -729,26 +729,27 @@ ive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texli
 ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texliv
 e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/
 2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/
-2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/20
-11/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2011
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2011/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2011/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2011/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2011/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2011/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2011/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2011/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2011/texmf-dist/fon
-ts/type1/public/esint-type1/esint10.pfb></usr/local/texlive/2011/texmf-dist/fon
-ts/type1/public/lm/lmr10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/pu
-blic/lm/lmr5.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/cm-supe
-r/sfrm1200.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrb
-8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><
-/usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
-Output written on spectrum_3d.pdf (11 pages, 275402 bytes).
+2011/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/local/texl
+ive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
+e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/
+2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/20
+11/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2011/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2011/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2011/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2011/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2011/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2011/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2011/texmf-dist
+/fonts/type1/public/esint-type1/esint10.pfb></usr/local/texlive/2011/texmf-dist
+/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type
+1/public/lm/lmr5.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/cm-
+super/sfrm1200.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/
+ucrb8a.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrr8a.p
+fb></usr/local/texlive/2011/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
+Output written on spectrum_3d.pdf (12 pages, 290114 bytes).
 PDF statistics:
- 489 PDF objects out of 1000 (max. 8388607)
- 445 compressed objects within 5 object streams
- 248 named destinations out of 1000 (max. 500000)
+ 506 PDF objects out of 1000 (max. 8388607)
+ 460 compressed objects within 5 object streams
+ 254 named destinations out of 1000 (max. 500000)
  15438 words of extra memory for PDF output out of 17280 (max. 10000000)
 

@@ -11,9 +11,6 @@ function [spectrum,k,bin_counter,time] = PowerSpec(u,v,w,L,dim)
 	mww = abs(ww_fft)/length(w)^3;
 
 	% Take the square of the magnitude of fft of x. 
-	%mu = mu.^2;
-	%mv = mv.^2;
-	%mw = mw.^2;
 	muu = muu.^2;
 	mvv = mvv.^2;
 	mww = mww.^2;
@@ -27,7 +24,6 @@ function [spectrum,k,bin_counter,time] = PowerSpec(u,v,w,L,dim)
 	rx=[0:1:dim-1] - (dim-1)/2;
     ry=[0:1:dim-1] - (dim-1)/2;
     rz=[0:1:dim-1] - (dim-1)/2;
-    
     
 	test_x=circshift(rx',[(dim+1)/2 1]);
 	test_y=circshift(ry',[(dim+1)/2 1]);
