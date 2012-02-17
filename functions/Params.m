@@ -1,8 +1,8 @@
 function [u,v,w,dim,Lx,dx,nu]=Params(uvel,vvel,wvel)
-%     dim=257; % number of points in one dimension
-%     Lx=0.4;
-    dim=33;
-    Lx=3.2e-2; % domain size
+    dim=257; % number of points in one dimension
+    Lx=0.4;
+%     dim=33;
+%     Lx=3.2e-2; % domain size
     Ly=Lx;
     Lz=Lx;
     dx=Lx/(dim-1); % grid spacing

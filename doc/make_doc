@@ -4,11 +4,20 @@
 
 grep -A 1000 -E '\\begin\{document\}' spectrum_3d.tex > test1
 cat includes.txt test1 > spectrum_3d.tex
-sed -E '
-/begin\{document\}/ a\
-	\\maketitle \
-	\\tableofcontents
-' spectrum_3d.tex > temp
+if [ `uname`=="Linux" ]; then
+	sed -r '
+	/begin\{document\}/ a\
+		\\maketitle \
+		\\tableofcontents
+	' spectrum_3d.tex > temp
+elif [ `uname`=="Darwin" ]; then
+	sed -E '
+	/begin\{document\}/ a\
+		\\maketitle \
+		\\tableofcontents
+	' spectrum_3d.tex > temp
+fi
+
 mv temp spectrum_3d.tex
 ## replace verbatim environment by listing env.
 sed -i -r 's/begin{verbatim}/begin{lstlisting}/g' spectrum_3d.tex

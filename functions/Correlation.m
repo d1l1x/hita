@@ -1,12 +1,9 @@
 function [R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx,dim)
     scaling = 1;
-    NFFT = 2.^nextpow2(size(u)); % next power of 2 fitting the length of u
-    u_fft=fftn(u,NFFT)./scaling; %2 pi --> definition of FFT 
-
-    %
+    NFFT = 2.^nextpow2(size(u)); %power of 2 fitting length of u
+    u_fft=fftn(u,NFFT)./scaling; 
     NFFT = 2.^nextpow2(size(v));
     v_fft=fftn(v,NFFT)./scaling;
-    %
     NFFT = 2.^nextpow2(size(w));
     w_fft=fftn(w,NFFT)./scaling;
 

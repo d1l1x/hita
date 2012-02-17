@@ -1,5 +1,4 @@
-function [spectrum,k,bin_counter,time] = PowerSpec(u,v,w,...
-                                                   L,dim)
+function [spectrum,k,bin_counter,time] = PowerSpec(u,v,w,L,dim)
 	tic;
 	uu_fft=fftn(u);
 	vv_fft=fftn(v);
@@ -31,25 +30,18 @@ function [spectrum,k,bin_counter,time] = PowerSpec(u,v,w,...
 	for N=2:(dim-1)/2-1
         picker = (r(:,:,:)*dx <= (k(N+1) + k(N))/2) & ...
                  (r(:,:,:)*dx > (k(N) + k(N-1))/2);
-		spectrum(N) = sum(muu(picker))+...
-                      sum(mvv(picker))+...
-                      sum(mww(picker));
+		spectrum(N) = sum(muu(picker))+sum(mvv(picker))+sum(mww(picker));
         bin_counter(N) = size(find(picker==1),1);
     end
-    % compute first value of spectrum
+    % special handling for first and last energy value necessary
     picker = (r(:,:,:)*dx <= (k(2) + k(1))/2);
-    spectrum(1) = sum(muu(picker))+...
-                  sum(mvv(picker))+...
-                  sum(mww(picker));
+    spectrum(1) = sum(muu(picker))+sum(mvv(picker))+sum(mww(picker));
     bin_counter(1) = size(find(picker==1),1);
-    % compute last value of spectrum
-    picker = (r(:,:,:)*dx > (k(end) + k(end-1))/2 & ...
-              r(:,:,:)*dx <= k(end));
-    spectrum(end) = sum(muu(picker))+...
-                    sum(mvv(picker))+...
-                    sum(mww(picker));
+    picker = (r(:,:,:)*dx > (k(end) + k(end-1))/2 & r(:,:,:)*dx <= k(end));
+    spectrum(end) = sum(muu(picker))+sum(mvv(picker))+sum(mww(picker));
     bin_counter(end) = size(find(picker==1),1);
-    %compute final spectrum
-    spectrum = spectrum*2*pi.*k'.^2./(bin_counter.*dx.^3);
+% 	spectrum=0.5*spectrum./(dx);%(2*pi)^3;%
+    spectrum = 0.5 *spectrum*4*pi.*k'.^2./(bin_counter.*dx.^3);
+% %     bin_counter.*4*pi.*k'.^2;
 	time=toc;
 end

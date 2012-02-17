@@ -4,6 +4,7 @@
 \usepackage[numbered,bw]{mcode}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{natbib}
 \usepackage{hyperref}
 \usepackage{esint}
 \usepackage{units}

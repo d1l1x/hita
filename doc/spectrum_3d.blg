@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2011)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: spectrum_3d.aux
+The style file: NTFD-bibstyle.bst
+Database file #1: bibliography.bib
+You've used 3 entries,
+            2616 wiz_defined-function locations,
+            595 strings with 4676 characters,
+and the built_in function-call counts, 1256 in all, are:
+= -- 80
+> -- 39
+< -- 3
++ -- 15
+- -- 12
+* -- 135
+:= -- 205
+add.period$ -- 3
+call.type$ -- 3
+change.case$ -- 18
+chr.to.int$ -- 3
+cite$ -- 3
+duplicate$ -- 89
+empty$ -- 106
+format.name$ -- 19
+if$ -- 228
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 21
+newline$ -- 15
+num.names$ -- 12
+pop$ -- 25
+preamble$ -- 1
+purify$ -- 19
+quote$ -- 0
+skip$ -- 35
+stack$ -- 0
+substring$ -- 36
+swap$ -- 62
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 18
+warning$ -- 0
+while$ -- 9
+width$ -- 0
+write$ -- 40

@@ -1,0 +1,21 @@
+\begin{thebibliography}{3}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Book
+\bibitem[{Pope(2000)}]{Pope:2000tp}
+\bibinfo{author}{S.~B. Pope}, \bibinfo{title}{{Turbulent Flows}},
+  \bibinfo{publisher}{Cambridge University Press}, \bibinfo{edition}{1}
+  edition, \bibinfo{year}{2000}.
+%Type = Book
+\bibitem[{Hinze(1975)}]{Hinze:1975tb}
+\bibinfo{author}{J.~O. Hinze}, \bibinfo{title}{{Turbulence}},
+  \bibinfo{publisher}{Mcgraw-Hill College}, \bibinfo{edition}{2} edition,
+  \bibinfo{year}{1975}.
+%Type = Book
+\bibitem[{Tennekes and Lumley(1972)}]{Tennekes:1972vb}
+\bibinfo{author}{H.~Tennekes}, \bibinfo{author}{J.~L. Lumley},
+  \bibinfo{title}{{A first course in turbulence}}, \bibinfo{publisher}{The MIT
+  Press}, \bibinfo{year}{1972}.
+
+\end{thebibliography}

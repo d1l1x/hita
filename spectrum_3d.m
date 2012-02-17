@@ -51,11 +51,11 @@ set(0,'DefaultFigureWindowStyle','docked')
 % read by nearly all data processing tools.
 % </latex>
 %
-% [uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
-test=importdata('data/3D/CFX_velocity_field.dat');
-uvel=reshape(test(:,1),33,33,33);
-vvel=reshape(test(:,2),33,33,33);
-wvel=reshape(test(:,3),33,33,33);
+[uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
+% test=importdata('data/3D/CFX_velocity_field.dat');
+% uvel=reshape(test(:,1),33,33,33);
+% vvel=reshape(test(:,2),33,33,33);
+% wvel=reshape(test(:,3),33,33,33);
 %% 
 % <latex>
 % \lstinputlisting{../functions/ReadData.m}
@@ -132,6 +132,7 @@ wvel=reshape(test(:,3),33,33,33);
 % The question is now how the remaining variable ($A$ or $B$) can be determined. Regarding the turbulent kinetic
 % energy we know that
 %   \begin{equation}
+%       \label{eq:exp_for_k}
 %       k=\int\limits_{-\infty}^{\infty}E(|\boldsymbol\kappa|)\,\mathrm{d}k
 %       =\sum\limits_{\boldsymbol\kappa}E(\boldsymbol\kappa)
 %       =\sum\limits_{\boldsymbol\kappa}\frac{1}{2}\left<u^{*}(\boldsymbol\kappa)\,u(\boldsymbol\kappa)\right>
@@ -139,48 +140,44 @@ wvel=reshape(test(:,3),33,33,33);
 %   \end{equation}
 % Comparing the second and last expression we get
 %   \begin{equation}
-%       E(\kappa)=\oiint\frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}S(\kappa).
+%       E(|\boldsymbol\kappa|)=\oiint\frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}S(\kappa).
 %   \end{equation}
-% This integral can be solved analytically by utilizing again the assumption of isotropy.
-% For these kind of flows the energy spectrum function can be regarded as the sum of kinetic energy
-% (in wave number space) on different energy levels. Each of these energy levels is denoted by a spherical
-% shell in wave number space. The idea of this integration is illustrated
-% in Fig. \ref{fig:shell_int}.
-%   \begin{figure}
+%   \begin{figure}[t!]
 %       \centering
 %       \includegraphics[scale=1]{shell_integration}
 %       \caption{Illustration of the two dimensional shell integration}
 %       \label{fig:shell_int}
 %   \end{figure}
+% This integral can be solved analytically by utilizing again the assumption of isotropy.
+% For these kind of flows the energy spectrum function can be regarded as the sum of kinetic energy
+% (in wave number space) on different energy levels. Each of these energy levels is denoted by a spherical
+% shell in wave number space. Since the surface of a sphere is completly determined by its radius the
+% surface integral can be solved analytically. The idea of this integration is illustrated
+% in Fig. \ref{fig:shell_int}.
 % As a result of this one gets
 %   \begin{equation}
-%       E(|\kappa|)=\oiint\frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}S(\kappa)
-%       =4\pi(|\kappa|)^2\,\Phi_{ii}(|\kappa|).
+%       E(|\boldsymbol\kappa|)=\oiint\frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}S(\kappa)
+%       =4\pi(|\boldsymbol\kappa|)^2\,\Phi_{ii}(|\boldsymbol\kappa|).
 %   \end{equation}
 % Introducing this relation to equations \eqref{eq:iso_tensor} and
-% \eqref{eq:rel_AB} after some calculations one arrives a
-% The integral on the very right side might be approximated by
+% \eqref{eq:rel_AB} one arrives at an expression for the variable $B$.
+%   \begin{equation}
+%       B=-\frac{E(|\boldsymbol\kappa|)}{4\pi(|\boldsymbol\kappa|)^2} 
+%   \end{equation}
+% Together with the approximation of the continous integral of $\Phi$
+% (equation \eqref{eq:exp_for_k})
 %   \begin{equation}
 %       \iiint\limits_{-\infty}^{\infty}\frac{1}{2}\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}\boldsymbol\kappa
-%       \approx\frac{1}{2}\sum\limits_{\boldsymbol\kappa}\Phi_{ii}(\boldsymbol\kappa)\,(\Delta\kappa)^3.
+%       \approx\frac{1}{2}\sum\limits_{\boldsymbol\kappa}\Phi_{ii}(\boldsymbol\kappa)\,(\Delta\kappa)^3,
 %   \end{equation}
-% Integrating the three dimensional spectrum over spherical shells.
+% where $\Delta\kappa$ refers to the step size in wave number space,
+% the final expression of the three dimensional discrete energy spectrum can be derived.
 %   \begin{equation}
-%       E(|\kappa|) = \oiint E(\boldsymbol\kappa)\mathrm{d}S(\kappa)
-%                 = \oiint \frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\mathrm{d}S(\kappa)
+%       E(|\boldsymbol\kappa|)=2\pi(|\boldsymbol\kappa|)^2\frac{\left<u^{*}
+%       (\boldsymbol\kappa)\,u(\boldsymbol\kappa)\right>}{(\Delta\kappa)^3}
 %   \end{equation}
-%   Since the surface of a sphere is completly determined by its radius the
-%   surface integral can be solved analytically.
-%   \begin{equation}
-%       \oiint(\,)\mathrm{d}S(\kappa) = 4\pi\kappa^2\cdot(\,)
-%   \end{equation}
-% This leads to
-%   \begin{equation}
-%       E(|\kappa|) = \frac{1}{2}\,\Phi_{ii}(|\boldsymbol\kappa|)
-%   \end{equation}
+% The calling sequence for the computation of the energy spectrum reads
 % </latex>
-% 
-
 [spectrum,k,bin_counter,time_spec] = PowerSpec(u,v,w,Lx,dim);
 %% 
 % <latex>
@@ -193,39 +190,43 @@ wvel=reshape(test(:,3),33,33,33);
 %   from the velocities and the previously computed spectrum. The latter
 %   one is calcualted by
 %   \begin{equation}
-%       k = \int E(\kappa)\,\mathrm{d}\kappa\qquad \kappa=|\boldsymbol\kappa|
+%       k = \int\limits_{-\infty}^{\infty} E(|\boldsymbol\kappa|)\,\mathrm{d}|\boldsymbol\kappa|
 %   \end{equation}
 %   A second integral, also evaluated in this routine, gives the value
 %   of the Dissipation
 %   \begin{equation}
-%       \epsilon = 2\int\nu\kappa^2 E(\kappa)\,\mathrm{d}\kappa
+%       \epsilon = 2\int\limits_{-\infty}^{\infty}\nu(|\boldsymbol\kappa|)^2
+%       E(|\boldsymbol\kappa|)\,\mathrm{d}|\boldsymbol\kappa|,
 %   \end{equation}
+%   where $\nu$ refers to the kinematic viscosity.
+%   The calling sequence reads
 % </latex>
-[Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,nu,u,v,w,dim);
-kin_E_Ph
-kin_E_Sp
+[Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,...
+                                            nu,u,v,w,dim);
 %% 
 % <latex>
 % \lstinputlisting{../functions/SpecProp.m}
 % </latex>
-%% Kolmogrov properties
+%% Kolmogorov properties
 %
-[eta,u_eta,tau]=KolmoScale(nu,Dissipation);
-eta
-u_eta
-tau
-%% 
 % <latex>
-% The content of \verb|KolmoScale| reads
-% \lstinputlisting{../functions/KolmoScale.m}
+% According to the Kolomogorov hypotheses the length scale $\eta$,
+% characterisitc velocity $u_{\eta}$ and the characteristic time scale
+% $\tau$ of the smallest swirls in the flow are computed
+% within the function \lstinline!KolmoScale!. From a dimensionality
+% analysis Kolmogorov derived
+%   \begin{eqnarray}
+%       \eta&=\left(\frac{\nu^3}{\epsilon}\right)^{1/4},\\
+%       u_{\eta}&=\left(\epsilon\,\nu\right)^{1/4},\\
+%       \tau_{\eta}&=\displaystyle\left(\frac{\nu}{\epsilon}\right)^{1/2}.
+%   \end{eqnarray}
+% For further reading concerning his theory it is refered to
+% \citet{Pope:2000tp}, \citet{Hinze:1975tb} and \citet{Tennekes:1972vb}.
 % </latex>
-%% Compute model spectra
-%
-PlotModelSpec(k,spectrum,Dissipation,up,Lx,eta,nu);
+[eta,u_eta,tau]=KolmoScale(nu,Dissipation);
 %% 
 % <latex>
-% The content of \verb|PlotModelSpec| reads
-% \lstinputlisting{../functions/PlotModelSpec.m}
+% \lstinputlisting{../functions/KolmoScale.m}
 % </latex>
 %% Compute correlations
 % Computing a correlation can be a tedious work (requireing tremendeous
@@ -245,20 +246,28 @@ PlotModelSpec(k,spectrum,Dissipation,up,Lx,eta,nu);
 % </latex>
 % 
 [R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx,dim);
-close all
-figure
-plot(r,R11,r,R22)
-legend('R11','R22')
 %% 
 % <latex>
 % The content of \verb|Correlation| reads
 % \lstinputlisting{../functions/Correlation.m}
 % </latex>
+%%
+% 
+% <latex>
+% \bibliographystyle{NTFD-bibstyle}
+% \bibliography{bibliography}
+% </latex>
+%% Plotting
 close all
-sohm=importdata('data/3D/SPECTRUM_00.SET');
-h=loglog(sohm(:,1),sohm(:,2),'*-b');hold on
+comte=importdata('Comte-Bellot.txt');
+kC=comte.data(:,1).*100;
+EC=comte.data(:,2)./100^3;
+vkp=importdata('data/3D/CTRL_TURB_ENERGY');
+h=loglog(vkp(:,1),vkp(:,3),'*-b');hold on
 set(h,'LineWidth',1);
 h=loglog(k,spectrum,'r-s');
 set(h,'LineWidth',1);
-legend('Sohm','Dietzsch')
+h=loglog(kC,EC,'*-g');
+set(h,'LineWidth',1);
+legend('VKP','Dietzsch','Comte-Bellot')
 saveas(gcf,'spectrum.eps','psc2')
