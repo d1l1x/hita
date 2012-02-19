@@ -4,11 +4,12 @@
 % figures since Matlab does not automatically open a new window each time
 % a plot call is invoked.
 %
+display('Clear workspace ...')
 path('./functions',path) % add functions directory the Matlab path
 close all % close all figures
 clear all % clear workspace
 clc % clear command window
-set(0,'DefaultFigureWindowStyle','docked')
+%set(0,'DefaultFigureWindowStyle','docked')
 [datadir,flag]=ClearWs();
 %%
 %
@@ -51,6 +52,7 @@ set(0,'DefaultFigureWindowStyle','docked')
 % read by nearly all data processing tools.
 % </latex>
 %
+display('Read data ...')
 [uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
 % test=importdata('data/3D/CFX_velocity_field.dat');
 % uvel=reshape(test(:,1),33,33,33);
@@ -73,6 +75,7 @@ set(0,'DefaultFigureWindowStyle','docked')
 % \end{itemize}
 % </latex>
 %
+display('Set parameters ...')
 [u,v,w,dim,Lx,dx,nu]=Params(uvel,vvel,wvel);
 % u=u-mean2(u);
 % v=v-mean2(v);
@@ -178,6 +181,7 @@ set(0,'DefaultFigureWindowStyle','docked')
 %   \end{equation}
 % The calling sequence for the computation of the energy spectrum reads
 % </latex>
+display('Compute spectrum...')
 [spectrum,k,bin_counter,time_spec] = PowerSpec(u,v,w,Lx,dim);
 %% 
 % <latex>
@@ -201,6 +205,7 @@ set(0,'DefaultFigureWindowStyle','docked')
 %   where $\nu$ refers to the kinematic viscosity.
 %   The calling sequence reads
 % </latex>
+display('Compute kinetic energy...')
 [Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,...
                                             nu,u,v,w,dim);
 %% 
@@ -223,6 +228,7 @@ set(0,'DefaultFigureWindowStyle','docked')
 % For further reading concerning his theory it is refered to
 % \citet{Pope:2000tp}, \citet{Hinze:1975tb} and \citet{Tennekes:1972vb}.
 % </latex>
+display('Compute Kolmogorov scales...')
 [eta,u_eta,tau]=KolmoScale(nu,Dissipation);
 %% 
 % <latex>
@@ -237,7 +243,7 @@ set(0,'DefaultFigureWindowStyle','docked')
 % the analysis of turbulent flows? For seemingly chaotic and random
 % procescees it would be beneficial if we had a measure of how the velocity
 % at point $A$ is influenced by the velocity at point $B$. A maybe more
-% intuitive measure that can be calculated from the correlation functions
+% intuitive quantity that can be calculated from the correlation functions
 % is the integral lengthscale which gives a measure of the largest
 % eddies in the flow. In fluid dynamics one generally differentiates
 % between two forms of correlation functions, the longitudinal and the
@@ -260,6 +266,7 @@ set(0,'DefaultFigureWindowStyle','docked')
 %   \end{equation}
 % </latex>
 % 
+display('Compute Correlations...')
 [R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx,dim);
 %% 
 % <latex>
@@ -273,6 +280,7 @@ set(0,'DefaultFigureWindowStyle','docked')
 % \bibliography{bibliography}
 % </latex>
 %% Plotting
+display('Save results...')
 close all
 comte=importdata('Comte-Bellot.txt');
 kC=comte.data(:,1).*100;
