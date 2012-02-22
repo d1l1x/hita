@@ -7,6 +7,8 @@
 \usepackage{natbib}
 \usepackage{hyperref}
 \usepackage{esint}
+\usepackage{subfig}
+\usepackage[subfigure]{tocloft}
 \usepackage{units}
 \usepackage[protrusion=true,expansion]{microtype}
 \hypersetup{
@@ -34,7 +36,6 @@
 \usepackage{lipsum}
 \usepackage{caption}
 \captionsetup[figure]{name=Fig.,labelfont=bf}
-\usepackage{tocloft}
 \setlength{\cftbeforesecskip}{2pt}
 
 \definecolor{lightgray}{gray}{0.5}

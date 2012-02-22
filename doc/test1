@@ -6,11 +6,12 @@
 For new Matlab projects best practise is to clear the complete workspace and the command window. It is also a good habit to close all remaining figures since Matlab does not automatically open a new window each time a plot call is invoked.
 \end{par} \vspace{1em}
 \begin{verbatim}
+display('Clear workspace ...')
 path('./functions',path) % add functions directory the Matlab path
 close all % close all figures
 clear all % clear workspace
 clc % clear command window
-set(0,'DefaultFigureWindowStyle','docked')
+%set(0,'DefaultFigureWindowStyle','docked')
 [datadir,flag]=ClearWs();
 \end{verbatim}
 \begin{par}
@@ -56,6 +57,7 @@ read by nearly all data processing tools.
 
 \end{par} \vspace{1em}
 \begin{verbatim}
+display('Read data ...')
 [uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
 % test=importdata('data/3D/CFX_velocity_field.dat');
 % uvel=reshape(test(:,1),33,33,33);
@@ -84,6 +86,7 @@ DNS simulation such as
 
 \end{par} \vspace{1em}
 \begin{verbatim}
+display('Set parameters ...')
 [u,v,w,dim,Lx,dx,nu]=Params(uvel,vvel,wvel);
 % u=u-mean2(u);
 % v=v-mean2(v);
@@ -110,7 +113,7 @@ The theory of one dimensional spectra relies
 on the assumption that the propagation of spectral waves ($\kappa_1$)
 is in the direction of the observed velocity fields or to say it differently one
 dimenional spectra and correlation functions are Fourier transform pairs.
-The theory of correlation functions will be discussed in a later section.
+The theory of correlation functions will be discussed in section \ref{sec:correlation}.
 A key drawback of this theory is that the calculated spectrum has
 contributions from all wavenumbers $\boldsymbol\kappa$, so that the
 magnitude of $\boldsymbol\kappa$ can be appreciably larger than
@@ -180,7 +183,7 @@ Introducing this relation to equations \eqref{eq:iso_tensor} and
   \begin{equation}
       B=-\frac{E(|\boldsymbol\kappa|)}{4\pi(|\boldsymbol\kappa|)^2}
   \end{equation}
-Together with the approximation of the continous integral of $\Phi$
+Together with the approximation of the integral of $\Phi$
 (equation \eqref{eq:exp_for_k})
   \begin{equation}
       \iiint\limits_{-\infty}^{\infty}\frac{1}{2}\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}\boldsymbol\kappa
@@ -196,6 +199,7 @@ The calling sequence for the computation of the energy spectrum reads
 
 \end{par} \vspace{1em}
 \begin{verbatim}
+display('Compute spectrum...')
 [spectrum,k,bin_counter,time_spec] = PowerSpec(u,v,w,Lx,dim);
 \end{verbatim}
 \begin{par}
@@ -226,6 +230,7 @@ The calling sequence for the computation of the energy spectrum reads
 
 \end{par} \vspace{1em}
 \begin{verbatim}
+display('Compute kinetic energy...')
 [Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,...
                                             nu,u,v,w,dim);
 \end{verbatim}
@@ -255,6 +260,7 @@ For further reading concerning his theory it is refered to
 
 \end{par} \vspace{1em}
 \begin{verbatim}
+display('Compute Kolmogorov scales...')
 [eta,u_eta,tau]=KolmoScale(nu,Dissipation);
 \end{verbatim}
 \begin{par}
@@ -267,7 +273,41 @@ For further reading concerning his theory it is refered to
 \subsection*{Compute correlations}
 
 \begin{par}
-Computing a correlation can be a tedious work (requireing tremendeous effort) especially if you have large data sets. From theory it is well known that the multiplication of the transform of a data set and its complex conjugate are an accurate representation of the correlation function. Using the FFT approach this gives an enormeous speed advantage. Since we already computed the veloity correlation tensor we may use this result in order to compute the correlation tensor.
+
+\label{sec:correlation}
+From a general perspective correlation functions are a measure of how
+much two physical quantities are connected. So how is this helpful for
+the analysis of turbulent flows? For seemingly chaotic and random
+procescees it would be beneficial if we had a measure of how the velocity
+at point $A$ is influenced by the velocity at point $B$. A maybe more
+intuitive quantity that can be calculated from the correlation functions
+is the integral lengthscale which gives a measure of the largest
+eddies in the flow. In fluid dynamics one generally differentiates
+between two forms of correlation functions, the longitudinal and the
+transversal or lateral correlation function. The difference between both forms is
+illustrated in figure \ref{fig:correlations}.
+\begin{figure}[t!]
+        \centering
+        \subfloat[Longitudinal correlation][Longitudinal correlation]{
+        \includegraphics[scale=1]{long_corr.eps}
+        \label{fig:long_corr}
+        }
+        \hfill
+        \subfloat[Transversal correlation][Transversal correlation]{
+        \includegraphics[scale=1]{trans_corr.eps}
+        \label{fig:trans_corr}
+        }
+\caption{Illustration of different correlation functions}
+\label{fig:correlations}
+\end{figure}
+Computing a correlation can be a tedious work (requireing tremendeous
+effort) especially if you have large data sets. From theory it is well
+known that the multiplication of the transform of a data set and its
+complex conjugate are an accurate representation of the correlation
+function. Using the FFT approach this gives an enormeous speed advantage.
+Since we already computed the veloity correlation tensor we may use this
+result in order to compute the correlation tensor.
+
 \end{par} \vspace{1em}
 \begin{par}
 
@@ -278,11 +318,8 @@ Computing a correlation can be a tedious work (requireing tremendeous effort) es
 
 \end{par} \vspace{1em}
 \begin{verbatim}
+display('Compute Correlations...')
 [R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx,dim);
-close all
-figure
-plot(r,R11,r,R22)
-legend('R11','R22')
 \end{verbatim}
 \begin{par}
 
@@ -301,6 +338,7 @@ The content of \verb|Correlation| reads
 \subsection*{Plotting}
 
 \begin{verbatim}
+display('Save results...')
 close all
 comte=importdata('Comte-Bellot.txt');
 kC=comte.data(:,1).*100;
