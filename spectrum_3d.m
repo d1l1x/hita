@@ -247,8 +247,22 @@ display('Compute Kolmogorov scales...')
 % is the integral lengthscale which gives a measure of the largest
 % eddies in the flow. In fluid dynamics one generally differentiates
 % between two forms of correlation functions, the longitudinal and the
-% transversal correlation function. The difference between both forms is
-% illustrated in figure ....
+% transversal or lateral correlation function. The difference between both forms is
+% illustrated in figure \ref{fig:correlations}.
+% \begin{figure}[t!]
+%         \centering
+%         \subfloat[Longitudinal correlation][Longitudinal correlation]{
+%         \includegraphics[scale=1]{long_corr.eps}
+%         \label{fig:long_corr}
+%         }
+%         \hfill
+%         \subfloat[Transversal correlation][Transversal correlation]{
+%         \includegraphics[scale=1]{trans_corr.eps}
+%         \label{fig:trans_corr}
+%         }
+% \caption{Illustration of different correlation functions}
+% \label{fig:correlations}
+% \end{figure}
 % Computing a correlation can be a tedious work (requireing tremendeous
 % effort) especially if you have large data sets. From theory it is well
 % known that the multiplication of the transform of a data set and its
