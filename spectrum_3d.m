@@ -308,6 +308,7 @@ display('Compute Correlations...')
 %% Plotting
 display('Save results...')
 close all
+h = figure('visible','on')
 comte=importdata('Comte-Bellot.txt');
 kC=comte.data(:,1).*100;
 EC=comte.data(:,2)./100^3;
