@@ -1,6 +1,6 @@
 function [u,v,w,dim,Lx,dx,nu]=Params(uvel,vvel,wvel)
     dim=385; % number of points in one dimension
-    Lx=0.4;
+    Lx=0.1;
 %     dim=33;
 %     Lx=3.2e-2; % domain size
     Ly=Lx;
