@@ -59,9 +59,13 @@ xleftmargin=6mm,%
 breaklines=true}
 
 \author[rss]{Felix Dietzsch}
-\address[rss]{Institut für Chemieingenieurwesen und Energieverahrenstechnik,...}
+\address[rss]{Institut f\"ur Chemieingenieurwesen und Energieverfahrenstechnik,...}
 \title{Small post processor}
 \begin{document}
+\maketitle 
+\tableofcontents
+\maketitle 
+\tableofcontents
 \maketitle 
 \tableofcontents
 
@@ -316,7 +320,7 @@ $\tau$ of the smallest swirls in the flow are computed
 within the function \lstinline!KolmoScale!. From a dimensionality
 analysis Kolmogorov derived
   \begin{eqnarray}
-      \eta&=\left(\frac{\nu^3}{\epsilon}\right)^{1/4},\\
+      \eta&=\displaystyle\left(\frac{\nu^3}{\epsilon}\right)^{1/4},\\
       u_{\eta}&=\left(\epsilon\,\nu\right)^{1/4},\\
       \tau_{\eta}&=\displaystyle\left(\frac{\nu}{\epsilon}\right)^{1/2}.
   \end{eqnarray}
@@ -365,20 +369,33 @@ illustrated in figure \ref{fig:correlations}.
 \caption{Illustration of different correlation functions}
 \label{fig:correlations}
 \end{figure}
-Computing a correlation can be a tedious work (requireing tremendeous
-effort) especially if you have large data sets. From theory it is well
-known that the multiplication of the transform of a data set and its
-complex conjugate are an accurate representation of the correlation
-function. Using the FFT approach this gives an enormeous speed advantage.
-Since we already computed the veloity correlation tensor we may use this
-result in order to compute the correlation tensor.
-
-\end{par} \vspace{1em}
-\begin{par}
-
+In general the correlation between two components of an isotropic
+homogeneous velocity field is expressed by
   \begin{equation}
-      R_{ij} = \frac{cov(U_i,U_j)}{\sqrt{\sigma_i^2\,\sigma_j^2}}
-             = \frac{\left<u_i'\,u_j'\right>}{\sqrt{\sigma_i^2\,\sigma_j^2}}
+      R_{ij} = \left<u_i(\mathbf{x}+r)\,u_j(\mathbf{x})\right>.
+  \end{equation}
+The correlation coefficients are computed by normalizing
+$R_{ij}$ with the square root of the product of the two variances
+$\sigma_i^2$ and $\sigma_j^2$.
+  \begin{equation}
+      r_{ij} = \frac{\left<u_i(\mathbf{x}+\mathbf{r})\,u_j(\mathbf{x})\right>}
+                  {\sqrt{\sigma_i^2\,\sigma_j^2}}
+  \end{equation}
+As illustrated in figure \ref{fig:correlations} the longitudinal and lateral
+correlation depend on the direction of $\mathbf{r}$, i.e.
+  \begin{eqnarray}
+      f(r) &= \displaystyle\frac{\left<u_1(\mathbf{x}+r\mathbf{e}_1)\,u_1(\mathbf{x})\right>}
+                  {\sigma_1}\\
+      g(r) &= \displaystyle\frac{\left<u_2(\mathbf{x}+r\mathbf{e}_1)\,u_2(\mathbf{x})\right>}
+                  {\sigma_2}
+  \end{eqnarray}
+From several theoretical analysis it is well known that correlations can
+be efficiently computed by means of multiplying the Fourier transform of
+a quantity with its complex conjugate. Using the FFT approach this gives
+an enormeous speed advantage.
+  \begin{equation}
+      R_{ij} =
+      \mathfrak{F}^{-1}\left\{\mathfrak{F}\left\{u_i\right\}^*\cdot\mathfrak{F}\left\{u_i\right\}\right\}
   \end{equation}
 
 \end{par} \vspace{1em}

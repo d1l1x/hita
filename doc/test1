@@ -1,11 +1,15 @@
 \begin{document}
+\maketitle 
+\tableofcontents
+\maketitle 
+\tableofcontents
 
-\subsection*{Clear complete workspace}
+\section{Clear complete workspace}
 
 \begin{par}
 For new Matlab projects best practise is to clear the complete workspace and the command window. It is also a good habit to close all remaining figures since Matlab does not automatically open a new window each time a plot call is invoked.
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Clear workspace ...')
 path('./functions',path) % add functions directory the Matlab path
 close all % close all figures
@@ -13,7 +17,7 @@ clear all % clear workspace
 clc % clear command window
 %set(0,'DefaultFigureWindowStyle','docked')
 [datadir,flag]=ClearWs();
-\end{verbatim}
+\end{lstlisting}
 \begin{par}
 
 The above mentioned clears are performed in the function \verb|ClearWs|.
@@ -24,7 +28,7 @@ directory or the dimensionality of the problem are also defined.
 \end{par} \vspace{1em}
 
 
-\subsection*{Read data files}
+\section{Read data files}
 
 \begin{par}
 
@@ -56,14 +60,14 @@ structure it is highly optimized for parallel I/O operations and can be
 read by nearly all data processing tools.
 
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Read data ...')
 [uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
 % test=importdata('data/3D/CFX_velocity_field.dat');
 % uvel=reshape(test(:,1),33,33,33);
 % vvel=reshape(test(:,2),33,33,33);
 % wvel=reshape(test(:,3),33,33,33);
-\end{verbatim}
+\end{lstlisting}
 \begin{par}
 
 \lstinputlisting{../functions/ReadData.m}
@@ -71,7 +75,7 @@ display('Read data ...')
 \end{par} \vspace{1em}
 
 
-\subsection*{Set neccessary parameters}
+\section{Set neccessary parameters}
 
 \begin{par}
 
@@ -85,13 +89,13 @@ DNS simulation such as
 \end{itemize}
 
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Set parameters ...')
 [u,v,w,dim,Lx,dx,nu]=Params(uvel,vvel,wvel);
 % u=u-mean2(u);
 % v=v-mean2(v);
 % w=w-mean2(w);
-\end{verbatim}
+\end{lstlisting}
 \begin{par}
 
 \lstinputlisting{../functions/Params.m}
@@ -99,7 +103,7 @@ display('Set parameters ...')
 \end{par} \vspace{1em}
 
 
-\subsection*{Compute 3D spectrum}
+\section{Compute 3D spectrum}
 
 \begin{par}
 
@@ -198,10 +202,10 @@ the final expression of the three dimensional discrete energy spectrum can be de
 The calling sequence for the computation of the energy spectrum reads
 
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Compute spectrum...')
 [spectrum,k,bin_counter,time_spec] = PowerSpec(u,v,w,Lx,dim);
-\end{verbatim}
+\end{lstlisting}
 \begin{par}
 
 \lstinputlisting{../functions/PowerSpec.m}
@@ -209,7 +213,7 @@ display('Compute spectrum...')
 \end{par} \vspace{1em}
 
 
-\subsection*{Compute dissipation and turbulent kinetic energy}
+\section{Compute dissipation and turbulent kinetic energy}
 
 \begin{par}
 
@@ -229,11 +233,11 @@ display('Compute spectrum...')
   The calling sequence reads
 
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Compute kinetic energy...')
 [Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,...
                                             nu,u,v,w,dim);
-\end{verbatim}
+\end{lstlisting}
 \begin{par}
 
 \lstinputlisting{../functions/SpecProp.m}
@@ -241,7 +245,7 @@ display('Compute kinetic energy...')
 \end{par} \vspace{1em}
 
 
-\subsection*{Kolmogorov properties}
+\section{Kolmogorov properties}
 
 \begin{par}
 
@@ -251,7 +255,7 @@ $\tau$ of the smallest swirls in the flow are computed
 within the function \lstinline!KolmoScale!. From a dimensionality
 analysis Kolmogorov derived
   \begin{eqnarray}
-      \eta&=\left(\frac{\nu^3}{\epsilon}\right)^{1/4},\\
+      \eta&=\displaystyle\left(\frac{\nu^3}{\epsilon}\right)^{1/4},\\
       u_{\eta}&=\left(\epsilon\,\nu\right)^{1/4},\\
       \tau_{\eta}&=\displaystyle\left(\frac{\nu}{\epsilon}\right)^{1/2}.
   \end{eqnarray}
@@ -259,10 +263,10 @@ For further reading concerning his theory it is refered to
 \citet{Pope:2000tp}, \citet{Hinze:1975tb} and \citet{Tennekes:1972vb}.
 
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Compute Kolmogorov scales...')
 [eta,u_eta,tau]=KolmoScale(nu,Dissipation);
-\end{verbatim}
+\end{lstlisting}
 \begin{par}
 
 \lstinputlisting{../functions/KolmoScale.m}
@@ -270,7 +274,7 @@ display('Compute Kolmogorov scales...')
 \end{par} \vspace{1em}
 
 
-\subsection*{Compute correlations}
+\section{Compute correlations}
 
 \begin{par}
 
@@ -300,27 +304,40 @@ illustrated in figure \ref{fig:correlations}.
 \caption{Illustration of different correlation functions}
 \label{fig:correlations}
 \end{figure}
-Computing a correlation can be a tedious work (requireing tremendeous
-effort) especially if you have large data sets. From theory it is well
-known that the multiplication of the transform of a data set and its
-complex conjugate are an accurate representation of the correlation
-function. Using the FFT approach this gives an enormeous speed advantage.
-Since we already computed the veloity correlation tensor we may use this
-result in order to compute the correlation tensor.
-
-\end{par} \vspace{1em}
-\begin{par}
-
+In general the correlation between two components of an isotropic
+homogeneous velocity field is expressed by
   \begin{equation}
-      R_{ij} = \frac{cov(U_i,U_j)}{\sqrt{\sigma_i^2\,\sigma_j^2}}
-             = \frac{\left<u_i'\,u_j'\right>}{\sqrt{\sigma_i^2\,\sigma_j^2}}
+      R_{ij} = \left<u_i(\mathbf{x}+r)\,u_j(\mathbf{x})\right>.
+  \end{equation}
+The correlation coefficients are computed by normalizing
+$R_{ij}$ with the square root of the product of the two variances
+$\sigma_i^2$ and $\sigma_j^2$.
+  \begin{equation}
+      r_{ij} = \frac{\left<u_i(\mathbf{x}+\mathbf{r})\,u_j(\mathbf{x})\right>}
+                  {\sqrt{\sigma_i^2\,\sigma_j^2}}
+  \end{equation}
+As illustrated in figure \ref{fig:correlations} the longitudinal and lateral
+correlation depend on the direction of $\mathbf{r}$, i.e.
+  \begin{eqnarray}
+      f(r) &= \displaystyle\frac{\left<u_1(\mathbf{x}+r\mathbf{e}_1)\,u_1(\mathbf{x})\right>}
+                  {\sigma_1}\\
+      g(r) &= \displaystyle\frac{\left<u_2(\mathbf{x}+r\mathbf{e}_1)\,u_2(\mathbf{x})\right>}
+                  {\sigma_2}
+  \end{eqnarray}
+From several theoretical analysis it is well known that correlations can
+be efficiently computed by means of multiplying the Fourier transform of
+a quantity with its complex conjugate. Using the FFT approach this gives
+an enormeous speed advantage.
+  \begin{equation}
+      R_{ij} =
+      \mathfrak{F}^{-1}\left\{\mathfrak{F}\left\{u_i\right\}^*\cdot\mathfrak{F}\left\{u_i\right\}\right\}
   \end{equation}
 
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Compute Correlations...')
 [R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx,dim);
-\end{verbatim}
+\end{lstlisting}
 \begin{par}
 
 The content of \verb|Correlation| reads
@@ -335,9 +352,9 @@ The content of \verb|Correlation| reads
 \end{par} \vspace{1em}
 
 
-\subsection*{Plotting}
+\section{Plotting}
 
-\begin{verbatim}
+\begin{lstlisting}
 display('Save results...')
 close all
 comte=importdata('Comte-Bellot.txt');
@@ -352,7 +369,7 @@ h=loglog(kC,EC,'*-g');
 set(h,'LineWidth',1);
 legend('VKP','Dietzsch','Comte-Bellot')
 saveas(gcf,'spectrum.eps','psc2')
-\end{verbatim}
+\end{lstlisting}
 
 
 

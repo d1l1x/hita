@@ -59,5 +59,5 @@ xleftmargin=6mm,%
 breaklines=true}
 
 \author[rss]{Felix Dietzsch}
-\address[rss]{Institut für Chemieingenieurwesen und Energieverahrenstechnik,...}
+\address[rss]{Institut f\"ur Chemieingenieurwesen und Energieverfahrenstechnik,...}
 \title{Small post processor}
