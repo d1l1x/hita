@@ -132,14 +132,9 @@ display('Set parameters ...')
 %   \end{equation}
 %   \begin{figure}[t!]
 %       \centering
-%       \subfloat[Illustration of the two dimensional shell integration]{
 %       \includegraphics[scale=1]{shell_integration}
 %       \label{fig:shell_int}
-%       }
-%       \subfloat[Computed spectrum]{
-%       \includegraphics[scale=0.4]{spectrum}
-%       \label{fig:shell_int}
-%       }
+%       \caption{Illustration of the two dimensional shell integration}
 %   \end{figure}
 % This integral can be solved analytically by utilizing again the assumption of isotropy.
 % For these kind of flows the energy spectrum function can be regarded as the sum of kinetic energy
@@ -148,6 +143,11 @@ display('Set parameters ...')
 % surface integral can be solved analytically. The idea of this integration is illustrated
 % in Fig. \ref{fig:shell_int}.
 % As a result of this one gets
+% \begin{figure}[t!]
+%       \includegraphics[scale=1]{spectrum}
+%       \label{fig:shell_int}
+%       \caption{Computed spectrum}
+% \end{figure}
 %   \begin{equation}
 %       E(|\boldsymbol\kappa|)=\oiint\frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}S(\kappa)
 %       =4\pi(|\boldsymbol\kappa|)^2\,\Phi_{ii}(|\boldsymbol\kappa|).

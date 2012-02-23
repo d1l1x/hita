@@ -62,25 +62,25 @@ breaklines=true}
 \address[rss]{Institut f\"ur Chemieingenieurwesen und Energieverfahrenstechnik,...}
 \title{Small post processor}
 \begin{document}
-		\maketitle 
-		\tableofcontents
+\maketitle 
+\tableofcontents
 
 \section{Clear complete workspace}
 
 \begin{par}
 For new Matlab projects best practise is to clear the complete workspace and the command window. It is also a good habit to close all remaining figures since Matlab does not automatically open a new window each time a plot call is invoked.
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Clear workspace ...')
 path('./functions',path) % add functions directory the Matlab path
 close all % close all figures
 clear all % clear workspace
 clc % clear command window
 
-datadir='data'; % specify directory containg input data
+datadir='data/stuttgart/'; % specify directory containg input data
 flag='3D'; % specify dimensionality
 %set(0,'DefaultFigureWindowStyle','docked')
-\end{verbatim}
+\end{lstlisting}
 
 
 \section{Read data files}
@@ -111,14 +111,14 @@ structure it is highly optimized for parallel I/O operations and can be
 read by nearly all data processing tools.
 
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Read data ...')
-[uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
+[uvel,vvel,wvel,time_read,dim] = ReadData(datadir,flag,'uvel','vvel','wvel');
 % test=importdata('data/3D/CFX_velocity_field.dat');
 % uvel=reshape(test(:,1),33,33,33);
 % vvel=reshape(test(:,2),33,33,33);
 % wvel=reshape(test(:,3),33,33,33);
-\end{verbatim}
+\end{lstlisting}
 \begin{par}
 
 \lstinputlisting{../functions/ReadData.m}
@@ -140,10 +140,10 @@ DNS simulation such as
 \end{itemize}
 
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Set parameters ...')
-[u,v,w,dim,Lx,dx,nu]=Params(uvel,vvel,wvel);
-\end{verbatim}
+[u,v,w,Lx,dx,nu]=Params(uvel,vvel,wvel,dim);
+\end{lstlisting}
 \begin{par}
 
 \lstinputlisting{../functions/Params.m}
@@ -215,14 +215,9 @@ Comparing the second and last expression we get
   \end{equation}
   \begin{figure}[t!]
       \centering
-      \subfloat[Illustration of the two dimensional shell integration]{
       \includegraphics[scale=1]{shell_integration}
       \label{fig:shell_int}
-      }
-      \subfloat[Computed spectrum]{
-      \includegraphics[scale=0.4]{spectrum}
-      \label{fig:shell_int}
-      }
+      \caption{Illustration of the two dimensional shell integration}
   \end{figure}
 This integral can be solved analytically by utilizing again the assumption of isotropy.
 For these kind of flows the energy spectrum function can be regarded as the sum of kinetic energy
@@ -231,6 +226,11 @@ shell in wave number space. Since the surface of a sphere is completly determine
 surface integral can be solved analytically. The idea of this integration is illustrated
 in Fig. \ref{fig:shell_int}.
 As a result of this one gets
+\begin{figure}[t!]
+      \includegraphics[scale=1]{spectrum}
+      \label{fig:shell_int}
+      \caption{Computed spectrum}
+\end{figure}
   \begin{equation}
       E(|\boldsymbol\kappa|)=\oiint\frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}S(\kappa)
       =4\pi(|\boldsymbol\kappa|)^2\,\Phi_{ii}(|\boldsymbol\kappa|).
@@ -255,10 +255,10 @@ the final expression of the three dimensional discrete energy spectrum can be de
 The calling sequence for the computation of the energy spectrum reads
 
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Compute spectrum...')
 [spectrum,k,bin_counter,time_spec] = PowerSpec(u,v,w,Lx,dim);
-\end{verbatim}
+\end{lstlisting}
 \begin{par}
 
 \lstinputlisting{../functions/PowerSpec.m}
@@ -286,11 +286,11 @@ display('Compute spectrum...')
   The calling sequence reads
 
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Compute kinetic energy...')
 [Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,...
                                             nu,u,v,w,dim);
-\end{verbatim}
+\end{lstlisting}
 \begin{par}
 
 \lstinputlisting{../functions/SpecProp.m}
@@ -316,10 +316,10 @@ For further reading concerning his theory it is refered to
 \citet{Pope:2000tp}, \citet{Hinze:1975tb} and \citet{Tennekes:1972vb}.
 
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Compute Kolmogorov scales...')
 [eta,u_eta,tau]=KolmoScale(nu,Dissipation);
-\end{verbatim}
+\end{lstlisting}
 \begin{par}
 
 \lstinputlisting{../functions/KolmoScale.m}
@@ -387,10 +387,10 @@ an enormeous speed advantage.
   \end{equation}
 
 \end{par} \vspace{1em}
-\begin{verbatim}
+\begin{lstlisting}
 display('Compute Correlations...')
 [R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx,dim);
-\end{verbatim}
+\end{lstlisting}
 \begin{par}
 
 The content of \verb|Correlation| reads

@@ -12,7 +12,7 @@ close all % close all figures
 clear all % clear workspace
 clc % clear command window
 
-datadir='data'; % specify directory containg input data
+datadir='data/stuttgart/'; % specify directory containg input data
 flag='3D'; % specify dimensionality
 %set(0,'DefaultFigureWindowStyle','docked')
 \end{verbatim}
@@ -48,7 +48,7 @@ read by nearly all data processing tools.
 \end{par} \vspace{1em}
 \begin{verbatim}
 display('Read data ...')
-[uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
+[uvel,vvel,wvel,time_read,dim] = ReadData(datadir,flag,'uvel','vvel','wvel');
 % test=importdata('data/3D/CFX_velocity_field.dat');
 % uvel=reshape(test(:,1),33,33,33);
 % vvel=reshape(test(:,2),33,33,33);
@@ -77,7 +77,7 @@ DNS simulation such as
 \end{par} \vspace{1em}
 \begin{verbatim}
 display('Set parameters ...')
-[u,v,w,dim,Lx,dx,nu]=Params(uvel,vvel,wvel);
+[u,v,w,Lx,dx,nu]=Params(uvel,vvel,wvel,dim);
 \end{verbatim}
 \begin{par}
 
@@ -150,14 +150,9 @@ Comparing the second and last expression we get
   \end{equation}
   \begin{figure}[t!]
       \centering
-      \subfloat[Illustration of the two dimensional shell integration]{
       \includegraphics[scale=1]{shell_integration}
       \label{fig:shell_int}
-      }
-      \subfloat[Computed spectrum]{
-      \includegraphics[scale=0.4]{spectrum}
-      \label{fig:shell_int}
-      }
+      \caption{Illustration of the two dimensional shell integration}
   \end{figure}
 This integral can be solved analytically by utilizing again the assumption of isotropy.
 For these kind of flows the energy spectrum function can be regarded as the sum of kinetic energy
@@ -166,6 +161,11 @@ shell in wave number space. Since the surface of a sphere is completly determine
 surface integral can be solved analytically. The idea of this integration is illustrated
 in Fig. \ref{fig:shell_int}.
 As a result of this one gets
+\begin{figure}[t!]
+      \includegraphics[scale=1]{spectrum}
+      \label{fig:shell_int}
+      \caption{Computed spectrum}
+\end{figure}
   \begin{equation}
       E(|\boldsymbol\kappa|)=\oiint\frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}S(\kappa)
       =4\pi(|\boldsymbol\kappa|)^2\,\Phi_{ii}(|\boldsymbol\kappa|).

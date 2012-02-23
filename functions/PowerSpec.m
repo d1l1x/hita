@@ -60,4 +60,9 @@ function [spectrum,k,bin_counter,time] = PowerSpec(u,v,w,...
     %compute final spectrum
     spectrum = spectrum*2*pi.*k'.^2./(bin_counter.*dx.^3);
 	time=toc;
+    
+    y = [k; spectrum'];
+    fid = fopen('spectrum.dat', 'w');
+    fprintf(fid, '%10.2E %10.2E\n', y);
+    fclose(fid);
 end
