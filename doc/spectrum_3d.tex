@@ -62,19 +62,15 @@ breaklines=true}
 \address[rss]{Institut f\"ur Chemieingenieurwesen und Energieverfahrenstechnik,...}
 \title{Small post processor}
 \begin{document}
-\maketitle 
-\tableofcontents
-\maketitle 
-\tableofcontents
-\maketitle 
-\tableofcontents
+		\maketitle 
+		\tableofcontents
 
 \section{Clear complete workspace}
 
 \begin{par}
 For new Matlab projects best practise is to clear the complete workspace and the command window. It is also a good habit to close all remaining figures since Matlab does not automatically open a new window each time a plot call is invoked.
 \end{par} \vspace{1em}
-\begin{lstlisting}
+\begin{verbatim}
 display('Clear workspace ...')
 path('./functions',path) % add functions directory the Matlab path
 close all % close all figures
@@ -82,8 +78,11 @@ clear all % clear workspace
 clc % clear command window
 %set(0,'DefaultFigureWindowStyle','docked')
 [datadir,flag]=ClearWs();
-\end{lstlisting}
-\begin{par}
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}Clear workspace ...
+\end{verbatim} \color{black}
+    \begin{par}
 
 The above mentioned clears are performed in the function \verb|ClearWs|.
 In addition some basic parameters like the name of the data
@@ -125,15 +124,18 @@ structure it is highly optimized for parallel I/O operations and can be
 read by nearly all data processing tools.
 
 \end{par} \vspace{1em}
-\begin{lstlisting}
+\begin{verbatim}
 display('Read data ...')
 [uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
 % test=importdata('data/3D/CFX_velocity_field.dat');
 % uvel=reshape(test(:,1),33,33,33);
 % vvel=reshape(test(:,2),33,33,33);
 % wvel=reshape(test(:,3),33,33,33);
-\end{lstlisting}
-\begin{par}
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}Read data ...
+\end{verbatim} \color{black}
+    \begin{par}
 
 \lstinputlisting{../functions/ReadData.m}
 
@@ -154,14 +156,17 @@ DNS simulation such as
 \end{itemize}
 
 \end{par} \vspace{1em}
-\begin{lstlisting}
+\begin{verbatim}
 display('Set parameters ...')
 [u,v,w,dim,Lx,dx,nu]=Params(uvel,vvel,wvel);
 % u=u-mean2(u);
 % v=v-mean2(v);
 % w=w-mean2(w);
-\end{lstlisting}
-\begin{par}
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}Set parameters ...
+\end{verbatim} \color{black}
+    \begin{par}
 
 \lstinputlisting{../functions/Params.m}
 
@@ -265,13 +270,22 @@ the final expression of the three dimensional discrete energy spectrum can be de
       (\boldsymbol\kappa)\,u(\boldsymbol\kappa)\right>}{(\Delta\kappa)^3}
   \end{equation}
 The calling sequence for the computation of the energy spectrum reads
+  \begin{figure}[t!]
+      \centering
+      \includegraphics[scale=1]{spectrum}
+	  \caption{Power spectrum}
+      \label{fig:spectrum}
+  \end{figure}
 
 \end{par} \vspace{1em}
-\begin{lstlisting}
+\begin{verbatim}
 display('Compute spectrum...')
 [spectrum,k,bin_counter,time_spec] = PowerSpec(u,v,w,Lx,dim);
-\end{lstlisting}
-\begin{par}
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}Compute spectrum...
+\end{verbatim} \color{black}
+    \begin{par}
 
 \lstinputlisting{../functions/PowerSpec.m}
 
@@ -298,12 +312,15 @@ display('Compute spectrum...')
   The calling sequence reads
 
 \end{par} \vspace{1em}
-\begin{lstlisting}
+\begin{verbatim}
 display('Compute kinetic energy...')
 [Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,...
                                             nu,u,v,w,dim);
-\end{lstlisting}
-\begin{par}
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}Compute kinetic energy...
+\end{verbatim} \color{black}
+    \begin{par}
 
 \lstinputlisting{../functions/SpecProp.m}
 
@@ -328,11 +345,14 @@ For further reading concerning his theory it is refered to
 \citet{Pope:2000tp}, \citet{Hinze:1975tb} and \citet{Tennekes:1972vb}.
 
 \end{par} \vspace{1em}
-\begin{lstlisting}
+\begin{verbatim}
 display('Compute Kolmogorov scales...')
 [eta,u_eta,tau]=KolmoScale(nu,Dissipation);
-\end{lstlisting}
-\begin{par}
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}Compute Kolmogorov scales...
+\end{verbatim} \color{black}
+    \begin{par}
 
 \lstinputlisting{../functions/KolmoScale.m}
 
@@ -395,15 +415,22 @@ a quantity with its complex conjugate. Using the FFT approach this gives
 an enormeous speed advantage.
   \begin{equation}
       R_{ij} =
-      \mathfrak{F}^{-1}\left\{\mathfrak{F}\left\{u_i\right\}^*\cdot\mathfrak{F}\left\{u_i\right\}\right\}
+      \mathfrak{F}^{-1}\left\{\mathfrak{F}\left\{u_i\right\}^*\cdot\mathfrak{F}\left\{u_j\right\}\right\}
   \end{equation}
 
 \end{par} \vspace{1em}
-\begin{lstlisting}
+\begin{verbatim}
 display('Compute Correlations...')
 [R11,R22,r,R1,R2,R3]=Correlation(u,v,w,Lx,dim);
-\end{lstlisting}
-\begin{par}
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}Compute Correlations...
+Warning: Integer operands are required for colon operator when used as
+index 
+Warning: Integer operands are required for colon operator when used as
+index 
+\end{verbatim} \color{black}
+    \begin{par}
 
 The content of \verb|Correlation| reads
 \lstinputlisting{../functions/Correlation.m}
@@ -419,9 +446,10 @@ The content of \verb|Correlation| reads
 
 \section{Plotting}
 
-\begin{lstlisting}
+\begin{verbatim}
 display('Save results...')
 close all
+h = figure('visible','on')
 comte=importdata('Comte-Bellot.txt');
 kC=comte.data(:,1).*100;
 EC=comte.data(:,2)./100^3;
@@ -434,7 +462,17 @@ h=loglog(kC,EC,'*-g');
 set(h,'LineWidth',1);
 legend('VKP','Dietzsch','Comte-Bellot')
 saveas(gcf,'spectrum.eps','psc2')
-\end{lstlisting}
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}Save results...
+
+h =
+
+     1
+
+\end{verbatim} \color{black}
+    
+\includegraphics [width=4in]{spectrum_3d_01.eps}
 
 
 

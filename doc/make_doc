@@ -5,18 +5,18 @@
 grep -A 1000 -E '\\begin\{document\}' spectrum_3d.tex > test1
 cat includes.txt test1 > spectrum_3d.tex
 #if [ `uname`=="Linux" ]; then
-	#sed -r '
-	#/begin\{document\}/ a\
-		#\\maketitle \
-		#\\tableofcontents
-	#' spectrum_3d.tex > temp ;
-#fi
-#if [ `uname`=="Darwin" ]; then
-	sed -E '
+	sed -r '
 	/begin\{document\}/ a\
 		\\maketitle \
 		\\tableofcontents
-	' spectrum_3d.tex > temp
+	' spectrum_3d.tex > temp ;
+#fi
+#if [ `uname`=="Darwin" ]; then
+	#sed -E '
+	#/begin\{document\}/ a\
+		#\\maketitle \
+		#\\tableofcontents
+	#' spectrum_3d.tex > temp
 #fi
 
 mv temp spectrum_3d.tex
