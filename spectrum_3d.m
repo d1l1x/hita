@@ -9,35 +9,23 @@ path('./functions',path) % add functions directory the Matlab path
 close all % close all figures
 clear all % clear workspace
 clc % clear command window
+
+datadir='data/stuttgart/'; % specify directory containg input data
+flag='3D'; % specify dimensionality
 %set(0,'DefaultFigureWindowStyle','docked')
-[datadir,flag]=ClearWs();
-%%
-%
-% <latex>
-% The above mentioned clears are performed in the function \verb|ClearWs|.
-% In addition some basic parameters like the name of the data
-% directory or the dimensionality of the problem are also defined.
-% \lstinputlisting{../functions/ClearWs.m}
-% </latex>
-% 
-% 
 %% Read data files
 %
 % <latex>
-% During the evaluation of the function \verb|ReadData| all data files
+% During the evaluation of the function \verb|ReadData| all velocity files
 % neseccary for the calculation of the spectrum and the correlation
-% coefficients are read, namely the velocity components. In addition the
+% coefficients are read. In addition the
 % import operations are enclosed in a \lstinline!tic;!$\ldots$
-% \lstinline!;toc! block
-% measuring the time needed for reading the ASCII data. What you should
+% \lstinline!;toc! block which
+% measures the time needed for reading the ASCII data. What you should
 % get from the tic/toc
 % block is that most of the time is spend during data I/O
-% (Input/Output operations), nearly \unit[220]{s}. The actual computation
-% needs only about \unit[8]{s}. What you can easily calculate from this is
-% that the
-% computation of the spectrum is nearly 27 times faster then the data
-% import. Why the computation of Fourier transforms is that fast we will
-% come to that later.
+% (Input/Output operations). The actual computation
+% needs much less time.
 % Although the ASCII
 % data format ist not the prefered choice in terms of speed and size, we
 % will use it since other
@@ -53,7 +41,7 @@ clc % clear command window
 % </latex>
 %
 display('Read data ...')
-[uvel,vvel,wvel,time_read] = ReadData(datadir,flag,'uvel','vvel','wvel');
+[uvel,vvel,wvel,time_read,dim] = ReadData(datadir,flag,'uvel','vvel','wvel');
 % test=importdata('data/3D/CFX_velocity_field.dat');
 % uvel=reshape(test(:,1),33,33,33);
 % vvel=reshape(test(:,2),33,33,33);
@@ -68,18 +56,15 @@ display('Read data ...')
 % For further computations it is important to define some parmeters of the
 % DNS simulation such as 
 % \begin{itemize}
-%   \item Number of grid points in on direction $n_{p}$,
-%   \item Physical length of one direction $L_x$,
+%   \item Number of grid points in one direction $n_{p}$,
+%   \item Physical length of one edge of the domain $L_x$,
 %   \item Physical grid spacing $\triangle x$,
 %   \item Kinematic viscosity $\nu$.
 % \end{itemize}
 % </latex>
 %
 display('Set parameters ...')
-[u,v,w,dim,Lx,dx,nu]=Params(uvel,vvel,wvel);
-% u=u-mean2(u);
-% v=v-mean2(v);
-% w=w-mean2(w);
+[u,v,w,Lx,dx,nu]=Params(uvel,vvel,wvel,dim);
 %% 
 % <latex>
 % \lstinputlisting{../functions/Params.m}
@@ -147,9 +132,14 @@ display('Set parameters ...')
 %   \end{equation}
 %   \begin{figure}[t!]
 %       \centering
+%       \subfloat[Illustration of the two dimensional shell integration]{
 %       \includegraphics[scale=1]{shell_integration}
-%       \caption{Illustration of the two dimensional shell integration}
 %       \label{fig:shell_int}
+%       }
+%       \subfloat[Computed spectrum]{
+%       \includegraphics[scale=0.4]{spectrum}
+%       \label{fig:shell_int}
+%       }
 %   \end{figure}
 % This integral can be solved analytically by utilizing again the assumption of isotropy.
 % For these kind of flows the energy spectrum function can be regarded as the sum of kinetic energy
@@ -305,19 +295,3 @@ display('Compute Correlations...')
 % \bibliographystyle{NTFD-bibstyle}
 % \bibliography{bibliography}
 % </latex>
-%% Plotting
-display('Save results...')
-close all
-h = figure('visible','on')
-comte=importdata('Comte-Bellot.txt');
-kC=comte.data(:,1).*100;
-EC=comte.data(:,2)./100^3;
-vkp=importdata('data/3D/CTRL_TURB_ENERGY');
-h=loglog(vkp(:,1),vkp(:,3),'*-b');hold on
-set(h,'LineWidth',1);
-h=loglog(k,spectrum,'r-s');
-set(h,'LineWidth',1);
-h=loglog(kC,EC,'*-g');
-set(h,'LineWidth',1);
-legend('VKP','Dietzsch','Comte-Bellot')
-saveas(gcf,'spectrum.eps','psc2')

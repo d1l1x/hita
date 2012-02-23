@@ -13,19 +13,27 @@ function [spectrum,k,bin_counter,time] = PowerSpec(u,v,w,...
 	mvv = mvv.^2;
 	mww = mww.^2;
     
-	rx=[0:1:dim-1] - (dim-1)/2;
-    ry=[0:1:dim-1] - (dim-1)/2;
-    rz=[0:1:dim-1] - (dim-1)/2;
+% % 	rx=[0:1:dim-1] - (dim-1)/2;
+% %     ry=[0:1:dim-1] - (dim-1)/2;
+% %     rz=[0:1:dim-1] - (dim-1)/2;
+% %     
+% % 	test_x=circshift(rx',[(dim+1)/2 1]);
+% % 	test_y=circshift(ry',[(dim+1)/2 1]);
+% % 	test_z=circshift(rz',[(dim+1)/2 1]);
+	rx=[0:1:dim-1] - (dim)/2+1;
+    ry=[0:1:dim-1] - (dim)/2+1;
+    rz=[0:1:dim-1] - (dim)/2+1;
     
-	test_x=circshift(rx',[(dim+1)/2 1]);
-	test_y=circshift(ry',[(dim+1)/2 1]);
-	test_z=circshift(rz',[(dim+1)/2 1]);
+	test_x=circshift(rx',[(dim)/2+1 1]);
+	test_y=circshift(ry',[(dim)/2+1 1]);
+	test_z=circshift(rz',[(dim)/2+1 1]);
 	
 	[X,Y,Z]= meshgrid(test_x,test_y,test_z);
 	r=(sqrt(X.^2+Y.^2+Z.^2));
 
     dx=2*pi/L;
-    k=[1:(dim-1)/2].*dx;
+    k=[1:(dim)/2].*dx;
+    
     spectrum=zeros(size(k,2),1);
     bin_counter=zeros(size(k,2),1);
 	for N=2:(dim-1)/2-1

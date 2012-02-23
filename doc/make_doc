@@ -25,5 +25,6 @@ sed -i -r 's/begin{verbatim}/begin{lstlisting}/g' spectrum_3d.tex
 sed -i -r 's/end{verbatim}/end{lstlisting}/g' spectrum_3d.tex
 sed -i -r 's/subsection\*/section/g' spectrum_3d.tex
 
+ps2pdf spectrum.eps
 latexmk -C
 latexmk -pdf spectrum_3d.tex
