@@ -1,42 +1,48 @@
-function [spectrum,k,bin_counter,time] = PowerSpec(u,v,w,...
+function [spectrum,k,bin_counter,time,r,dx] = PowerSpec(u,v,w,...
                                                    L,dim)
 	tic;
 	uu_fft=fftn(u);
 	vv_fft=fftn(v);
 	ww_fft=fftn(w);
-	
-	muu = abs(uu_fft)/length(u)^3;
-	mvv = abs(vv_fft)/length(v)^3;
-	mww = abs(ww_fft)/length(w)^3;
+    if mod(dim,2)==0
+        muu = abs(uu_fft)/length(u)^3;
+        mvv = abs(vv_fft)/length(v)^3;
+        mww = abs(ww_fft)/length(w)^3;
 
-	muu = muu.^2;
-	mvv = mvv.^2;
-	mww = mww.^2;
-    
-% % 	rx=[0:1:dim-1] - (dim-1)/2;
-% %     ry=[0:1:dim-1] - (dim-1)/2;
-% %     rz=[0:1:dim-1] - (dim-1)/2;
-% %     
-% % 	test_x=circshift(rx',[(dim+1)/2 1]);
-% % 	test_y=circshift(ry',[(dim+1)/2 1]);
-% % 	test_z=circshift(rz',[(dim+1)/2 1]);
+        muu = muu.^2;
+        mvv = mvv.^2;
+        mww = mww.^2;
+        
+        k_end = (dim)/2;
+    else  
+        rx=[0:1:dim-1] - (dim-1)/2;
+        ry=[0:1:dim-1] - (dim-1)/2;
+        rz=[0:1:dim-1] - (dim-1)/2;
+
+        R_x=circshift(rx',[(dim+1)/2 1]);
+        R_y=circshift(ry',[(dim+1)/2 1]);
+        R_z=circshift(rz',[(dim+1)/2 1]);
+        
+        k_end = (dim-1)/2;
+    end
+
 	rx=[0:1:dim-1] - (dim)/2+1;
     ry=[0:1:dim-1] - (dim)/2+1;
     rz=[0:1:dim-1] - (dim)/2+1;
     
-	test_x=circshift(rx',[(dim)/2+1 1]);
-	test_y=circshift(ry',[(dim)/2+1 1]);
-	test_z=circshift(rz',[(dim)/2+1 1]);
+	R_x=circshift(rx',[(dim)/2+1 1]);
+	R_y=circshift(ry',[(dim)/2+1 1]);
+	R_z=circshift(rz',[(dim)/2+1 1]);
 	
-	[X,Y,Z]= meshgrid(test_x,test_y,test_z);
+	[X,Y,Z]= meshgrid(R_x,R_y,R_z);
 	r=(sqrt(X.^2+Y.^2+Z.^2));
 
     dx=2*pi/L;
-    k=[1:(dim)/2].*dx;
+    k=[1:k_end].*dx;
     
     spectrum=zeros(size(k,2),1);
     bin_counter=zeros(size(k,2),1);
-	for N=2:(dim)/2-1
+	for N=2:k_end-1
         picker = (r(:,:,:)*dx <= (k(N+1) + k(N))/2) & ...
                  (r(:,:,:)*dx > (k(N) + k(N-1))/2);
 		spectrum(N) = sum(muu(picker))+...

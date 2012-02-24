@@ -172,7 +172,7 @@ display('Set parameters ...')
 % The calling sequence for the computation of the energy spectrum reads
 % </latex>
 display('Compute spectrum...')
-[spectrum,k,bin_counter,time_spec] = PowerSpec(u,v,w,Lx,dim);
+[spectrum,k,bin_counter,time_spec,R,dx] = PowerSpec(u,v,w,Lx,dim);
 %% 
 % <latex>
 % \lstinputlisting{../functions/PowerSpec.m}
@@ -196,7 +196,7 @@ display('Compute spectrum...')
 %   The calling sequence reads
 % </latex>
 display('Compute kinetic energy...')
-[Dissipation,kin_E_Sp,kin_E_Ph,up] = SpecProp(spectrum,k,...
+[Dissipation,kin_Sp,kin_Ph,kin_E,up] = SpecProp(spectrum,k,...
                                             nu,u,v,w,dim);
 %% 
 % <latex>
