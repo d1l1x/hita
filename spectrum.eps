@@ -1,11 +1,9 @@
-%!PS-Adobe-2.0
+%!PS-Adobe-2.0 EPSF-2.0
 %%Title: spectrum.eps
 %%Creator: gnuplot 4.4 patchlevel 4
-%%CreationDate: Thu Feb 23 22:11:13 2012
+%%CreationDate: Fri Feb 24 09:16:53 2012
 %%DocumentFonts: (atend)
-%%BoundingBox: 50 50 554 770
-%%Orientation: Landscape
-%%Pages: (atend)
+%%BoundingBox: 50 50 410 302
 %%EndComments
 %%BeginProlog
 /gnudict 256 dict def
@@ -18,7 +16,7 @@ gnudict begin
 /Blacktext false def
 /Solid false def
 /Dashlength 1 def
-/Landscape true def
+/Landscape false def
 /Level1 false def
 /Rounded false def
 /ClipToBoundingBox false def
@@ -52,13 +50,13 @@ SDict begin [
   /Author (fdietzsc)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Thu Feb 23 22:11:13 2012)
+  /CreationDate (Fri Feb 24 09:16:53 2012)
   /DOCINFO pdfmark
 end
 } ifelse
 /doclip {
   ClipToBoundingBox {
-    newpath 50 50 moveto 554 50 lineto 554 770 lineto 50 770 lineto closepath
+    newpath 50 50 moveto 410 50 lineto 410 302 lineto 50 302 lineto closepath
     clip
   } if
 } def
@@ -435,208 +433,321 @@ Level1 {Level1PatternFill} {Level2PatternFill} ifelse
 /Symbol-Oblique /Symbol findfont [1 0 .167 1 0 0] makefont
 dup length dict begin {1 index /FID eq {pop pop} {def} ifelse} forall
 currentdict end definefont pop
+/MFshow {
+   { dup 5 get 3 ge
+     { 5 get 3 eq {gsave} {grestore} ifelse }
+     {dup dup 0 get findfont exch 1 get scalefont setfont
+     [ currentpoint ] exch dup 2 get 0 exch R dup 5 get 2 ne {dup dup 6
+     get exch 4 get {Gshow} {stringwidth pop 0 R} ifelse }if dup 5 get 0 eq
+     {dup 3 get {2 get neg 0 exch R pop} {pop aload pop M} ifelse} {dup 5
+     get 1 eq {dup 2 get exch dup 3 get exch 6 get stringwidth pop -2 div
+     dup 0 R} {dup 6 get stringwidth pop -2 div 0 R 6 get
+     show 2 index {aload pop M neg 3 -1 roll neg R pop pop} {pop pop pop
+     pop aload pop M} ifelse }ifelse }ifelse }
+     ifelse }
+   forall} def
+/Gswidth {dup type /stringtype eq {stringwidth} {pop (n) stringwidth} ifelse} def
+/MFwidth {0 exch { dup 5 get 3 ge { 5 get 3 eq { 0 } { pop } ifelse }
+ {dup 3 get{dup dup 0 get findfont exch 1 get scalefont setfont
+     6 get Gswidth pop add} {pop} ifelse} ifelse} forall} def
+/MLshow { currentpoint stroke M
+  0 exch R
+  Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
+/MRshow { currentpoint stroke M
+  exch dup MFwidth neg 3 -1 roll R
+  Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
+/MCshow { currentpoint stroke M
+  exch dup MFwidth -2 div 3 -1 roll R
+  Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
+/XYsave    { [( ) 1 2 true false 3 ()] } bind def
+/XYrestore { [( ) 1 2 true false 4 ()] } bind def
 end
 %%EndProlog
-%%Page: 1 1
 gnudict begin
 gsave
 doclip
 50 50 translate
-0.100 0.100 scale
-90 rotate
-0 -5040 translate
+0.050 0.050 scale
 0 setgray
 newpath
 (Helvetica) findfont 140 scalefont setfont
 1.000 UL
 LTb
-798 280 M
+1.000 UL
+LTa
+462 280 M
+6485 0 V
+stroke
+LTb
+462 280 M
 63 0 V
-6086 0 R
+6422 0 R
 -63 0 V
-714 280 M
-( 1e-14) Rshow
+stroke
+378 280 M
+[ [(Helvetica) 140.0 0.0 true true 0 (10)]
+[(Helvetica) 112.0 70.0 true true 0 (-8)]
+] -60.7 MRshow
 1.000 UL
 LTb
-798 608 M
-31 0 V
-6118 0 R
--31 0 V
-798 936 M
+1.000 UL
+LTa
+462 854 M
+6485 0 V
+stroke
+LTb
+462 854 M
 63 0 V
-6086 0 R
+6422 0 R
 -63 0 V
-714 936 M
-( 1e-12) Rshow
+stroke
+378 854 M
+[ [(Helvetica) 140.0 0.0 true true 0 (10)]
+[(Helvetica) 112.0 70.0 true true 0 (-7)]
+] -60.7 MRshow
 1.000 UL
 LTb
-798 1264 M
-31 0 V
-6118 0 R
--31 0 V
-798 1592 M
+1.000 UL
+LTa
+462 1428 M
+6485 0 V
+stroke
+LTb
+462 1428 M
 63 0 V
-6086 0 R
+6422 0 R
 -63 0 V
--6170 0 R
-( 1e-10) Rshow
+stroke
+378 1428 M
+[ [(Helvetica) 140.0 0.0 true true 0 (10)]
+[(Helvetica) 112.0 70.0 true true 0 (-6)]
+] -60.7 MRshow
 1.000 UL
 LTb
-798 1920 M
-31 0 V
-6118 0 R
--31 0 V
-798 2248 M
+1.000 UL
+LTa
+462 2002 M
+6485 0 V
+stroke
+LTb
+462 2002 M
 63 0 V
-6086 0 R
+6422 0 R
 -63 0 V
--6170 0 R
-( 1e-08) Rshow
+stroke
+378 2002 M
+[ [(Helvetica) 140.0 0.0 true true 0 (10)]
+[(Helvetica) 112.0 70.0 true true 0 (-5)]
+] -60.7 MRshow
 1.000 UL
 LTb
-798 2576 M
-31 0 V
-6118 0 R
--31 0 V
-798 2903 M
+1.000 UL
+LTa
+462 2576 M
+6485 0 V
+stroke
+LTb
+462 2576 M
 63 0 V
-6086 0 R
+6422 0 R
 -63 0 V
--6170 0 R
-( 1e-06) Rshow
+stroke
+378 2576 M
+[ [(Helvetica) 140.0 0.0 true true 0 (10)]
+[(Helvetica) 112.0 70.0 true true 0 (-4)]
+] -60.7 MRshow
 1.000 UL
 LTb
-798 3231 M
-31 0 V
-6118 0 R
--31 0 V
-798 3559 M
+1.000 UL
+LTa
+462 3149 M
+6485 0 V
+stroke
+LTb
+462 3149 M
 63 0 V
-6086 0 R
+6422 0 R
 -63 0 V
--6170 0 R
-( 0.0001) Rshow
+stroke
+378 3149 M
+[ [(Helvetica) 140.0 0.0 true true 0 (10)]
+[(Helvetica) 112.0 70.0 true true 0 (-3)]
+] -60.7 MRshow
 1.000 UL
 LTb
-798 3887 M
-31 0 V
-6118 0 R
--31 0 V
-798 4215 M
+1.000 UL
+LTa
+462 3723 M
+6485 0 V
+stroke
+LTb
+462 3723 M
 63 0 V
-6086 0 R
+6422 0 R
 -63 0 V
--6170 0 R
-( 0.01) Rshow
+stroke
+378 3723 M
+[ [(Helvetica) 140.0 0.0 true true 0 (10)]
+[(Helvetica) 112.0 70.0 true true 0 (-2)]
+] -60.7 MRshow
 1.000 UL
 LTb
-798 4543 M
-31 0 V
-6118 0 R
--31 0 V
-798 4871 M
+1.000 UL
+LTa
+462 4297 M
+6485 0 V
+stroke
+LTb
+462 4297 M
 63 0 V
-6086 0 R
+6422 0 R
 -63 0 V
--6170 0 R
-( 1) Rshow
+stroke
+378 4297 M
+[ [(Helvetica) 140.0 0.0 true true 0 (10)]
+[(Helvetica) 112.0 70.0 true true 0 (-1)]
+] -60.7 MRshow
 1.000 UL
 LTb
-798 280 M
+1.000 UL
+LTa
+462 4871 M
+6485 0 V
+stroke
+LTb
+462 4871 M
+63 0 V
+6422 0 R
+-63 0 V
+stroke
+378 4871 M
+[ [(Helvetica) 140.0 0.0 true true 0 (10)]
+[(Helvetica) 112.0 70.0 true true 0 (0)]
+] -60.7 MRshow
+1.000 UL
+LTb
+1.000 UL
+LTa
+462 280 M
+0 4591 V
+stroke
+LTb
+462 280 M
 0 63 V
 0 4528 R
 0 -63 V
-798 140 M
-( 1) Cshow
+stroke
+462 140 M
+[ [(Helvetica) 140.0 0.0 true true 0 (10)]
+[(Helvetica) 112.0 70.0 true true 0 (0)]
+] -60.7 MCshow
 1.000 UL
 LTb
-1724 280 M
+1438 280 M
 0 31 V
 0 4560 R
 0 -31 V
-2265 280 M
+2009 280 M
 0 31 V
 0 4560 R
 0 -31 V
-2649 280 M
+2414 280 M
 0 31 V
 0 4560 R
 0 -31 V
-2947 280 M
+2728 280 M
 0 31 V
 0 4560 R
 0 -31 V
-3190 280 M
+2985 280 M
 0 31 V
 0 4560 R
 0 -31 V
-3396 280 M
+3202 280 M
 0 31 V
 0 4560 R
 0 -31 V
-3575 280 M
+3390 280 M
 0 31 V
 0 4560 R
 0 -31 V
-3732 280 M
+3556 280 M
 0 31 V
 0 4560 R
 0 -31 V
-3873 280 M
+stroke
+LTa
+3705 280 M
+0 4591 V
+stroke
+LTb
+3705 280 M
 0 63 V
 0 4528 R
 0 -63 V
-0 -4668 R
-( 10) Cshow
+stroke
+3705 140 M
+[ [(Helvetica) 140.0 0.0 true true 0 (10)]
+[(Helvetica) 112.0 70.0 true true 0 (1)]
+] -60.7 MCshow
 1.000 UL
 LTb
-4798 280 M
+4681 280 M
 0 31 V
 0 4560 R
 0 -31 V
-5339 280 M
+5252 280 M
 0 31 V
 0 4560 R
 0 -31 V
-5724 280 M
+5657 280 M
 0 31 V
 0 4560 R
 0 -31 V
-6021 280 M
+5971 280 M
 0 31 V
 0 4560 R
 0 -31 V
-6265 280 M
+6228 280 M
 0 31 V
 0 4560 R
 0 -31 V
-6471 280 M
+6445 280 M
 0 31 V
 0 4560 R
 0 -31 V
-6649 280 M
+6633 280 M
 0 31 V
 0 4560 R
 0 -31 V
-6806 280 M
+6799 280 M
 0 31 V
 0 4560 R
 0 -31 V
+stroke
+LTa
+6947 280 M
+0 4591 V
+stroke
+LTb
 6947 280 M
 0 63 V
 0 4528 R
 0 -63 V
-0 -4668 R
-( 100) Cshow
+stroke
+6947 140 M
+[ [(Helvetica) 140.0 0.0 true true 0 (10)]
+[(Helvetica) 112.0 70.0 true true 0 (2)]
+] -60.7 MCshow
 1.000 UL
 LTb
 1.000 UL
 LTb
-798 4871 N
-798 280 L
-6149 0 V
+462 4871 N
+462 280 L
+6485 0 V
 0 4591 V
--6149 0 V
+-6485 0 V
 Z stroke
 1.000 UP
 1.000 UL
@@ -645,141 +756,153 @@ LTb
 1.000 UP
 3.000 UL
 LT0
-0.00 0.38 0.68 C /Helvetica findfont 140 scalefont setfont
-798 4270 M
-926 -28 V
-541 -95 V
-384 -98 V
-298 -129 V
-243 -116 V
-206 -103 V
-179 -100 V
-157 -103 V
-141 -121 V
-127 -107 V
-116 -91 V
-107 -103 V
-99 -106 V
-92 -92 V
-86 -94 V
-81 -104 V
-76 -104 V
-73 -96 V
-68 -97 V
-65 -101 V
-62 -100 V
-60 -96 V
-56 -99 V
-55 -97 V
-52 -103 V
-51 -94 V
-48 -98 V
-47 -98 V
-45 -93 V
-44 -94 V
-43 -85 V
-41 -91 V
-40 -72 V
-38 -69 V
-38 -64 V
-36 -40 V
-36 -45 V
-35 -26 V
-34 -31 V
-33 -25 V
-32 -21 V
-31 -25 V
-31 -17 V
-30 -23 V
-29 -13 V
-29 -21 V
-28 -15 V
-28 -16 V
-26 -11 V
-27 -14 V
-26 -12 V
-25 -12 V
-25 -12 V
-25 -11 V
-24 -13 V
-23 -14 V
-24 -10 V
-22 -12 V
-23 -12 V
-22 -6 V
-22 -9 V
-42 -90 V
-798 4270 CircleF
-1724 4242 CircleF
-2265 4147 CircleF
-2649 4049 CircleF
-2947 3920 CircleF
-3190 3804 CircleF
-3396 3701 CircleF
-3575 3601 CircleF
-3732 3498 CircleF
-3873 3377 CircleF
-4000 3270 CircleF
-4116 3179 CircleF
-4223 3076 CircleF
-4322 2970 CircleF
-4414 2878 CircleF
-4500 2784 CircleF
-4581 2680 CircleF
-4657 2576 CircleF
-4730 2480 CircleF
-4798 2383 CircleF
-4863 2282 CircleF
-4925 2182 CircleF
-4985 2086 CircleF
-5041 1987 CircleF
-5096 1890 CircleF
-5148 1787 CircleF
-5199 1693 CircleF
-5247 1595 CircleF
-5294 1497 CircleF
-5339 1404 CircleF
-5383 1310 CircleF
-5426 1225 CircleF
-5467 1134 CircleF
-5507 1062 CircleF
-5545 993 CircleF
-5583 929 CircleF
-5619 889 CircleF
-5655 844 CircleF
-5690 818 CircleF
-5724 787 CircleF
-5757 762 CircleF
-5789 741 CircleF
-5820 716 CircleF
-5851 699 CircleF
-5881 676 CircleF
-5910 663 CircleF
-5939 642 CircleF
-5967 627 CircleF
-5995 611 CircleF
-6021 600 CircleF
-6048 586 CircleF
-6074 574 CircleF
-6099 562 CircleF
-6124 550 CircleF
-6149 539 CircleF
-6173 526 CircleF
-6196 512 CircleF
-6220 502 CircleF
-6242 490 CircleF
-6265 478 CircleF
-6287 472 CircleF
-6309 463 CircleF
-6351 373 CircleF
+1.00 0.00 0.00 C /Helvetica findfont 140 scalefont setfont
+462 4586 M
+976 13 V
+571 -122 V
+405 -89 V
+314 -86 V
+257 -107 V
+217 -99 V
+188 -95 V
+166 -93 V
+149 -101 V
+134 -69 V
+122 -82 V
+113 -79 V
+104 -72 V
+97 -75 V
+91 -69 V
+86 -74 V
+80 -78 V
+76 -65 V
+73 -68 V
+68 -64 V
+66 -68 V
+62 -69 V
+60 -60 V
+58 -71 V
+55 -64 V
+53 -65 V
+51 -59 V
+50 -67 V
+48 -56 V
+46 -64 V
+44 -54 V
+44 -59 V
+42 -61 V
+41 -58 V
+39 -53 V
+39 -59 V
+37 -52 V
+37 -53 V
+36 -50 V
+34 -50 V
+34 -32 V
+34 -47 V
+32 -68 V
+32 -62 V
+30 -74 V
+31 -62 V
+29 -70 V
+29 -73 V
+29 -69 V
+28 -71 V
+27 -79 V
+27 -72 V
+26 -78 V
+26 -62 V
+25 -84 V
+25 -56 V
+25 -96 V
+24 -79 V
+24 -107 V
+23 -117 V
+19 -82 V
+462 4586 CircleF
+1438 4599 CircleF
+2009 4477 CircleF
+2414 4388 CircleF
+2728 4302 CircleF
+2985 4195 CircleF
+3202 4096 CircleF
+3390 4001 CircleF
+3556 3908 CircleF
+3705 3807 CircleF
+3839 3738 CircleF
+3961 3656 CircleF
+4074 3577 CircleF
+4178 3505 CircleF
+4275 3430 CircleF
+4366 3361 CircleF
+4452 3287 CircleF
+4532 3209 CircleF
+4608 3144 CircleF
+4681 3076 CircleF
+4749 3012 CircleF
+4815 2944 CircleF
+4877 2875 CircleF
+4937 2815 CircleF
+4995 2744 CircleF
+5050 2680 CircleF
+5103 2615 CircleF
+5154 2556 CircleF
+5204 2489 CircleF
+5252 2433 CircleF
+5298 2369 CircleF
+5342 2315 CircleF
+5386 2256 CircleF
+5428 2195 CircleF
+5469 2137 CircleF
+5508 2084 CircleF
+5547 2025 CircleF
+5584 1973 CircleF
+5621 1920 CircleF
+5657 1870 CircleF
+5691 1820 CircleF
+5725 1788 CircleF
+5759 1741 CircleF
+5791 1673 CircleF
+5823 1611 CircleF
+5853 1537 CircleF
+5884 1475 CircleF
+5913 1405 CircleF
+5942 1332 CircleF
+5971 1263 CircleF
+5999 1192 CircleF
+6026 1113 CircleF
+6053 1041 CircleF
+6079 963 CircleF
+6105 901 CircleF
+6130 817 CircleF
+6155 761 CircleF
+6180 665 CircleF
+6204 586 CircleF
+6228 479 CircleF
+6251 362 CircleF
 % End plot #1
+% Begin plot #2
+1.000 UP
+1.000 UL
+LT1
+/Helvetica findfont 140 scalefont setfont
+462 4580 Crs
+980 4580 Crs
+1535 4462 Crs
+2019 4343 Crs
+2699 4146 Crs
+3773 3672 Crs
+4399 3237 Crs
+5222 2369 Crs
+6079 947 Crs
+% End plot #2
 1.000 UL
 LTb
-798 4871 N
-798 280 L
-6149 0 V
+462 4871 N
+462 280 L
+6485 0 V
 0 4591 V
--6149 0 V
+-6485 0 V
 Z stroke
 1.000 UP
 1.000 UL
@@ -790,4 +913,3 @@ end
 showpage
 %%Trailer
 %%DocumentFonts: Helvetica
-%%Pages: 1
