@@ -1,16 +1,8 @@
-function [u,v,w,Lx,dx,nu]=Params(uvel,vvel,wvel,dim)
-%     Lx=0.1;
-    Lx=2*pi;
-%     dim=33;
-%     Lx=3.2e-2; % domain size
-    Ly=Lx;
-    Lz=Lx;
-    dx=Lx/(dim-1); % grid spacing
-    dy=dx;
-    dz=dx;
+function [u,v,w,Lx,nu]=Params(uvel,vvel,wvel,dim)
+    Lx=2*pi; %edge length
     nu=1.7e-5; % viscosity
-    u=reshape(uvel,dim,dim,dim); % reshape arrays to have them in 3D
+    u=reshape(uvel,dim,dim,dim); % reshape to 3D
     v=reshape(vvel,dim,dim,dim);
     w=reshape(wvel,dim,dim,dim);
-    clear uvel vvel wvel
+    clear uvel vvel wvel % save memory
 end

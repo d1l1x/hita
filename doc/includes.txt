@@ -18,8 +18,8 @@
 	pdfmenubar=true,        % show Acrobat’s menu?
 	pdffitwindow=false,     % window fit to page when opened
 	pdfstartview={FitH},    % fits the width of the page to the window
-	pdftitle={My title},    % title
-	pdfauthor={Author},     % author
+	pdftitle={Spectral analysis of Direct Numerical Simulation data},    % title
+	pdfauthor={Felix Dietzsch},     % author
 	pdfsubject={Subject},   % subject of the document
 	pdfcreator={Creator},   % creator of the document
 	pdfproducer={Producer}, % producer of the document
@@ -34,6 +34,7 @@
 \usepackage{verbatim}
 \usepackage{relsize}
 \usepackage{lipsum}
+\usepackage{marvosym}
 \usepackage{caption}
 \captionsetup[figure]{name=Fig.,labelfont=bf}
 \setlength{\cftbeforesecskip}{2pt}
@@ -59,5 +60,7 @@ xleftmargin=6mm,%
 breaklines=true}
 
 \author[rss]{Felix Dietzsch}
-\address[rss]{Institut f\"ur Chemieingenieurwesen und Energieverfahrenstechnik,...}
-\title{Small post processor}
+\address[rss]{Institut f\"ur Chemieingenieurwesen und Energieverfahrenstechnik,\\
+	Fuchsm\"uhlenweg 9, Reiche Zeche, 09599 Freiberg.\\[1ex]
+	\Telefon\, \normalfont{+49 3731 394212}, \Email\, \normalfont{Felix.Dietzsch@vtc.tu-freiberg.de}}
+\title{Spectral analysis of Direct Numerical Simulation data with Matlab}
