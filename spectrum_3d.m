@@ -139,11 +139,6 @@ display('Set parameters ...')
 % surface integral can be solved analytically. The idea of this integration is illustrated
 % in Fig. \ref{fig:shell_int}.
 % As a result of this one gets
-% \begin{figure}[t!]
-%       \includegraphics[scale=0.7]{spectrum}
-%       \caption{Computed spectrum}
-%       \label{fig:shell_int}
-% \end{figure}
 %   \begin{equation}
 %       E(|\boldsymbol\kappa|)=\oiint\frac{1}{2}\,\Phi_{ii}(\boldsymbol\kappa)\,\mathrm{d}S(\kappa)
 %       =4\pi(|\boldsymbol\kappa|)^2\,\Phi_{ii}(|\boldsymbol\kappa|).
@@ -161,6 +156,11 @@ display('Set parameters ...')
 %       \approx\frac{1}{2}\sum\limits_{\boldsymbol\kappa}\Phi_{ii}(\boldsymbol\kappa)
 %       \,\Delta\kappa_x\,\Delta\kappa_y\,\Delta\kappa_z,
 %   \end{equation}
+% \begin{figure}[t!]
+%       \centering
+%       \includegraphics[scale=0.7]{spectrum}
+%       \caption{Computed spectrum}
+% \end{figure}
 % where $\Delta\kappa$ refers to the step size in wave number space,
 % the final expression of the three dimensional discrete energy spectrum can be derived.
 %   \begin{equation}
@@ -269,6 +269,11 @@ display('Compute Kolmogorov scales...')
 %         }
 % \caption{Illustration of different correlation functions}
 % \label{fig:correlations}
+% \end{figure}
+% \begin{figure}[hbt]
+%       \centering
+%       \includegraphics[scale=0.6]{correlation.eps}
+%       \caption{Computed longitudinal and transversal correlation coefficients}
 % \end{figure}
 % In general the correlation between two components of an isotropic
 % homogeneous velocity field is expressed by

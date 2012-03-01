@@ -21,3 +21,7 @@ mktextfm cmr12-20
 mktextfm cmr12+20
 mktextfm cmr12+20
 mktextfm cmr12+20
+mktextfm cmr12+20
+mktextfm cmr12-20
+mktextfm cmr10+20
+mktextfm cmr10-20

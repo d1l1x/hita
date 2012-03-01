@@ -1,7 +1,8 @@
-\contentsline {section}{\numberline {1}Clear complete workspace}{1}{section.1}
-\contentsline {section}{\numberline {2}Read data files}{2}{section.2}
-\contentsline {section}{\numberline {3}Set necessary parameters}{3}{section.3}
-\contentsline {section}{\numberline {4}Compute 3D spectrum}{3}{section.4}
-\contentsline {section}{\numberline {5}Compute dissipation and turbulent kinetic energy}{8}{section.5}
-\contentsline {section}{\numberline {6}Kolmogorov properties}{9}{section.6}
-\contentsline {section}{\numberline {7}Compute correlations}{10}{section.7}
+\contentsline {section}{\numberline {1}Contents}{1}{section.1}
+\contentsline {section}{\numberline {2}Clear complete workspace}{1}{section.2}
+\contentsline {section}{\numberline {3}Read data files}{2}{section.3}
+\contentsline {section}{\numberline {4}Set necessary parameters}{3}{section.4}
+\contentsline {section}{\numberline {5}Compute 3D spectrum}{3}{section.5}
+\contentsline {section}{\numberline {6}Compute dissipation and turbulent kinetic energy}{8}{section.6}
+\contentsline {section}{\numberline {7}Kolmogorov properties}{10}{section.7}
+\contentsline {section}{\numberline {8}Compute correlations}{10}{section.8}
